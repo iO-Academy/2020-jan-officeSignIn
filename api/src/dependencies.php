@@ -20,6 +20,7 @@ return function (App $app) {
         return $logger;
     };
 
+    // DB connection
     $container['dbConnection'] = function ($c) {
         $settings = $c->get('settings')['db'];
         $db = new PDO($settings['host'] . $settings['dbName'], $settings['userName'], $settings['password']);

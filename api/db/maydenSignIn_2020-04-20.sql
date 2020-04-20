@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.29)
 # Database: maydenSignIn
-# Generation Time: 2020-04-20 14:38:27 +0000
+# Generation Time: 2020-04-20 15:20:03 +0000
 # ************************************************************
 
 
@@ -33,7 +33,7 @@ CREATE TABLE `visitors` (
   `DateOfVisit` date NOT NULL,
   `TimeOfSignIn` time NOT NULL,
   `TimeOfSignOut` time NOT NULL,
-  `SignedIn` int(1) NOT NULL DEFAULT '1',
+  `SignedIn` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

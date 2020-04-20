@@ -1,11 +1,11 @@
 .DS_Store
-.idea
+.idea/
 
 api/.DS_Store
-api/.idea
+api/.idea/
 api/vendor/
 api/logs/*
-!api/logs/README.md
+!/api/logs/README.md
 
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.

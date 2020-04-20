@@ -1,5 +1,5 @@
 import React from "react";
-import 'MainContainer.css/Main';
+import './MainContainer.css';
 
 class MainContainer extends React.Component {
     render() {

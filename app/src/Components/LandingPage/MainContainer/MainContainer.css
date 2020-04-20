@@ -1,0 +1,7 @@
+.mainContainer {
+    width: 70%;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+}

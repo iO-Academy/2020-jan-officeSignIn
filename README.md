@@ -14,3 +14,6 @@
 -To run the front-end React app you need npm running in a separate terminal window run the command 'npm start' (make sure you have npm installed on your machine)
 
 -Run the app on the port specified in the documentation in the app directory
+
+### Setting up the DataBase
+- Create and SQL database called 'maydenSignIn' then import the 'maydenSignIn_2020-04-20.sql' from the db directory in the root of api.

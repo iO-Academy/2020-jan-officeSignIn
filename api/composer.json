@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "VisitorSignIn\\": "src/Classes/"
+            "SignInApp\\": "src/Classes/"
         }
     },
     "config": {

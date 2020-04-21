@@ -2,27 +2,27 @@
 
 namespace SignInApp\Controllers;
 
-use SignInApp\Models\VisitorsModel;
+use SignInApp\Models\VisitorModel;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
 class AddVisitorController
 {
-    private $visitorsModel;
+    private $visitorModel;
 
-    /** Constructor assigns VisitorsModel to this object
+    /** Constructor assigns VisitorModel to this object
      *  AddVisitorController constructor.
      *
-     * @param VisitorsModel $visitorsModel
+     * @param VisitorModel $visitorsModel
      */
-    public function __construct(VisitorsModel $visitorsModel)
+    public function __construct(VisitorModel $visitorsModel)
     {
-        $this->visitorsModel = $visitorsModel;
+        $this->visitorModel = $visitorsModel;
     }
 
     /**
      *  On invoke check input for Name value, if data there, call addVisitor method
-     *  from VisitorsModel and response whether that was successful or not
+     *  from VisitorModel and response whether that was successful or not
      *
      * @param Request $request
      * @param Response $response
@@ -47,7 +47,7 @@ class AddVisitorController
         $statusCode = 500;
 
         if (isset($requestData['Name']) && strlen($requestData['Name']) > 0) {
-            $successfulInsert = $this->visitorsModel->addVisitor($name, $company, $dateOfVisit, $timeOfSignIn, $signedIn);
+            $successfulInsert = $this->visitorModel->addVisitor($name, $company, $dateOfVisit, $timeOfSignIn, $signedIn);
             if ($successfulInsert) {
                 $responseData = [
                     'Success' => true,

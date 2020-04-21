@@ -15,7 +15,7 @@ class AddVisitorControllerFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $visitorsModel = $container->get('VisitorsModel');
+        $visitorsModel = $container->get('VisitorModel');
         return new AddVisitorController($visitorsModel);
     }
 }

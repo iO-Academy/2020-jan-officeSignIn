@@ -8,7 +8,7 @@ use SignInApp\Models\VisitorModel;
 class VisitorModelFactory
 {
     /**
-     * Creates visitors model with dependencies.
+     * Creates visitor model with dependencies.
      *
      * @param ContainerInterface $container
      *

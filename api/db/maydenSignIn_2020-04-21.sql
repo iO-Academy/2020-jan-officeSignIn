@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.29)
 # Database: maydenSignIn
-# Generation Time: 2020-04-20 15:20:03 +0000
+# Generation Time: 2020-04-21 09:01:47 +0000
 # ************************************************************
 
 
@@ -27,8 +27,7 @@ DROP TABLE IF EXISTS `visitors`;
 
 CREATE TABLE `visitors` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `Firstname` varchar(256) NOT NULL DEFAULT '',
-  `Surname` varchar(256) NOT NULL DEFAULT '',
+  `Name` varchar(256) NOT NULL DEFAULT '',
   `Company` varchar(256) DEFAULT 'N/A',
   `DateOfVisit` date NOT NULL,
   `TimeOfSignIn` time NOT NULL,

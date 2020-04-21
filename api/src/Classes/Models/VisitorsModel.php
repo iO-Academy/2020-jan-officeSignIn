@@ -25,11 +25,15 @@ class VisitorsModel
      * @param $Company
      * @return bool
      */
-    public function addVisitor($Name, $Company) : bool
+    public function addVisitor($Name, $Company, $dateOfVisit, $timeOfSignIn, $signedIn) : bool
     {
-        $query = $this->db->prepare("INSERT INTO `visitors` (`Name`, `Company`) VALUES (:Name, :Company);");
+        $query = $this->db->prepare("INSERT INTO `visitors` (`Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `SignedIn`) 
+            VALUES (:Name, :Company, :dateOfVisit, :timeOfSignIn, :signedIn);");
         $query->bindParam(':Name', $Name);
         $query->bindParam(':Company', $Company);
+        $query->bindParam(':dateOfVisit', $dateOfVisit);
+        $query->bindParam(':timeOfSignIn', $timeOfSignIn);
+        $query->bindParam(':signedIn', $signedIn);
         return $query->execute();
     }
 }

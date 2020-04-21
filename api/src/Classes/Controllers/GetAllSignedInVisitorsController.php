@@ -32,6 +32,14 @@ class GetAllSignedInVisitorsController
         $statusCode = 500;
 
         $apiResponse['Data'] = $this->visitorModel->getAllSignedInVisitors();
-        return $response->withJson($apiResponse);
+        if ($apiResponse['Data'].count > 0) {
+            $statusCode = 200;
+            $apiResponse['Message'] = 'Successfully retrieved signed in visitors';
+        } else {
+            $statusCode = 404;
+            $apiResponse['Message'] = 'No data retrieved or no data in database';
+            $apiResponse['Data'] = [];
+        }
+        return $response->withJson($apiResponse, $statusCode);
     }
 }

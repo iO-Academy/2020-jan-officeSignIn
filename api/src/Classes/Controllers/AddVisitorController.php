@@ -35,7 +35,9 @@ class AddVisitorController extends ValidationEntity
     {
         $requestData = $request->getParsedBody();
         $name = self::sanitiseString($requestData['Name']);
+        $name = self::validateLength($name, 255);
         $company = self::sanitiseString($requestData['Company']);
+        $company = self::validateLength($company, 255);
         $dateOfVisit = date("Y-m-d");
 
         $now = new DateTime('Europe/London');
@@ -49,7 +51,7 @@ class AddVisitorController extends ValidationEntity
         ];
         $statusCode = 500;
 
-        if (isset($requestData['Name']) && strlen($requestData['Name']) > 0) {
+        if (strlen($name) > 0) {
             $successfulInsert = $this->visitorModel->addVisitor($name, $company, $dateOfVisit, $timeOfSignIn, $signedIn);
             if ($successfulInsert) {
                 $responseData = [

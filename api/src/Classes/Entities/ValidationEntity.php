@@ -20,4 +20,13 @@ abstract class ValidationEntity
         $clean = trim($clean);
         return $clean;
     }
+
+    public static function validateLength($validateData, $characterLength)
+    {
+        if (strlen($validateData) > $characterLength) {
+            $validateData = substr($validateData, 0, $characterLength);
+        }
+
+        return $validateData;
+    }
 }

@@ -10,7 +10,7 @@ class GetAllSignedInVisitorsControllerFactoryTest extends TestCase
     /**
      * checks to make sure factory class instantiated when calling new factory
      */
-    public function testSuccessInvoke()
+    public function testSuccessInstantiation()
     {
         $factory = new GetAllSignedInVisitorsControllerFactory();
         $expected = GetAllSignedInVisitorsControllerFactory::class;

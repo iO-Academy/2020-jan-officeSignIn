@@ -3,10 +3,12 @@
 namespace SignInApp\Controllers;
 
 use SignInApp\Models\VisitorModel;
+use SignInApp\Entities\ValidationEntity;
+use \DateTime;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class AddVisitorController
+class AddVisitorController extends ValidationEntity
 {
     private $visitorModel;
 
@@ -31,13 +33,14 @@ class AddVisitorController
      */
     public function __invoke(Request $request, Response $response, array $args)
     {
-        date_default_timezone_set("London (United Kingdom - England)");
-        $h = date('h') + 1;
         $requestData = $request->getParsedBody();
-        $name = $requestData['Name'];
-        $company = $requestData['Company'];
+        $name = self::sanitiseString($requestData['Name']);
+        $company = self::sanitiseString($requestData['Company']);
         $dateOfVisit = date("Y-m-d");
-        $timeOfSignIn = date($h . ':i:s');
+
+        $now = new DateTime('Europe/London');
+        $timeOfSignIn = $now->format('H:i:s');
+
         $signedIn = 1;
         $responseData = [
             'Success' => false,

@@ -1,32 +1,45 @@
-# Slim Framework 3 Skeleton Application
+# Office Signin Application
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3 with the PHP-View template renderer. It also uses the Monolog logger.
+This application is built using Slim framework, OOP and the MVC structure.
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+## Setup
 
-## Install the Application
+1. Clone repo
+2. Run ```composer install``` in app route
+3. Create database with name ```maydenSignIn``` and a either import template from db/ file or create your own with the following columns:
+    - ```id``` : user id
+    - ```Name``` : visitor name
+    - ```Company``` : company the visitor is from
+    - ```DateOfVisit``` : DATE format, date of visit
+    - ```TimeOfSignIn``` : Time visitor signed in
+    - ```TimeOfSignIn``` : Time visitor signed out
+    - ```SignedIn``` : bool to say if signed in or out
 
-Create a new directory with your project name, e.g:
-```
-mkdir academyProject
-```
+4. Run ```composer start```
 
-Once inside the new directory, clone this repo:
-```
-git clone git@github.com:Mayden-Academy/slim3-skeleton.git .
-```
-One cloned, you must install the slim components by running:
-```
-composer install
-```
+### Running Tests
 
-To run the application locally:
-```
-composer start
-```
+- cd into the tests directory and run: ```../vendor/bin/phpunit .```
 
-Run this command in the application directory to run the test suite
-```
-composer test
-```
-That's it! Now go build something cool.
+## Routes
+- for local development use localhost:8080/whatYouRequire as your URL
+
+**/api/visitorSignIn**
+
+POST
+- Logs a new visitor to DB
+- Required
+    - `Name` - visitor's first name 
+- Optional
+    - `Company` - company visitor represents
+- Sends: 
+  - `{ "Name": "string", "Company": "string" }`
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Visitor successfully logged", "Data": [] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "First name and surname are required, "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server, "Data": [] }`

@@ -2,28 +2,58 @@ import React from "react";
 import './SigninForm.css';
 
 class SigninForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            Name: '',
+            Company: '',
+            response: ''
+        }
+    }
+
+    handleChangeName = (event) => {
+        this.setState({Name: event.target.value});
+    };
+    handleChangeCompany = (event) => {
+        this.setState({Company: event.target.value});
+    };
+
+
+    handleSignIn = async (e)=>{
+        e.preventDefault();
+        let dataToSend = {
+            'Name': this.state.Name,
+            'Company': this.state.Company,
+        };
+    console.log(dataToSend);
+    await this.postSignInData('https', 'POST', dataToSend);
+
+    };
+
+    async postSignInData(url, requestMethod, dataToSend) {
+       let requestData = JSON.stringify(dataToSend)
+
+        const response = await fetch(url, {
+            method: requestMethod.toUpperCase(),
+            mode: 'no-cors',
+            body: requestData,
+            headers: {
+            "Content-Type" : "application/json"
+        }
+    });
+        let responseData = await response.json();
+        this.setState({ response: responseData.Message });
+        console.log(responseData);
+    }
+
     render() {
         return (
-            <form id="visitorSignInForm" action="POST">
-                <input id="name" type="text" placeholder="Your first name and surname..."/>
-                <input id="organisation" type="text" placeholder="Your organisation..."/>
+            <form method="POST" onSubmit={this.handleSignIn}>
+                <input id="Name" type="text" placeholder="Your first name and surname..." value={this.state.Name} onChange={this.handleChangeName} required/>
+                <input id="Company" type="text" placeholder="Your organisation..." value={this.state.Company} onChange={this.handleChangeCompany}/>
                 <input className="signInButton" type="submit" value="Sign In"/>
             </form>
         )
-    }
-
-    postSignInData() {
-        let signInButton = document.querySelector('.signInButton');
-        signInButton.addEventListener('submit', (e)=>{
-            e.preventDefault();
-        });
-        let name = document.getElementById('name').value;
-        let organisation = document.getElementById('organisation').value;
-        const visitorDataToSend = {
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' }, 
-            body: JSON.stringify({ name: name, organisation: organisation })
-        }
     }
 }
 

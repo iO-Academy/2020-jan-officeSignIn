@@ -40,7 +40,7 @@ POST
         - `{ "Success": true, "Message": "Visitor successfully logged", "Data": [] }`  
     - if unsuccessful
         - `status 400` 
-            - `{ "Success": false, "Message": "First name and surname are required, "Data": [] }`
+            - `{ "Success": false, "Message": "Name is required", "Data": [] }`
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server, "Data": [] }`
             

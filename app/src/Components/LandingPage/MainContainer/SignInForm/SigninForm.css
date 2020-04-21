@@ -1,6 +1,21 @@
+form {
+    margin-top: 20px;
+}
+
 input {
     border-radius: 5px;
     border: 1px solid #295074;
     display: block;
-    width: 30%;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+    margin-top: 15px;
+    padding: 8px;
+}
+
+.signInButton {
+    background-color: #94BA66;
+    color: #ffffff;
+    width: 150px;
+    font: 700 25px Arial, sans-serif;
 }

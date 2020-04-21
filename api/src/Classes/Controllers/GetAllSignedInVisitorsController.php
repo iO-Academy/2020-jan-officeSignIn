@@ -32,8 +32,9 @@ class GetAllSignedInVisitorsController
         $statusCode = 500;
 
         $apiResponse['Data'] = $this->visitorModel->getAllSignedInVisitors();
-        if ($apiResponse['Data'].count > 0) {
+        if (count($apiResponse['Data']) > 0) {
             $statusCode = 200;
+            $apiResponse['Success'] = true;
             $apiResponse['Message'] = 'Successfully retrieved signed in visitors';
         } else {
             $statusCode = 404;

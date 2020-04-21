@@ -11,5 +11,6 @@ class GetAllSignedInVisitorsControllerFactory
     public function __invoke(ContainerInterface $container) : GetAllSignedInVisitorsController
     {
         $visitorModel = $container->get('VisitorModel');
+        return new GetAllSignedInVisitorsController($visitorModel);
     }
 }

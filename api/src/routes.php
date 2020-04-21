@@ -7,6 +7,6 @@ use Slim\Http\Response;
 return function (App $app) {
 
     //Api Routes
-    $app->get('/api/visitorSignIn', 'AddVisitorController');
+    $app->post('/api/visitorSignIn', 'AddVisitorController');
 
 };

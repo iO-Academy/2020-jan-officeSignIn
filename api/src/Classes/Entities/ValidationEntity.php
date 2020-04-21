@@ -6,6 +6,8 @@ abstract class ValidationEntity
 {
     /**
      * Sanitise as a string in the database table as data.
+     * Removes all special chars, html chars and only excepts alphabetic chars and '-'
+     * Then trims both sides
      *
      * @param $validateData
      *

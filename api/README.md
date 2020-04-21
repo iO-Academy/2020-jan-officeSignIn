@@ -8,8 +8,7 @@ This application is built using Slim framework, OOP and the MVC structure.
 2. Run ```composer install``` in app route
 3. Create database with name ```maydenSignIn``` and a either import template from db/ file or create your own with the following columns:
     - ```id``` : user id
-    - ```Firstname``` : first name
-    - ```Surname``` : surname
+    - ```Name``` : visitor name
     - ```Company``` : company the visitor is from
     - ```DateOfVisit``` : DATE format, date of visit
     - ```TimeOfSignIn``` : Time visitor signed in
@@ -18,6 +17,29 @@ This application is built using Slim framework, OOP and the MVC structure.
 
 4. Run ```composer start```
 
-## Running Tests
+### Running Tests
 
 - cd into the tests directory and run: ```../vendor/bin/phpunit .```
+
+## Routes
+- for local development use localhost:8080/whatYouRequire as your URL
+
+**/api/visitorSignIn**
+
+POST
+- Logs a new visitor to DB
+- Required
+    - `Name` - visitor's first name 
+- Optional
+    - `Company` - company visitor represents
+- Sends: 
+  - `{ "Name": "string", "Company": "string" }`
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Visitor successfully logged", "Data": [] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "First name and surname are required, "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server, "Data": [] }`

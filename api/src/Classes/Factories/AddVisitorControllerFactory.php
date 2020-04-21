@@ -8,14 +8,14 @@ use SignInApp\Controllers\AddVisitorController;
 class AddVisitorControllerFactory
 {
     /**
-     * Instantiates a new AddVisitorController and injects a StageModel
+     * Instantiates a new AddVisitorController and injects a VisitorModel
      *
      * @param ContainerInterface $container
      * @return AddVisitorController
      */
     public function __invoke(ContainerInterface $container)
     {
-        $visitorsModel = $container->get('VisitorModel');
-        return new AddVisitorController($visitorsModel);
+        $visitorModel = $container->get('VisitorModel');
+        return new AddVisitorController($visitorModel);
     }
 }

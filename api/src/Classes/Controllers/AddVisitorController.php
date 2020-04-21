@@ -15,11 +15,11 @@ class AddVisitorController extends ValidationEntity
     /** Constructor assigns VisitorModel to this object
      *  AddVisitorController constructor.
      *
-     * @param VisitorModel $visitorsModel
+     * @param VisitorModel $visitorModel
      */
-    public function __construct(VisitorModel $visitorsModel)
+    public function __construct(VisitorModel $visitorModel)
     {
-        $this->visitorModel = $visitorsModel;
+        $this->visitorModel = $visitorModel;
     }
 
     /**

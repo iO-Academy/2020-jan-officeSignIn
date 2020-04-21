@@ -25,9 +25,11 @@ class GetAllSignedInVisitorsController
         //once tested, surround this with an if statement to check admin logged in status
         $apiResponse = [
             'Success' => false,
-            'Message' => 'Unable to retrieve data',
+            'Message' => 'Unable to connect to server',
             'Data' => []
         ];
+
+        $statusCode = 500;
 
         $apiResponse['Data'] = $this->visitorModel->getAllSignedInVisitors();
         return $response->withJson($apiResponse);

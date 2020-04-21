@@ -28,4 +28,6 @@ return function (App $app) {
         return $db;
     };
 
+    //getAllSignedInVisitors
+    $app['GetAllSignedInVisitorsController'] = new SignInApp\Factories\GetAllSignedInVisitorsControllerFactory();
 };

@@ -10,6 +10,6 @@ class GetAllSignedInVisitorsControllerFactory
 {
     public function __invoke(ContainerInterface $container) : GetAllSignedInVisitorsController
     {
-        $visitorsModel = $container->get('VisitorsModel');
+        $visitorModel = $container->get('VisitorModel');
     }
 }

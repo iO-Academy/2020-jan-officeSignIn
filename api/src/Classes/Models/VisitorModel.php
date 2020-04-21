@@ -2,12 +2,12 @@
 
 namespace SignInApp\Models;
 
-class VisitorsModel
+class VisitorModel
 {
     private $db;
 
     /**
-     * VisitorsModel constructor grabs db connection
+     * VisitorModel constructor grabs db connection
      *
      * @param \PDO $db
      */

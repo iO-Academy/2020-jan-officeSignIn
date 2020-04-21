@@ -2,22 +2,22 @@
 
 namespace SignInApp\Controllers;
 
-use SignInApp\Models\VisitorsModel;
+use SignInApp\Models\VisitorModel;
 use Slim\Http\Request as Request;
 use Slim\Http\Response as Response;
 
 class GetAllSignedInVisitorsController
 {
-    private $visitorsModel;
+    private $visitorModel;
 
     /**
      * GetAllSignedInVisitorsController constructor.
      *
-     * @param $visitorsModel
+     * @param $visitorModel
      */
-    public function __construct(VisitorsModel $visitorsModel)
+    public function __construct(VisitorModel $visitorModel)
     {
-        $this->visitorsModel = $visitorsModel;
+        $this->visitorModel = $visitorModel;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
@@ -29,7 +29,7 @@ class GetAllSignedInVisitorsController
             'Data' => []
         ];
 
-        $apiResponse['Data'] = $this->visitorsModel->getAllSignedInVisitors();
+        $apiResponse['Data'] = $this->visitorModel->getAllSignedInVisitors();
         return $response->withJson($apiResponse);
     }
 }

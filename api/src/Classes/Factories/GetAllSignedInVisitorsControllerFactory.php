@@ -8,6 +8,13 @@ use Psr\Container\ContainerInterface;
 
 class GetAllSignedInVisitorsControllerFactory
 {
+    /**
+     * when invoked, instantiates a GetAllSignedInVisitorsController
+     *
+     * @param ContainerInterface $container
+     *
+     * @return GetAllSignedInVisitorsController - the instantiated controller
+     */
     public function __invoke(ContainerInterface $container) : GetAllSignedInVisitorsController
     {
         $visitorModel = $container->get('VisitorModel');

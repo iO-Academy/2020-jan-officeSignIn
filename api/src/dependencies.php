@@ -32,6 +32,5 @@ return function (App $app) {
 
     $container['AddVisitorController'] = new \SignInApp\Factories\AddVisitorControllerFactory();
 
-    //getAllSignedInVisitors
     $container['GetAllSignedInVisitorsController'] = new SignInApp\Factories\GetAllSignedInVisitorsControllerFactory();
 };

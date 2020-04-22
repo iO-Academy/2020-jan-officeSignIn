@@ -20,9 +20,19 @@ class GetAllSignedInVisitorsController
         $this->visitorModel = $visitorModel;
     }
 
-    public function __invoke(Request $request, Response $response, array $args)
+    /**
+     * upon invoke, gets all signed in visitors using Visitor Model, and generates a json response
+     *
+     * @param Request $request
+     *
+     * @param Response $response
+     *
+     * @param array $args
+     *
+     * @return Response - a JSON object containing the response data
+     */
+    public function __invoke(Request $request, Response $response, array $args) :Response
     {
-        //once tested, surround this with an if statement to check admin logged in status
         $apiResponse = [
             'Success' => false,
             'Message' => 'Unable to connect to server',

@@ -42,7 +42,7 @@ POST
         - `status 400` 
             - `{ "Success": false, "Message": "Name is required", "Data": [] }`
         - `status 500` 
-            - `{ "Success": false, "Message": "Unable to connect to server, "Data": [] }`
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
             
 **/api/admin**
 GET

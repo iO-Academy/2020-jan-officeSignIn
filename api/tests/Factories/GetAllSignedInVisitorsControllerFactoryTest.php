@@ -20,6 +20,9 @@ class GetAllSignedInVisitorsControllerFactoryTest extends TestCase
         $this->assertInstanceOf($expected, $factory);
     }
 
+    /**
+     * Tests the invoke magic method, asserting that a GetAllSignedInVisitorsController object is instantiated.
+     */
     public function testInvoke()
     {
         $container = $this->createMock(ContainerInterface::class);

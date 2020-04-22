@@ -18,7 +18,12 @@ class VisitorModel
         $this->db = $db;
     }
 
-    public function getAllSignedInVisitors()
+    /**
+     * queries database to return all signed in visitors who signed in today
+     *
+     * @return array - an array of the signed in visitors
+     */
+    public function getAllSignedInVisitors() :array
     {
         $query = $this->db->prepare(
             'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn` FROM `visitors`

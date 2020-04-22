@@ -2,6 +2,8 @@
 
 namespace SignInApp\Entities;
 
+use phpDocumentor\Reflection\Types\String_;
+
 abstract class ValidationEntity
 {
     /**
@@ -21,7 +23,17 @@ abstract class ValidationEntity
         return $clean;
     }
 
-    public static function validateLength($validateData, $characterLength)
+    /**
+     * Checks if a string is above a given length and trims string down if it is too long
+     *
+     * @param $validateData - the string to validate
+     *
+     * @param $characterLength - an integer that represents the maximum character length
+     *
+     * @return false|string - the string, trimmed if necessary
+     *
+     */
+    public static function validateLength(string $validateData, int $characterLength)  :string
     {
         if (strlen($validateData) > $characterLength) {
             $validateData = substr($validateData, 0, $characterLength);

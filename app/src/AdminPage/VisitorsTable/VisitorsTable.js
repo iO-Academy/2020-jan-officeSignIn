@@ -39,6 +39,7 @@ class VisitorsTable extends React.Component
     };
 
     //Async fetch to grab all data
+    //Make sure to include authentication in HEADERS
 
     render() {
         return (

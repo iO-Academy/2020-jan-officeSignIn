@@ -9,4 +9,6 @@ return function (App $app) {
     //Api Routes
     $app->post('/api/visitorSignIn', 'AddVisitorController');
 
+    $app->get('/api/admin', 'GetAllSignedInVisitorsController');
+
 };

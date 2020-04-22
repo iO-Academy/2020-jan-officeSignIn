@@ -17,6 +17,7 @@ app/.pnp.js
 
 # testing
 app/coverage
+app/src/AdminPage/VisitorsTable/visitorPackage.json
 
 # production
 app/build
@@ -31,3 +32,4 @@ app/.env.production.local
 app/npm-debug.log*
 app/yarn-debug.log*
 app/yarn-error.log*
+

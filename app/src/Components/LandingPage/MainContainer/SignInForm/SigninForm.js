@@ -26,8 +26,7 @@ class SigninForm extends React.Component {
             'Company': this.state.Company,
         };
     console.log(dataToSend);
-    await this.postSignInData('https', 'POST', dataToSend);
-
+    await this.postSignInData('https://localhost:8080/api/visitorSignIn', 'POST', dataToSend);
     };
 
     async postSignInData(url, requestMethod, dataToSend) {
@@ -35,7 +34,6 @@ class SigninForm extends React.Component {
 
         const response = await fetch(url, {
             method: requestMethod.toUpperCase(),
-            mode: 'no-cors',
             body: requestData,
             headers: {
             "Content-Type" : "application/json"

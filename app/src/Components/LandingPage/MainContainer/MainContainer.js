@@ -5,13 +5,21 @@ import SigninForm from "./SignInForm/SigninForm";
 import MessageBox from "./MessageBox/MessageBox";
 
 class MainContainer extends React.Component {
+        state = {
+            response: ''
+        }
+
+    updateResponse = (newResponse) => {
+            this.setState({ response : newResponse })
+    }
+
     render() {
         return (
                 <main>
                     <div className="mainContainer">
                         <Logo/>
-                        <SigninForm/>
-                        <MessageBox/>
+                        <SigninForm updateResponse={this.updateResponse}/>
+                        <MessageBox response={this.state.response}/>
                     </div>
                 </main>
             )

@@ -36,7 +36,6 @@ class SigninForm extends React.Component {
     });
          let responseData = await response.json();
           this.props.updateResponse( responseData.Message );
-        console.log(responseData.Message);
     }
 
     render() {

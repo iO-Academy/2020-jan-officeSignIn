@@ -2,16 +2,14 @@ import React from "react";
 import './SigninForm.css';
 
 class SigninForm extends React.Component {
-
-        state = {
-            Name: '',
-            Company: ''
-        }
-
+    state = {
+        Name: '',
+        Company: ''
+    };
 
     handleUpdate = (e, stateValue) => {
-            let updatedData = {}
-            updatedData[stateValue] = e.target.value
+        let updatedData = {};
+        updatedData[stateValue] = e.target.value;
         this.setState(updatedData);
     };
 
@@ -21,11 +19,11 @@ class SigninForm extends React.Component {
             'Name': this.state.Name,
             'Company': this.state.Company,
         };
-    await this.postVisitorToDb('http://localhost:8080/api/visitorSignIn', 'POST', dataToSend);
+        await this.postVisitorToDb('http://localhost:8080/api/visitorSignIn', 'POST', dataToSend);
     };
 
     postVisitorToDb = async (url, requestMethod, dataToSend) => {
-       let requestData = JSON.stringify(dataToSend)
+       let requestData = JSON.stringify(dataToSend);
 
         const response = await fetch(url, {
             method: requestMethod.toUpperCase(),
@@ -36,7 +34,7 @@ class SigninForm extends React.Component {
     });
          let responseData = await response.json();
           this.props.updateResponse( responseData.Message );
-    }
+    };
 
     render() {
         return (

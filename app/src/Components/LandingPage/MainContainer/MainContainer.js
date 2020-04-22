@@ -5,13 +5,13 @@ import SigninForm from "./SignInForm/SigninForm";
 import MessageBox from "./MessageBox/MessageBox";
 
 class MainContainer extends React.Component {
-        state = {
-            response: ''
-        }
+    state = {
+        response: ''
+    };
 
     updateResponse = (newResponse) => {
             this.setState({ response : newResponse })
-    }
+    };
 
     render() {
         return (

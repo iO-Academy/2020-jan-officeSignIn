@@ -11,4 +11,6 @@ return function (App $app) {
 
     $app->post('/adminLogin', 'LoginController');
 
+    $app->get('/api/admin', 'GetAllSignedInVisitorsController');
+
 };

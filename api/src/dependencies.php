@@ -28,4 +28,7 @@ return function (App $app) {
         return $db;
     };
 
+    $container['VisitorModel'] = new \SignInApp\Factories\VisitorModelFactory();
+
+    $container['AddVisitorController'] = new \SignInApp\Factories\AddVisitorControllerFactory();
 };

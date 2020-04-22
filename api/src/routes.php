@@ -3,6 +3,7 @@
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use SignInApp\Authenticate\Authenticate;
 
 return function (App $app) {
 
@@ -11,6 +12,6 @@ return function (App $app) {
 
     $app->post('/adminLogin', 'LoginController');
 
-    $app->get('/api/admin', 'GetAllSignedInVisitorsController');
+    $app->get('/api/admin', 'GetAllSignedInVisitorsController')->add(new Authenticate());
 
 };

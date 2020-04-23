@@ -2,8 +2,6 @@
 
 namespace SignInApp\Entities;
 
-use phpDocumentor\Reflection\Types\String_;
-
 abstract class ValidationEntity
 {
     /**
@@ -21,6 +19,22 @@ abstract class ValidationEntity
         $clean = preg_replace('/[^a-zA-Z\s\-]/', '', $clean);
         $clean = trim($clean);
         return $clean;
+    }
+
+    /**
+     * Checks if what is given is a four digit number
+     *
+     * @param $validateData - the data to validate
+     *
+     * @return bool - whether the data is a four digit number or not
+     */
+    public static function checkFourDigitInput($validateData)
+    {
+        if (preg_match('/^[\d]{4}$/', $validateData)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

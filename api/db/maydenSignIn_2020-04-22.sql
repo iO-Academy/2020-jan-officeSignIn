@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.29)
 # Database: maydenSignIn
-# Generation Time: 2020-04-21 15:35:11 +0000
+# Generation Time: 2020-04-22 13:56:42 +0000
 # ************************************************************
 
 
@@ -18,6 +18,28 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table admins
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `admins`;
+
+CREATE TABLE `admins` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `passcode` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `admins` WRITE;
+/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+
+INSERT INTO `admins` (`id`, `passcode`)
+VALUES
+	(1,'$2y$10$dmOo8vCN78.EJgCOk8bG0OpXbV0ni.N0rR3Up5qiCYU3ITH9VbYUW');
+
+/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table visitors
@@ -41,18 +63,11 @@ LOCK TABLES `visitors` WRITE;
 
 INSERT INTO `visitors` (`id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`, `SignedIn`)
 VALUES
-	(1,'Charlie','MarioTown','2020-04-12','23:59:59','12:43:43',1),
-	(2,'Bob','Gulp','2020-03-19','13:59:59','15:43:43',0),
-	(3,'Chris','OfficeSpot','2999-12-25','23:59:59','23:59:59',0),
-	(4,'Roger','','2999-12-25','23:59:59','23:59:59',0),
-	(5,'Jamie','Facebook','2999-12-25','23:59:59','23:59:59',0),
-	(6,'roger','comp','2020-09-12','00:00:00','00:00:00',1),
-	(7,'Bob Chapmen','Flow','2020-04-21','02:11:30','00:00:00',1),
-	(8,'Roger Time','Pizza Party','2020-04-21','03:25:01','00:00:00',1),
-	(9,'Cuthbert Cuthy','Laravel','2020-04-21','03:41:41','00:00:00',1),
-	(10,'Fran','Google','2020-04-21','04:20:37','00:00:00',1),
-	(11,'Nelly','Google','2020-04-21','04:27:32','00:00:00',1),
-	(12,'Paul','Mayden','2020-04-21','04:31:52','00:00:00',1);
+	(1,'Charlie','MarioTown','2020-04-22','23:59:59','12:43:43',1),
+	(2,'Bob','Gulp','2020-04-22','13:59:59','15:43:43',0),
+	(3,'Chris','OfficeSpot','2020-04-22','23:59:59','23:59:59',0),
+	(4,'Roger','','2020-04-22','23:59:59','23:59:59',1),
+	(5,'Davey','Beaky','2020-04-22','14:55:00','00:00:00',1);
 
 /*!40000 ALTER TABLE `visitors` ENABLE KEYS */;
 UNLOCK TABLES;

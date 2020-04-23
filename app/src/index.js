@@ -12,7 +12,7 @@ class Routing extends React.Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={ LandingPage }/>
-                        <Route path="/AdminPage" component={ AdminPage }/>
+                        <Route path="/adminPage" component={ AdminPage }/>
                         <Route component={ LandingPage }/>
                     </Switch>
                 </div>
@@ -37,4 +37,13 @@ const getBaseUrl = () => {
   }
 };
 
-export default getBaseUrl();
+export const getBaseUrlApp = () => {
+    let isProd = false;
+    if(isProd) {
+        return '{productionApp}'
+    } else {
+        return 'http://localhost:3000/'
+    }
+};
+
+export default getBaseUrl()

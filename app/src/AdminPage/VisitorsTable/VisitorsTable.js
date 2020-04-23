@@ -1,18 +1,34 @@
 import React from "react";
 import './visitorsTable.css';
 import visitorPackage from './visitorPackage';
-const columnHeader = ['Name', 'Company', 'Date', 'Time Signed In'];
+const columnHeader = ['Name', 'Company', 'Time Signed In'];
 
-class VisitorsTable extends React.Component
-{
+class VisitorsTable extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
+        // this.fetchVisitors();
 
+        this.state = {
+            visitorPackage: {}
         }
     }
 
+    //Make sure to include authentication in HEADERS
+    // fetchVisitors = async () => {
+    //     let response = await fetch('http://localhost:8080/api/admin', {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type" : "application/json"
+    //         }
+    //     });
+    //
+    //     let responseData = await response.json();
+    //     this.setState({visitorPackage: responseData});
+    //     console.log(responseData);
+    // };
+
+    // change visitorPackage.Data to this.visitorPackage.Data
     generateRows = () => {
         let result = [];
         let tableData = visitorPackage.Data;
@@ -22,7 +38,6 @@ class VisitorsTable extends React.Component
                 <tr key={i} data-id={tableData[i].id}>
                     <td key={tableData[i].Name}>{tableData[i].Name}</td>
                     <td key={tableData[i].Company}>{tableData[i].Company}</td>
-                    <td key={tableData[i].DateOfVisit}>{tableData[i].DateOfVisit}</td>
                     <td key={tableData[i].TimeOfSignIn}>{tableData[i].TimeOfSignIn}</td>
                 </tr>
             )
@@ -38,13 +53,10 @@ class VisitorsTable extends React.Component
         return result;
     };
 
-    //Async fetch to grab all data
-    //Make sure to include authentication in HEADERS
-
     render() {
         return (
-            <div>
-                <table className="table table-hover">
+            <div className="col-12">
+                <table className="table table-bordered table-hover">
                     <thead>
                         <tr>
                             {this.generateHeader()}

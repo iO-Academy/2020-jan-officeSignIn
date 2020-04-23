@@ -15,7 +15,7 @@ class AdminModal extends React.Component {
 
     render() {
         return (
-                <div className="adminModal">
+                <div className="adminModal"  style={{display: this.props.modalVisible ? 'block' : 'none'}}>
                     <span className="instructions">Please enter the admin passcode</span>
                     <div className="keypadContainer">
                         <div className="keypadRow">

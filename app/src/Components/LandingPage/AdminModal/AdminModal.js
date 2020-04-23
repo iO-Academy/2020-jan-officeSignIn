@@ -1,10 +1,12 @@
 import React from "react";
 import './AdminModal.css';
+import getBaseUrl from "../../../index";
 
 class AdminModal extends React.Component {
     state = {
         passcode: '',
-        modalClass: 'hidden'
+        modalClass: 'hidden',
+        response: ''
     };
 
     componentDidUpdate(prevProps) {
@@ -24,11 +26,51 @@ class AdminModal extends React.Component {
         console.log(passcodeValue)
     }
 
+    handleLogin = async (e)=>{
+        console.log(this.state.passcode)
+        console.log(getBaseUrl)
+        let dataToSend = {
+            'Passcode': this.state.passcode
+        };
+        await this.postPasscodeToDb(getBaseUrl + 'adminLogin', 'POST', dataToSend);
+    };
+
+    postPasscodeToDb = async (url, requestMethod, dataToSend) => {
+        let requestData = JSON.stringify(dataToSend);
+        const response = await fetch(url, {
+            method: requestMethod.toUpperCase(),
+            body: requestData,
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        });
+        let responseData = await response.json();
+        if(responseData.success === false) {
+            this.updateResponse(responseData.message);
+            console.log('failure')
+        } else if(responseData.success === true) {
+            // localStorage.setItem(responseData.token)
+            console.log('success')
+        }
+    };
+
+    updateResponse = (newResponse) => {
+        setTimeout(()=> {
+            this.clearResponse()
+        }, 3000);
+        this.setState({response : newResponse})
+    };
+
+    clearResponse = () => {
+        this.setState({response : ''})
+    };
+
     render() {
         let visibleState = 'adminModal ' + this.state.modalClass
         return (
                 <div className={visibleState}>
                     <span className="instructions">Please enter the admin passcode</span>
+                    <span className="responseMessage"></span>
                     <div className="keypadContainer">
                         <div className="keypadRow">
                             <div className="keypadBtn" onClick={(e) => this.captureInput(e,'1', this.state.passcode)}><span>1</span></div>
@@ -47,7 +89,7 @@ class AdminModal extends React.Component {
                         </div>
                         <div className="keypadRow">
                             <div className="keypadBtn" onClick={(e) => this.captureInput(e,'0', this.state.passcode)}><span>0</span></div>
-                            <div className="logInBtn"><span>Log In</span></div>
+                            <div className="logInBtn" onClick={this.handleLogin}><span>Log In</span></div>
                         </div>
                     </div>
                     <button className="closeModalBtn" onClick={this.props.updateModalVisible}>X</button>

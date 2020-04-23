@@ -1,5 +1,4 @@
 import React from "react";
-import getBaseUrl from '../../../index';
 import './visitorsTable.css';
 const columnHeader = ['Name', 'Company', 'Time Signed In'];
 
@@ -12,18 +11,28 @@ class VisitorsTable extends React.Component {
                 "Data": []
             }
         };
+    }
 
+    componentDidMount() {
         this.fetchVisitors();
     }
 
     fetchVisitors = () => {
-        fetch('http://localhost:8080/api/admin')
+        fetch('http://localhost:8080/api/admin', {
+            method: 'GET',
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgyNTYzODksImlhdCI6MTU4NzY1NjM4OX0.1tpnhphWArUjS18JWECePTYL8dqXTb-To5qEnAmqGp4"
+            }
+        })
             .then(data=>data.json())
             .then((data)=>{
                 this.setState({
                     visitorPackage: data
                 })
+                console.log(data)
             })
+
     };
 
     generateRows = () => {

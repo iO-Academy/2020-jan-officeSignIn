@@ -10,7 +10,7 @@ class AddVisitorControllerFactoryTest extends TestCase
     /**
      * checks to make sure factory class instantiated when calling new factory
      */
-    public function testSuccessInvoke()
+    public function testInstantiation()
     {
         $factory = new AddVisitorControllerFactory();
         $expected = AddVisitorControllerFactory::class;

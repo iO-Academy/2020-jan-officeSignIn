@@ -13,7 +13,6 @@ class VisitorsTable extends React.Component {
         };
 
         this.fetchVisitors();
-
     }
 
     fetchVisitors = () => {
@@ -31,13 +30,16 @@ class VisitorsTable extends React.Component {
         let tableData = this.state.visitorPackage.Data;
 
         for(var i = 0; i < tableData.length; i++) {
+            let timeOfSignIn = tableData[i].TimeOfSignIn;
+            timeOfSignIn = timeOfSignIn.substring(0,5);
             result.push(
                 <tr key={i} data-id={tableData[i].id}>
                     <td key={tableData[i].Name}>{tableData[i].Name}</td>
                     <td key={tableData[i].Company}>{tableData[i].Company}</td>
-                    <td key={tableData[i].TimeOfSignIn}>{tableData[i].TimeOfSignIn}</td>
+                    <td key={timeOfSignIn}>{timeOfSignIn}</td>
                 </tr>
             )
+
         }
         return result;
     };

@@ -1,6 +1,7 @@
 import React from "react";
 import './AdminModal.css';
-import getBaseUrl from "../../../index";
+import getBaseUrl, {getBaseUrlApp} from "../../../index";
+
 
 class AdminModal extends React.Component {
     constructor(props) {
@@ -62,8 +63,8 @@ class AdminModal extends React.Component {
         if(responseData.success === false) {
             this.updateResponse(responseData.message);
         } else if(responseData.success === true) {
-            this.updateToken(responseData.token)
-            this.props.history.push(getBaseUrl +'adminPage');
+            this.updateToken(responseData.token);
+            window.location.replace(getBaseUrlApp() + 'AdminPage');
         }
     };
 

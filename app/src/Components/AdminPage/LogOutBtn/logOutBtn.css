@@ -1,6 +1,6 @@
-button {
+.logOutBtn {
     position: absolute;
-    bottom: 5%;
+    top: 3%;
     right: 5%;
     background-color: #F27424;
     color: #ffffff;

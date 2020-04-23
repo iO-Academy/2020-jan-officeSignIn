@@ -4,7 +4,7 @@ import './logOutBtn.css';
 class LogOutBtn extends React.Component {
     render() {
         return (
-            <button>Log Out</button>
+            <button className="logOutBtn">Log Out</button>
         )
     }
 }

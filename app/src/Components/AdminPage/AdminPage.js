@@ -7,8 +7,9 @@ class AdminPage extends React.Component{
     render() {
         return (
             <div>
-                <AdminContainer/>
                 <LogOutBtn/>
+                <h1>All visitors currently signed in today:</h1>
+                <AdminContainer/>
             </div>
         );
     }

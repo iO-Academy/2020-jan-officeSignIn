@@ -4,7 +4,7 @@ import './AdminBtn.css';
 class AdminBtn extends React.Component {
     render() {
         return (
-            <button>Admin</button>
+            <button className="adminBtn">Admin</button>
         )
     }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import getBaseUrl from '../../../index';
 import './visitorsTable.css';
 const columnHeader = ['Name', 'Company', 'Time Signed In'];
 

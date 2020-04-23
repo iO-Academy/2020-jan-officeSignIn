@@ -7,7 +7,7 @@ class Authenticate
 {
     public function __invoke($request, $response, $next)
     {
-        var_dump($request->getHeader('HTTP_AUTHORIZATION'));
+//        var_dump($request->getHeader('HTTP_AUTHORIZATION'));
         //boot out if they dont have any Auth headers
         if(!$request->hasHeader('HTTP_AUTHORIZATION')){
             return $response->withJson(["success"=>false]);
@@ -26,7 +26,7 @@ class Authenticate
         } catch (\Firebase\JWT\SignatureInvalidException $e) {
             return $response->withJson(["success"=>false, "message"=>"Incorrect token"]);
         }
-        $next($request, $response);
-        return $response;
+        return $next($request, $response);
+//        return $response;
     }
 }

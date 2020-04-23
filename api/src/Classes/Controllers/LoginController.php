@@ -21,7 +21,7 @@ class LoginController extends ValidationEntity
      *
      * @param jwtKey - the jwtKey passed in
      */
-    public function __construct(AdminModel $adminModel, $jwtKey)
+    public function __construct(AdminModel $adminModel, String $jwtKey)
     {
         $this->adminModel = $adminModel;
         $this->jwtKey = $jwtKey;

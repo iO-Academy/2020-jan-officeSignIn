@@ -14,7 +14,8 @@ class LoginControllerTest extends TestCase
     public function testSuccessConstruct()
     {
         $adminModel = $this->createMock(AdminModel::class);
-        $case = new LoginController($adminModel);
+        $key = 'some_key';
+        $case = new LoginController($adminModel,$key);
         $expected = LoginController::class;
         $this->assertInstanceOf($expected, $case);
     }

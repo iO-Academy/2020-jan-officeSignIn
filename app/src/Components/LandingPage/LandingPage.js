@@ -2,14 +2,29 @@ import React from 'react';
 import './LandingPage.css';
 import MainContainer from "./MainContainer/MainContainer";
 import AdminBtn from "./AdminBtn/AdminBtn";
+import AdminModal from "./AdminModal/AdminModal";
 
 class LandingPage extends React.Component {
+    state = {
+        modalVisible: false,
+        adminBtnVisible: true
+    };
+
+    updateModalVisible = () => {
+        if(!this.state.modalVisible) {
+            this.setState({modalVisible: true, adminBtnVisible: false})
+        } else {
+            this.setState({modalVisible: false, adminBtnVisible: true})
+        }
+    }
+
     render() {
         return (
             <div>
                 <h1>Mayden Academy Visitor sign-in</h1>
                 <MainContainer/>
-                <AdminBtn/>
+                <AdminModal modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
+                <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
             </div>
         )
     }

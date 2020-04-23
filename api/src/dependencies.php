@@ -38,4 +38,6 @@ return function (App $app) {
     $container['AddVisitorController'] = new \SignInApp\Factories\AddVisitorControllerFactory();
     $container['GetAllSignedInVisitorsController'] = new SignInApp\Factories\GetAllSignedInVisitorsControllerFactory();
     $container['LoginController'] = new SignInApp\Factories\LoginControllerFactory();
+
+    $container['Authenticate'] = new SignInApp\Factories\AuthenticateFactory();
 };

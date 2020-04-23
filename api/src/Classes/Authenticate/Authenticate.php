@@ -5,6 +5,13 @@ use \Firebase\JWT\JWT;
 
 class Authenticate
 {
+    private $key;
+
+    public function __construct($key)
+    {
+       $this->key = $key;
+    }
+
     public function __invoke($request, $response, $next)
     {
 //        var_dump($request->getHeader('HTTP_AUTHORIZATION'));
@@ -24,7 +31,7 @@ class Authenticate
         } catch (\Firebase\JWT\ExpiredException $e) {
             return $response->withJson(["success"=>false, "message"=>"Token has expired"]);
         } catch (\Firebase\JWT\SignatureInvalidException $e) {
-            return $response->withJson(["success"=>false, "message"=>"Incorrect token"]);
+            return $response->withJson(["success"=>false, "message"=>"Invalid token"]);
         }
         return $next($request, $response);
 //        return $response;

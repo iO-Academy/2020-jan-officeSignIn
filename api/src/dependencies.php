@@ -28,6 +28,10 @@ return function (App $app) {
         return $db;
     };
 
+    $container['jwtKey'] = function ($c) {
+        return $c->get('settings')['jwtKey'];
+    };
+
     $container['VisitorModel'] = new \SignInApp\Factories\VisitorModelFactory();
     $container['AdminModel'] = new \SignInApp\Factories\AdminModelFactory();
 

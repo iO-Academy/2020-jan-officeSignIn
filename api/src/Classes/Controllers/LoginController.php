@@ -6,20 +6,25 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use SignInApp\Models\AdminModel;
 use SignInApp\Entities\ValidationEntity;
+use SignInApp\Authenticate\JwtKey;
 use \Firebase\JWT\JWT;
 
 class LoginController extends ValidationEntity
 {
     private $adminModel;
+    private $jwtKey;
 
     /**
      * LoginController constructor.
      *
      * @param AdminModel $adminModel - the admin model passed in
+     *
+     * @param jwtKey - the jwtKey passed in
      */
-    public function __construct(AdminModel $adminModel)
+    public function __construct(AdminModel $adminModel, $jwtKey)
     {
         $this->adminModel = $adminModel;
+        $this->jwtKey = $jwtKey;
     }
 
     /**
@@ -49,9 +54,7 @@ class LoginController extends ValidationEntity
         $hashedPasscode = $this->adminModel->getHashedPasscode();
 
         if(password_verify($adminPasscode, $hashedPasscode[0]['passcode'])) {
-
-            //move key to seperate file
-            $key = "super_secret_key";
+            $key = $this->jwtKey;
             $expiryTimestamp = time() + 60;
             $payload = [
                 "exp" => $expiryTimestamp,

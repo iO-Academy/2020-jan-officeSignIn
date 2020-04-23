@@ -18,6 +18,7 @@ class LoginControllerFactory
     public function __invoke(ContainerInterface $container) : LoginController
     {
         $adminModel = $container->get('AdminModel');
-        return new LoginController($adminModel);
+        $jwtKey = $container->get('jwtKey');
+        return new LoginController($adminModel, $jwtKey);
     }
 }

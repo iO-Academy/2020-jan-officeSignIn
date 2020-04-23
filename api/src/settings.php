@@ -22,7 +22,7 @@ return [
             'dbName' => 'dbname=maydenSignIn',
             'userName' => 'root',
             'password' => 'password'
-        ]
+        ],
+        'jwtKey' => 'super_secret_key'
     ],
 ];
-

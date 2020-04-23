@@ -5,11 +5,11 @@ use \Firebase\JWT\JWT;
 
 class Authenticate
 {
-    private $key;
+    private $jwtKey;
 
-    public function __construct($key)
+    public function __construct($jwtKey)
     {
-       $this->key = $key;
+       $this->jwtKey = $jwtKey;
     }
 
     public function __invoke($request, $response, $next)
@@ -26,8 +26,7 @@ class Authenticate
         //Grab the bearer token string from the array
         $bearerToken = $requestString[1];
         try {
-            $key = "super_secret_key";
-            $decoded = JWT::decode($bearerToken, $key, array('HS256'));
+            $decoded = JWT::decode($bearerToken, $this->jwtKey, array('HS256'));
         } catch (\Firebase\JWT\ExpiredException $e) {
             return $response->withJson(["success"=>false, "message"=>"Token has expired"]);
         } catch (\Firebase\JWT\SignatureInvalidException $e) {

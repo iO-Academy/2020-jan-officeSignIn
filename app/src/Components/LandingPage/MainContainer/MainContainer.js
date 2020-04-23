@@ -10,19 +10,26 @@ class MainContainer extends React.Component {
     };
 
     updateResponse = (newResponse) => {
-            this.setState({ response : newResponse })
+        setTimeout(()=> {
+            this.clearResponse()
+        }, 3000);
+        this.setState({response : newResponse})
+    };
+
+    clearResponse = () => {
+        this.setState({response : ''})
     };
 
     render() {
         return (
-                <main>
-                    <div className="mainContainer">
-                        <Logo/>
-                        <SigninForm updateResponse={this.updateResponse}/>
-                        <MessageBox response={this.state.response}/>
-                    </div>
-                </main>
-            )
+            <main>
+                <div className="mainContainer">
+                    <Logo/>
+                    <SigninForm updateResponse={this.updateResponse}/>
+                    <MessageBox response={this.state.response}/>
+                </div>
+            </main>
+        )
     }
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import './SigninForm.css';
+import getBaseUrl from '../../../../index';
 
 class SigninForm extends React.Component {
     state = {
@@ -19,12 +20,11 @@ class SigninForm extends React.Component {
             'Name': this.state.Name,
             'Company': this.state.Company,
         };
-        await this.postVisitorToDb('http://localhost:8080/api/visitorSignIn', 'POST', dataToSend);
+        await this.postVisitorToDb(getBaseUrl + 'api/visitorSignIn', 'POST', dataToSend);
     };
 
     postVisitorToDb = async (url, requestMethod, dataToSend) => {
-       let requestData = JSON.stringify(dataToSend);
-
+        let requestData = JSON.stringify(dataToSend);
         const response = await fetch(url, {
             method: requestMethod.toUpperCase(),
             body: requestData,
@@ -33,18 +33,25 @@ class SigninForm extends React.Component {
         }
     });
          let responseData = await response.json();
-          this.props.updateResponse( responseData.Message );
+         this.props.updateResponse(responseData.Message);
     };
 
     render() {
         return (
             <form method="POST" onSubmit={this.handleSignIn}>
-                <input id="Name" type="text" placeholder="Your first name and surname..." value={this.state.Name} onChange={(e) => this.handleUpdate(e, 'Name')} required/>
-                <input id="Company" type="text" placeholder="Your organisation..." value={this.state.Company} onChange={(e) => this.handleUpdate(e, 'Company')}/>
+                <input id="Name" type="text" placeholder="Your first name and surname..."
+                       value={this.state.Name}
+                       onChange={(e) => this.handleUpdate(e, 'Name')}
+                       required
+                />
+                <input id="Company" type="text" placeholder="Your organisation..."
+                       value={this.state.Company}
+                       onChange={(e) => this.handleUpdate(e, 'Company')}
+                />
                 <input className="signInButton" type="submit" value="Sign In"/>
             </form>
-        )
-    }
+            )
+        }
 }
 
 export default SigninForm;

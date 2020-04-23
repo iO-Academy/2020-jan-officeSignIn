@@ -3,6 +3,8 @@
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use SignInApp\Authenticate\Authenticate;
+use Psr\Container\ContainerInterface;
 
 /**
  * To decide whether React app URL is from deployed app or local server (set is prod to true for deployed version)
@@ -35,7 +37,9 @@ return function (App $app) {
 
     //Api Routes
     $app->post('/api/visitorSignIn', 'AddVisitorController');
-    $app->get('/api/admin', 'GetAllSignedInVisitorsController');
+    $app->get('/api/admin', 'GetAllSignedInVisitorsController')->add('Authenticate');
+
+    $app->post('/adminLogin', 'LoginController');
 
     // Catch-all route to serve a 404 Not Found page if none of the routes match
     // NOTE: make sure this route is defined last

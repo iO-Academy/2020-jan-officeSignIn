@@ -3,10 +3,26 @@ import './AdminModal.css';
 import getBaseUrl from "../../../index";
 
 class AdminModal extends React.Component {
-    state = {
-        passcode: '',
-        modalClass: 'hidden',
-        response: ''
+    constructor(props) {
+        super(props);
+        let token = '';
+
+        if(localStorage.getItem('bearerToken')) {
+            token = localStorage.getItem('bearerToken')
+        }
+
+        this.state = {
+            passcode: '',
+            modalClass: 'hidden',
+            response: '',
+            bearerToken: token
+        };
+    }
+
+    updateToken = (fetchedToken) => {
+        let updatedToken = fetchedToken;
+        this.setState({bearerToken: updatedToken});
+        localStorage.setItem('bearerToken', updatedToken)
     };
 
     componentDidUpdate(prevProps) {
@@ -23,15 +39,13 @@ class AdminModal extends React.Component {
             let passcodeValue = {}
                 passcodeValue['passcode'] = passcodeUpdate + keyPressed
         this.setState(passcodeValue)
-        console.log(passcodeValue)
     }
 
     handleLogin = async (e)=>{
-        console.log(this.state.passcode)
-        console.log(getBaseUrl)
         let dataToSend = {
             'Passcode': this.state.passcode
         };
+        this.setState({passcode: ''})
         await this.postPasscodeToDb(getBaseUrl + 'adminLogin', 'POST', dataToSend);
     };
 
@@ -47,10 +61,9 @@ class AdminModal extends React.Component {
         let responseData = await response.json();
         if(responseData.success === false) {
             this.updateResponse(responseData.message);
-            console.log('failure')
         } else if(responseData.success === true) {
-            // localStorage.setItem(responseData.token)
-            console.log('success')
+            this.updateToken(responseData.token)
+            this.props.history.push(getBaseUrl +'adminPage');
         }
     };
 
@@ -70,7 +83,6 @@ class AdminModal extends React.Component {
         return (
                 <div className={visibleState}>
                     <span className="instructions">Please enter the admin passcode</span>
-                    <span className="responseMessage"></span>
                     <div className="keypadContainer">
                         <div className="keypadRow">
                             <div className="keypadBtn" onClick={(e) => this.captureInput(e,'1', this.state.passcode)}><span>1</span></div>
@@ -93,6 +105,7 @@ class AdminModal extends React.Component {
                         </div>
                     </div>
                     <button className="closeModalBtn" onClick={this.props.updateModalVisible}>X</button>
+                    <div className="responseMessage">{this.state.response}</div>
                 </div>
         )
     }

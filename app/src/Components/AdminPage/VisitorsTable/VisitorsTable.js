@@ -9,8 +9,11 @@ class VisitorsTable extends React.Component {
         this.state = {
             visitorPackage: {
                 "Data": []
-            }
+            },
+            bearerToken: localStorage.getItem('bearerToken')
         };
+
+        console.log(this.state.bearerToken)
     }
 
     componentDidMount() {
@@ -22,7 +25,7 @@ class VisitorsTable extends React.Component {
             method: 'GET',
             headers: {
                 "Content-Type" : "application/json",
-                "Authorization" : "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgyNTYzODksImlhdCI6MTU4NzY1NjM4OX0.1tpnhphWArUjS18JWECePTYL8dqXTb-To5qEnAmqGp4"
+                "Authorization" : "Bearer " + this.state.bearerToken
             }
         })
             .then(data=>data.json())

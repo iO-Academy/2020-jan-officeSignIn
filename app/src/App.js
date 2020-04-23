@@ -1,12 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import VisitorsTable from "./AdminPage/VisitorsTable/VisitorsTable";
+import AdminPage from "./AdminPage/AdminPage";
 
 function App() {
   return (
       <div>
-          <VisitorsTable/>
+          <AdminPage/>
       </div>
   );
 }

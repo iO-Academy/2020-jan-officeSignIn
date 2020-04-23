@@ -1,6 +1,5 @@
 import React from "react";
 import './visitorsTable.css';
-import visitorPackage from './visitorPackage';
 const columnHeader = ['Name', 'Company', 'Time Signed In'];
 
 class VisitorsTable extends React.Component {
@@ -8,26 +7,25 @@ class VisitorsTable extends React.Component {
         super(props);
 
         this.state = {
-            visitorPackage: visitorPackage
-        }
+            visitorPackage: {
+                "Data": []
+            }
+        };
+
+        this.fetchVisitors();
 
     }
 
-    //Make sure to include authentication in HEADERS
-    // fetchVisitors = async () => {
-    //     let response = await fetch('http://localhost:8080/api/admin', {
-    //         method: 'GET',
-    //         headers: {
-    //             "Content-Type" : "application/json"
-    //         }
-    //     });
-    //
-    //     let responseData = await response.json();
-    //     this.setState({visitorPackage: responseData});
-    //     console.log(this.state.visitorPackage);
-    //     // this.generateRows();
-    // };
-    
+    fetchVisitors = () => {
+        fetch('http://localhost:8080/api/admin')
+            .then(data=>data.json())
+            .then((data)=>{
+                this.setState({
+                    visitorPackage: data
+                })
+            })
+    };
+
     generateRows = () => {
         let result = [];
         let tableData = this.state.visitorPackage.Data;

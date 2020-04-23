@@ -2,19 +2,20 @@
 
 namespace SignInApp\Authenticate;
 use \Firebase\JWT\JWT;
+use Slim\Http\Request as Request;
+use Slim\Http\Response as Response;
 
 class Authenticate
 {
     private $jwtKey;
 
-    public function __construct($jwtKey)
+    public function __construct(string $jwtKey)
     {
        $this->jwtKey = $jwtKey;
     }
 
-    public function __invoke($request, $response, $next)
+    public function __invoke(Request $request, Response $response, $next)
     {
-//        var_dump($request->getHeader('HTTP_AUTHORIZATION'));
         //boot out if they dont have any Auth headers
         if(!$request->hasHeader('HTTP_AUTHORIZATION')){
             return $response->withJson(["success"=>false]);

@@ -10,11 +10,12 @@ class LandingPage extends React.Component {
     };
 
     updateModalVisible = () => {
-        if(this.state.modalVisible) {
+        if(!this.state.modalVisible) {
             this.setState({modalVisible: true})
         } else {
             this.setState({modalVisible: false})
         }
+        console.log(this.state.modalVisible)
     }
 
     render() {

@@ -3,8 +3,20 @@ import './AdminModal.css';
 
 class AdminModal extends React.Component {
     state = {
-        passcode: ''
+        passcode: '',
+        modalClass: 'hidden'
     };
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.modalVisible != this.props.modalVisible) {
+            if(this.props.modalVisible) {
+                this.setState({modalClass: 'visible'})
+            } else {
+                this.setState({modalClass: 'hidden'})
+            }
+        }
+    }
+
 
     captureInput = (e,keyPressed, passcodeUpdate) => {
             let passcodeValue = {}
@@ -14,8 +26,9 @@ class AdminModal extends React.Component {
     }
 
     render() {
+        let visibleState = 'adminModal ' + this.state.modalClass
         return (
-                <div className="adminModal"  style={{display: this.props.modalVisible ? 'block' : 'none'}}>
+                <div className={visibleState}>
                     <span className="instructions">Please enter the admin passcode</span>
                     <div className="keypadContainer">
                         <div className="keypadRow">

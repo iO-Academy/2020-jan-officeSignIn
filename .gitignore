@@ -16,8 +16,7 @@ app/.pnp
 app/.pnp.js
 
 # testing
-app/coverage
-app/src/AdminPage/VisitorsTable/visitorPackage.json
+app/coveragen
 
 # production
 app/build

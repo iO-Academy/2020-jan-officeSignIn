@@ -6,16 +6,16 @@ import AdminModal from "./AdminModal/AdminModal";
 
 class LandingPage extends React.Component {
     state = {
-        modalVisible: false
+        modalVisible: false,
+        adminBtnVisible: true
     };
 
     updateModalVisible = () => {
         if(!this.state.modalVisible) {
-            this.setState({modalVisible: true})
+            this.setState({modalVisible: true, adminBtnVisible: false})
         } else {
-            this.setState({modalVisible: false})
+            this.setState({modalVisible: false, adminBtnVisible: true})
         }
-        console.log(this.state.modalVisible)
     }
 
     render() {
@@ -24,7 +24,7 @@ class LandingPage extends React.Component {
                 <h1>Mayden Academy Visitor sign-in</h1>
                 <MainContainer/>
                 <AdminModal modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
-                <AdminBtn modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
+                <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
             </div>
         )
     }

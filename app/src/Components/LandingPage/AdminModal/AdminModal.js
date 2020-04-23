@@ -8,7 +8,7 @@ class AdminModal extends React.Component {
     };
 
     componentDidUpdate(prevProps) {
-        if (prevProps.modalVisible != this.props.modalVisible) {
+        if (prevProps.modalVisible !== this.props.modalVisible) {
             if(this.props.modalVisible) {
                 this.setState({modalClass: 'visible'})
             } else {
@@ -16,7 +16,6 @@ class AdminModal extends React.Component {
             }
         }
     }
-
 
     captureInput = (e,keyPressed, passcodeUpdate) => {
             let passcodeValue = {}
@@ -51,7 +50,7 @@ class AdminModal extends React.Component {
                             <div className="logInBtn"><span>Log In</span></div>
                         </div>
                     </div>
-                    <button className="closeModalBtn">X</button>
+                    <button className="closeModalBtn" onClick={this.props.updateModalVisible}>X</button>
                 </div>
         )
     }

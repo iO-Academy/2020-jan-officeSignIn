@@ -28,9 +28,17 @@ return function (App $app) {
         return $db;
     };
 
+    // JWT Key
+    $container['jwtKey'] = function ($c) {
+        return $c->get('settings')['jwtKey'];
+    };
+
     $container['VisitorModel'] = new \SignInApp\Factories\VisitorModelFactory();
+    $container['AdminModel'] = new \SignInApp\Factories\AdminModelFactory();
 
     $container['AddVisitorController'] = new \SignInApp\Factories\AddVisitorControllerFactory();
-
     $container['GetAllSignedInVisitorsController'] = new SignInApp\Factories\GetAllSignedInVisitorsControllerFactory();
+    $container['LoginController'] = new SignInApp\Factories\LoginControllerFactory();
+
+    $container['Authenticate'] = new SignInApp\Factories\AuthenticateFactory();
 };

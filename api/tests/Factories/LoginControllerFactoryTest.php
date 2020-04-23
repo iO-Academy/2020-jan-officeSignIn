@@ -32,7 +32,6 @@ class LoginControllerFactoryTest extends TestCase
             ->withConsecutive($this->equalTo('AdminModel'), $this->equalTo('jwtKey'))
             ->willReturnOnConsecutiveCalls($this->returnValue($adminModel), $this->returnValue('a_key'));
 
-
         $factory = new LoginControllerFactory();
         $case = $factory($container);
         $expected = LoginController::class;

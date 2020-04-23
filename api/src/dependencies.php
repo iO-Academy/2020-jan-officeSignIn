@@ -28,6 +28,7 @@ return function (App $app) {
         return $db;
     };
 
+    // JWT Key
     $container['jwtKey'] = function ($c) {
         return $c->get('settings')['jwtKey'];
     };

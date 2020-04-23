@@ -39,7 +39,7 @@ class LoginController extends ValidationEntity
      *
      * @return object - the data to return to the requestor
      */
-    public function __invoke(Request $request, Response $response, array $args) :object
+    public function __invoke(Request $request, Response $response, array $args) :Response
     {
         $adminPasscode = $request->getParsedBodyParam('Passcode');
 

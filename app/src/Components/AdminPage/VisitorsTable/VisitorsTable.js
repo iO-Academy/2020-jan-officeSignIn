@@ -7,11 +7,10 @@ class VisitorsTable extends React.Component {
     constructor(props) {
         super(props);
 
-        // this.fetchVisitors();
-
         this.state = {
-            visitorPackage: {}
+            visitorPackage: visitorPackage
         }
+
     }
 
     //Make sure to include authentication in HEADERS
@@ -25,13 +24,13 @@ class VisitorsTable extends React.Component {
     //
     //     let responseData = await response.json();
     //     this.setState({visitorPackage: responseData});
-    //     console.log(responseData);
+    //     console.log(this.state.visitorPackage);
+    //     // this.generateRows();
     // };
-
-    // change visitorPackage.Data to this.visitorPackage.Data
+    
     generateRows = () => {
         let result = [];
-        let tableData = visitorPackage.Data;
+        let tableData = this.state.visitorPackage.Data;
 
         for(var i = 0; i < tableData.length; i++) {
             result.push(
@@ -55,7 +54,7 @@ class VisitorsTable extends React.Component {
 
     render() {
         return (
-            <div className="col-12">
+            <div className="col-12 visitorsTable">
                 <table className="table table-bordered table-hover">
                     <thead>
                         <tr>

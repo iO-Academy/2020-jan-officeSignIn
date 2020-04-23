@@ -8,6 +8,7 @@ class AdminContainer extends React.Component {
         return (
             <main>
                 <div className="adminContainer">
+                    <h1>All visitors currently signed in today:</h1>
                     <Logo/>
                     <VisitorsTable/>
                 </div>

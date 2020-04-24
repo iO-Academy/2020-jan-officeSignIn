@@ -2,16 +2,14 @@ import React from "react";
 import './logOutBtn.css';
 
 class LogOutBtn extends React.Component {
-    logout(){
+    handleClick = () => {
         localStorage.clear();
-        return(
-            <Redirect to="/"/>
-        )
-    }
+        window.location.replace('http://localhost:3000/')
+    };
 
     render() {
         return (
-            <button className="logOutBtn">Log Out</button>
+            <button className="logOutBtn" onClick={this.handleClick}>Log Out</button>
         )
     }
 }

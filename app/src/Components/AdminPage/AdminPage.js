@@ -3,17 +3,6 @@ import './adminPage.css';
 import AdminContainer from "./AdminContainer/AdminContainer";
 import LogOutBtn from "./LogOutBtn/LogOutBtn";
 
-// let loggedIn=false;
-//
-// if (localStorage.getItem('bearerToken') !== '') {
-//     loggedIn=true;
-// } else {
-//     loggedIn=false;
-// }
-// console.log(loggedIn)
-
-
-
 class AdminPage extends React.Component{
     constructor(props) {
         super(props);
@@ -27,7 +16,15 @@ class AdminPage extends React.Component{
     }
 
     componentDidMount() {
+        if (localStorage.getItem('bearerToken') === null) {
+            return window.location.replace('http://localhost:3000')
+        }
         this.fetchVisitors();
+
+        setTimeout(() => {
+            localStorage.clear();
+            window.location.replace('http://localhost:3000/')
+        }, 300000)
     }
 
     fetchVisitors = () => {
@@ -42,7 +39,7 @@ class AdminPage extends React.Component{
             .then((data)=>{
                 this.setState({
                     success: data.Success
-                })
+                });
                 if (!(this.state.success)) {
                     window.location.replace('http://localhost:3000')
                 }

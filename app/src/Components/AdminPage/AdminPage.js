@@ -2,17 +2,9 @@ import React from "react";
 import './adminPage.css';
 import AdminContainer from "./AdminContainer/AdminContainer";
 import LogOutBtn from "./LogOutBtn/LogOutBtn";
-
-// let loggedIn=false;
-//
-// if (localStorage.getItem('bearerToken') !== '') {
-//     loggedIn=true;
-// } else {
-//     loggedIn=false;
-// }
-// console.log(loggedIn)
-
-
+import getBaseUrl from "../../index"
+import {getBaseUrlApp} from "../../index";
+import AdminModal from "../LandingPage/AdminModal/AdminModal";
 
 class AdminPage extends React.Component{
     constructor(props) {
@@ -30,7 +22,12 @@ class AdminPage extends React.Component{
     }
 
     componentDidMount() {
-        this.fetchVisitors();
+        if (this.state.loggedIn) {
+            this.fetchVisitors();
+        } else {
+            window.location.replace('http://localhost:3000/')
+        }
+
     }
 
     fetchVisitors = () => {
@@ -58,7 +55,12 @@ class AdminPage extends React.Component{
             <div>
                 <LogOutBtn/>
                 <h1>All visitors currently signed in today:</h1>
-                <AdminContainer/>
+                <AdminContainer
+                    bearerToken={this.state.bearerToken}
+                    setBearerToken={this.state.setBearerToken}
+                    loggedIn={this.state.loggedIn}
+                    setLoggedIn={this.state.setLoggedIn}
+                />
             </div>
         );
     }

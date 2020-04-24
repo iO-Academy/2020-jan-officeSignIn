@@ -1,20 +1,11 @@
-.adminBtn {
+.logOutBtn {
     position: absolute;
-    bottom: 5%;
+    top: 3%;
     right: 5%;
     background-color: #F27424;
     color: #ffffff;
     width: 150px;
     font: 700 25px Arial, sans-serif;
     border-radius: 5px;
-    border-color: #295074;
     cursor: pointer;
-}
-
-.visible {
-    display: block;
-}
-
-.hidden {
-    display: none;
 }

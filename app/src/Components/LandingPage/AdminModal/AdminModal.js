@@ -1,6 +1,7 @@
 import React from "react";
 import './AdminModal.css';
-import getBaseUrl from "../../../index";
+import getBaseUrl, {getBaseUrlApp} from "../../../index";
+
 
 class AdminModal extends React.Component {
     constructor(props) {
@@ -36,16 +37,16 @@ class AdminModal extends React.Component {
     }
 
     captureInput = (e,keyPressed, passcodeUpdate) => {
-            let passcodeValue = {}
-                passcodeValue['passcode'] = passcodeUpdate + keyPressed
+            let passcodeValue = {};
+                passcodeValue['passcode'] = passcodeUpdate + keyPressed;
         this.setState(passcodeValue)
-    }
+    };
 
     handleLogin = async (e)=>{
         let dataToSend = {
             'Passcode': this.state.passcode
         };
-        this.setState({passcode: ''})
+        this.setState({passcode: ''});
         await this.postPasscodeToDb(getBaseUrl + 'adminLogin', 'POST', dataToSend);
     };
 
@@ -62,8 +63,8 @@ class AdminModal extends React.Component {
         if(responseData.success === false) {
             this.updateResponse(responseData.message);
         } else if(responseData.success === true) {
-            this.updateToken(responseData.token)
-            this.props.history.push(getBaseUrl +'adminPage');
+            this.updateToken(responseData.token);
+            window.location.replace(getBaseUrlApp() + 'AdminPage');
         }
     };
 
@@ -79,7 +80,7 @@ class AdminModal extends React.Component {
     };
 
     render() {
-        let visibleState = 'adminModal ' + this.state.modalClass
+        let visibleState = 'adminModal ' + this.state.modalClass;
         return (
                 <div className={visibleState}>
                     <span className="instructions">Please enter the admin passcode</span>

@@ -38,13 +38,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
 }
 
 .keypadRow {
     height: 100px;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     margin: 0;
     padding: 0;
 }
@@ -56,6 +56,7 @@
     color: #ffffff;
     width: 100px;
     height: 100px;
+    cursor: pointer;
 }
 
 .logInBtn {
@@ -65,15 +66,32 @@
     color: #ffffff;
     width: 225px;
     height: 100px;
-
+    cursor: pointer;
 }
 
 .closeModalBtn {
+    position: absolute;
+    right: 40px;
+    bottom: 30px;
     width: 40px;
     height: 40px;
     background-color: #F27424;
     border: 2px solid #295074;
+    border-radius: 5px;
+    color: #ffffff;
     margin: 0 5px 5px 0;
+    line-height: 33px;
+    cursor: pointer;
+}
+
+.keypadBtn:active, .closeModalBtn:active {
+    background-color:#ffffff;
+    color: #288FB0;
+}
+
+.logInBtn:active {
+    background-color:#ffffff;
+    color: #94BA66;
 }
 
 span {

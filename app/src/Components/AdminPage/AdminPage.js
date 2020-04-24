@@ -2,6 +2,7 @@ import React from "react";
 import './adminPage.css';
 import AdminContainer from "./AdminContainer/AdminContainer";
 import LogOutBtn from "./LogOutBtn/LogOutBtn";
+import {getBaseUrlApp} from "../../index";
 
 // let loggedIn=false;
 //
@@ -28,6 +29,9 @@ class AdminPage extends React.Component{
 
     componentDidMount() {
         this.fetchVisitors();
+        setTimeout(()=> {
+            window.location.replace(getBaseUrlApp);
+        }, 300000)
     }
 
     fetchVisitors = () => {

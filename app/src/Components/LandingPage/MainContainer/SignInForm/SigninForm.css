@@ -18,4 +18,5 @@ input {
     color: #ffffff;
     width: 150px;
     font: 700 25px Arial, sans-serif;
+    cursor: pointer;
 }

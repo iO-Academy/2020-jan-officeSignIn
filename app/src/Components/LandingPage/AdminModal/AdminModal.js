@@ -8,24 +8,20 @@ class AdminModal extends React.Component {
         super(props);
         let token = '';
 
-        // if(localStorage.getItem('bearerToken')) {
-        //     token = localStorage.getItem('bearerToken')
-        // }
-
         this.state = {
             passcode: '',
             modalClass: 'hidden',
             response: '',
             bearerToken: this.props.bearerToken,
-            setBearerToken: this.props.setBearerToken,
+            logAdminIn: this.props.logAdminIn,
             loggedIn: this.props.loggedIn,
-            setLoggedIn: this.props.setLoggedIn
         };
     }
 
     updateToken = (fetchedToken) => {
-        this.props.setBearerToken(fetchedToken);
-        this.props.setLoggedIn(true);
+        console.log(fetchedToken)
+        this.state.logAdminIn(fetchedToken);
+
     };
 
     componentDidMount() {
@@ -33,11 +29,12 @@ class AdminModal extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.modalVisible !== this.props.modalVisible) {
+        if (prevProps.modalVisible !== this.props.modalVisible || prevProps.bearerToken !== this.props.bearerToken ||
+            prevProps.loggedIn !== this.props.loggedIn) {
             if(this.props.modalVisible) {
-                this.setState({modalClass: 'visible'})
+                this.setState({modalClass: 'visible', bearerToken: this.props.bearerToken, loggedIn: this.props.loggedIn})
             } else {
-                this.setState({modalClass: 'hidden'})
+                this.setState({modalClass: 'hidden', bearerToken: this.props.bearerToken, loggedIn: this.props.loggedIn})
             }
         }
     }

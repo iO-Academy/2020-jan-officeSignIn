@@ -13,19 +13,27 @@ class AdminPage extends React.Component{
         this.state = {
             success: '',
             bearerToken: this.props.bearerToken,
-            setBearerToken: this.props.setBearerToken,
+            logAdminIn: this.props.logAdminIn,
             loggedIn: this.props.loggedIn,
-            setLoggedIn: this.props.setLoggedIn
         };
 
         console.log(this.state.bearerToken)
+        console.log(this.state.loggedIn)
     }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.bearerToken !== this.props.bearerToken || prevProps.loggedIn !== this.props.loggedIn) {
+            this.setState({bearerToken: this.props.bearerToken, loggedIn: this.props.loggedIn})
+        }
+    }
+
 
     componentDidMount() {
         if (this.state.loggedIn) {
             this.fetchVisitors();
         } else {
-            window.location.replace('http://localhost:3000/')
+            console.log('get out!!')
+            // window.location.replace('http://localhost:3000/')
         }
 
     }
@@ -44,7 +52,8 @@ class AdminPage extends React.Component{
                     success: data.Success
                 })
                 if (!(this.state.success)) {
-                    window.location.replace('http://localhost:3000')
+                    console.log('Get out!!!')
+                    //window.location.replace('http://localhost:3000')
                 }
             })
 
@@ -57,9 +66,8 @@ class AdminPage extends React.Component{
                 <h1>All visitors currently signed in today:</h1>
                 <AdminContainer
                     bearerToken={this.state.bearerToken}
-                    setBearerToken={this.state.setBearerToken}
+                    logAdminIn={this.logAdminIn}
                     loggedIn={this.state.loggedIn}
-                    setLoggedIn={this.state.setLoggedIn}
                 />
             </div>
         );

@@ -11,9 +11,8 @@ class VisitorsTable extends React.Component {
                 "Data": []
             },
             bearerToken: this.props.bearerToken,
-            setBearerToken: this.props.setBearerToken,
+            logAdminIn: this.props.logAdminIn,
             loggedIn: this.props.loggedIn,
-            setLoggedIn: this.props.setLoggedIn
         };
 
         console.log(this.state.bearerToken)
@@ -22,6 +21,13 @@ class VisitorsTable extends React.Component {
     componentDidMount() {
         this.fetchVisitors();
     }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.bearerToken !== this.props.bearerToken || prevProps.loggedIn !== this.props.loggedIn) {
+            this.setState({bearerToken: this.props.bearerToken, loggedIn: this.props.loggedIn})
+        }
+    }
+
 
     fetchVisitors = () => {
         fetch('http://localhost:8080/api/admin', {

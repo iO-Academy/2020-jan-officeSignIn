@@ -12,11 +12,18 @@ class LandingPage extends React.Component {
             modalVisible: false,
             adminBtnVisible: true,
             bearerToken: this.props.bearerToken,
-            setBearerToken: this.props.setBearerToken,
+            logAdminIn: this.props.logAnAdminIn,
             loggedIn: this.props.loggedIn,
-            setLoggedIn: this.props.setLoggedIn
         };
+        console.log('LandingPageConstructor ' + this.state)
     }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.bearerToken !== this.props.bearerToken || prevProps.loggedIn !== this.props.loggedIn) {
+            this.setState({bearerToken: this.props.bearerToken, loggedIn: this.props.loggedIn})
+        }
+    }
+
 
     updateModalVisible = () => {
         if(!this.state.modalVisible) {
@@ -35,9 +42,8 @@ class LandingPage extends React.Component {
                     modalVisible={this.state.modalVisible}
                     updateModalVisible={this.updateModalVisible}
                     bearerToken={this.state.bearerToken}
-                    setBearerToken={this.state.setBearerToken}
                     loggedIn={this.state.loggedIn}
-                    setLoggedIn={this.state.setLoggedIn}
+                    logAdminIn={this.logAdminIn}
                 />
                 <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
             </div>

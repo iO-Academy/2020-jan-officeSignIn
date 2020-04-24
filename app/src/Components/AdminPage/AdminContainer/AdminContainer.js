@@ -9,11 +9,17 @@ class AdminContainer extends React.Component {
         super(props)
         this.state = {
             bearerToken: this.props.bearerToken,
-            setBearerToken: this.props.setBearerToken,
+            logAdminIn: this.props.logAdminIn,
             loggedIn: this.props.loggedIn,
-            setLoggedIn: this.props.setLoggedIn
         };
     }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.bearerToken !== this.props.bearerToken || prevProps.loggedIn !== this.props.loggedIn) {
+            this.setState({bearerToken: this.props.bearerToken, loggedIn: this.props.loggedIn})
+        }
+    }
+
 
     render() {
         return (
@@ -22,9 +28,8 @@ class AdminContainer extends React.Component {
                     <Logo/>
                     <VisitorsTable
                         bearerToken={this.state.bearerToken}
-                        setBearerToken={this.state.setBearerToken}
                         loggedIn={this.state.loggedIn}
-                        setLoggedIn={this.state.setLoggedIn}
+                        logAdminIn={this.state.logAdminIn}
                     />
                 </div>
             </main>

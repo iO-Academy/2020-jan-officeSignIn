@@ -11,14 +11,9 @@ class Routing extends React.Component {
         loggedIn: false
     }
 
-    setBearerToken = (bearerToken) =>
+    logAdminIn = (bearerToken) =>
     {
-        this.setState({bearerToken: bearerToken})
-    }
-
-    setLoggedIn = (loggedInState) =>
-    {
-        this.setState({loggedIn: loggedInState})
+        this.setState({bearerToken: bearerToken, loggedIn: !this.state.loggedIn})
     }
 
     render() {
@@ -30,24 +25,21 @@ class Routing extends React.Component {
                             <LandingPage
                                 loggedIn={this.state.loggedIn}
                                 bearerToken={this.state.bearerToken}
-                                setBearerToken={this.setBearerToken}
-                                setLoggedIn={this.setLoggedIn}
+                                logAdminIn={this.logAdminIn}
                             />}
                         />
                         <Route path="/adminPage" render={() =>
                             <AdminPage
                                 loggedIn={this.state.loggedIn}
                                 bearerToken={this.state.bearerToken}
-                                setBearerToken={this.setBearerToken}
-                                setLoggedIn={this.setLoggedIn}
+                                logAdminIn={this.logAdminIn}
                             />}
                         />
                         <Route render={() =>
                             <LandingPage
                                 loggedIn={this.state.loggedIn}
                                 bearerToken={this.state.bearerToken}
-                                setBearerToken={this.setBearerToken}
-                                setLoggedIn={this.setLoggedIn}
+                                logAdminIn={this.logAdminIn}
                             />}
                         />
                     </Switch>

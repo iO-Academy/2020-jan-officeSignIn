@@ -20,7 +20,10 @@ class AdminPage extends React.Component{
 
         this.state = {
             success: '',
-            bearerToken: localStorage.getItem('bearerToken')
+            bearerToken: this.props.bearerToken,
+            setBearerToken: this.props.setBearerToken,
+            loggedIn: this.props.loggedIn,
+            setLoggedIn: this.props.setLoggedIn
         };
 
         console.log(this.state.bearerToken)

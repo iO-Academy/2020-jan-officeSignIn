@@ -8,23 +8,29 @@ class AdminModal extends React.Component {
         super(props);
         let token = '';
 
-        if(localStorage.getItem('bearerToken')) {
-            token = localStorage.getItem('bearerToken')
-        }
+        // if(localStorage.getItem('bearerToken')) {
+        //     token = localStorage.getItem('bearerToken')
+        // }
 
         this.state = {
             passcode: '',
             modalClass: 'hidden',
             response: '',
-            bearerToken: token
+            bearerToken: this.props.bearerToken,
+            setBearerToken: this.props.setBearerToken,
+            loggedIn: this.props.loggedIn,
+            setLoggedIn: this.props.setLoggedIn
         };
     }
 
     updateToken = (fetchedToken) => {
-        let updatedToken = fetchedToken;
-        this.setState({bearerToken: updatedToken});
-        localStorage.setItem('bearerToken', updatedToken)
+        this.props.setBearerToken(fetchedToken);
+        this.props.setLoggedIn(true);
     };
+
+    componentDidMount() {
+        console.log(this.state)
+    }
 
     componentDidUpdate(prevProps) {
         if (prevProps.modalVisible !== this.props.modalVisible) {

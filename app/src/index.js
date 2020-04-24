@@ -6,14 +6,50 @@ import AdminPage from "./Components/AdminPage/AdminPage";
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 class Routing extends React.Component {
+    state= {
+        bearerToken: '',
+        loggedIn: false
+    }
+
+    setBearerToken = (bearerToken) =>
+    {
+        this.setState({bearerToken: bearerToken})
+    }
+
+    setLoggedIn = (loggedInState) =>
+    {
+        this.setState({loggedIn: loggedInState})
+    }
+
     render() {
         return (
             <Router>
                 <div>
                     <Switch>
-                        <Route exact path="/" component={ LandingPage }/>
-                        <Route path="/adminPage" component={ AdminPage }/>
-                        <Route component={ LandingPage }/>
+                        <Route exact path="/" render={() =>
+                            <LandingPage
+                                loggedIn={this.state.loggedIn}
+                                bearerToken={this.state.bearerToken}
+                                setBearerToken={this.setBearerToken}
+                                setLoggedIn={this.setLoggedIn}
+                            />}
+                        />
+                        <Route path="/adminPage" render={() =>
+                            <AdminPage
+                                loggedIn={this.state.loggedIn}
+                                bearerToken={this.state.bearerToken}
+                                setBearerToken={this.setBearerToken}
+                                setLoggedIn={this.setLoggedIn}
+                            />}
+                        />
+                        <Route render={() =>
+                            <LandingPage
+                                loggedIn={this.state.loggedIn}
+                                bearerToken={this.state.bearerToken}
+                                setBearerToken={this.setBearerToken}
+                                setLoggedIn={this.setLoggedIn}
+                            />}
+                        />
                     </Switch>
                 </div>
             </Router>

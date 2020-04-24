@@ -5,10 +5,18 @@ import AdminBtn from "./AdminBtn/AdminBtn";
 import AdminModal from "./AdminModal/AdminModal";
 
 class LandingPage extends React.Component {
-    state = {
-        modalVisible: false,
-        adminBtnVisible: true
-    };
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            modalVisible: false,
+            adminBtnVisible: true,
+            bearerToken: this.props.bearerToken,
+            setBearerToken: this.props.setBearerToken,
+            loggedIn: this.props.loggedIn,
+            setLoggedIn: this.props.setLoggedIn
+        };
+    }
 
     updateModalVisible = () => {
         if(!this.state.modalVisible) {
@@ -23,7 +31,14 @@ class LandingPage extends React.Component {
             <div>
                 <h1>Mayden Academy Visitor sign-in</h1>
                 <MainContainer/>
-                <AdminModal modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
+                <AdminModal
+                    modalVisible={this.state.modalVisible}
+                    updateModalVisible={this.updateModalVisible}
+                    bearerToken={this.state.bearerToken}
+                    setBearerToken={this.state.setBearerToken}
+                    loggedIn={this.state.loggedIn}
+                    setLoggedIn={this.state.setLoggedIn}
+                />
                 <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
             </div>
         )

@@ -5,21 +5,27 @@ This application is built using Slim framework, OOP and the MVC structure.
 ## Setup
 
 1. Clone repo
-2. Run ```composer install``` in app route
-3. Create database with name ```maydenSignIn``` and a either import template from db/ file or create your own with the following columns:
-    - ```id``` : user id
+2. Run ```composer install``` in api directory
+3. Create database with name ```maydenSignIn``` and either import template from db/ file or create your own with the following tables:
+ - ```visitors``` with the following fields:
+    - ```id``` : user id (auto generated)
     - ```Name``` : visitor name
     - ```Company``` : company the visitor is from
     - ```DateOfVisit``` : DATE format, date of visit
     - ```TimeOfSignIn``` : Time visitor signed in
     - ```TimeOfSignIn``` : Time visitor signed out
     - ```SignedIn``` : bool to say if signed in or out
+    
+ - ```admins``` with the following fields:
+    - ```id``` : id (auto generated)
+    - ```passcode``` : a hashed 4 digit passcode
 
-4. Run ```composer start```
+4. Run ```composer start``` in the api directory
 
 ### Running Tests
 
 - cd into the tests directory and run: ```../vendor/bin/phpunit .```
+- or in the api directory run: ```composer test```
 
 ## Routes
 - for local development use localhost:8080/whatYouRequire as your URL

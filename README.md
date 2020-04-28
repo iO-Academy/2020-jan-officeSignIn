@@ -1,6 +1,6 @@
 # Mayden Academy Visitor Sign In App
 
-##Tech Stack
+## Tech Stack
 The Mayden Office Sign In App is written in the LAMP stack.
 - API written in Slim, using MVC and Factory Pattern
 - Front end App written in React

@@ -29,14 +29,12 @@ class VisitorsTable extends React.Component {
                 "Authorization" : "Bearer " + this.state.bearerToken
             }
         })
-            .then(data=>data.json())
-            .then((data)=>{
-                this.setState({
-                    visitorPackage: data
-                })
-                console.log(data)
+        .then(data=>data.json())
+        .then((data)=>{
+            this.setState({
+                visitorPackage: data
             })
-
+        })
     };
 
     generateRows = () => {

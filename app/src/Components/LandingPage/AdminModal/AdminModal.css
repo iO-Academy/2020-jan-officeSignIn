@@ -26,7 +26,6 @@
 }
 
 .instructions {
-    font-family:'truenoRg', sans-serif;
     color: #295074;
 }
 
@@ -105,7 +104,7 @@ span {
     color: #e74c3c;
 }
 
-@media screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) {
     .mainContainer {
         width: 500px;
     }

@@ -5,7 +5,8 @@
     background-color: #F27424;
     color: #ffffff;
     width: 150px;
-    font: 700 25px Arial, sans-serif;
+    font-weight: 700;
+    font-size: 25px;
     border-radius: 5px;
     cursor: pointer;
 }

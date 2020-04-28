@@ -44,14 +44,13 @@ class AdminPage extends React.Component{
                     window.location.replace(this.state.appUrl)
                 }
             })
-
     };
 
     render() {
         return (
             <div>
                 <LogOutBtn/>
-                <h1>All visitors currently signed in today:</h1>
+                <h1 className={'adminPage'}>All visitors currently signed in today:</h1>
                 <AdminContainer/>
             </div>
         );

@@ -9,11 +9,27 @@ class Authenticate
 {
     private $jwtKey;
 
+    /**
+     * Authenticate constructor.
+     *
+     * @param string $jwtKey
+     */
     public function __construct(string $jwtKey)
     {
        $this->jwtKey = $jwtKey;
     }
 
+    /**
+     * Checks that a valid bearer token has been provided
+     *
+     * @param Request $request
+     *
+     * @param Response $response
+     *
+     * @param $next
+     *
+     * @return Response
+     */
     public function __invoke(Request $request, Response $response, $next)
     {
         //boot out if they dont have any Auth headers

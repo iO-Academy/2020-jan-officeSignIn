@@ -34,7 +34,7 @@ class AdminModal extends React.Component {
         }
     }
 
-    captureInput = (e,keyPressed, passcodeUpdate) => {
+    captureInput = (e, keyPressed, passcodeUpdate) => {
             let passcodeValue = {};
                 passcodeValue['passcode'] = passcodeUpdate + keyPressed;
         this.setState(passcodeValue)

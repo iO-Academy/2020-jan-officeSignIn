@@ -47,7 +47,8 @@ POST
 **/api/admin**
 GET
 
-You must be authenticated to retrieve data from this route
+You must be authenticated to retrieve data from this route.
+To test, passcode is 8974.
 
 - Gets all Visitors currently signed in
 - Required

@@ -1,4 +1,4 @@
-button {
+.adminBtn {
     position: absolute;
     bottom: 5%;
     right: 5%;
@@ -7,4 +7,14 @@ button {
     width: 150px;
     font: 700 25px Arial, sans-serif;
     border-radius: 5px;
+    border-color: #295074;
+    cursor: pointer;
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
 }

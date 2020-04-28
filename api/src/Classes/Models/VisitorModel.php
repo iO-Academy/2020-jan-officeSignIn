@@ -19,6 +19,21 @@ class VisitorModel
     }
 
     /**
+     * queries database to return all signed in visitors who signed in today
+     *
+     * @return array - an array of the signed in visitors
+     */
+    public function getAllSignedInVisitors() :array
+    {
+        $query = $this->db->prepare(
+            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn` FROM `visitors`
+            WHERE `DateOfVisit` = CURDATE() AND `SignedIn` = 1;'
+        );
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
      *  Adds new visitor to the database and returns a bool based on success or failure
      *
      * @param $Name

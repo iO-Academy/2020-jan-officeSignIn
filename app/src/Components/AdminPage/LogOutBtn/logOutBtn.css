@@ -1,0 +1,12 @@
+.logOutBtn {
+    position: absolute;
+    top: 3%;
+    right: 5%;
+    background-color: #F27424;
+    color: #ffffff;
+    width: 150px;
+    font-weight: 700;
+    font-size: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}

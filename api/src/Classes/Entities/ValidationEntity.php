@@ -21,7 +21,33 @@ abstract class ValidationEntity
         return $clean;
     }
 
-    public static function validateLength($validateData, $characterLength)
+    /**
+     * Checks if what is given is a four digit number
+     *
+     * @param $validateData - the data to validate
+     *
+     * @return bool - whether the data is a four digit number or not
+     */
+    public static function checkFourDigitInput($validateData)
+    {
+        if (preg_match('/^[\d]{4}$/', $validateData)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if a string is above a given length and trims string down if it is too long
+     *
+     * @param $validateData - the string to validate
+     *
+     * @param $characterLength - an integer that represents the maximum character length
+     *
+     * @return false|string - the string, trimmed if necessary
+     *
+     */
+    public static function validateLength(string $validateData, int $characterLength)  :string
     {
         if (strlen($validateData) > $characterLength) {
             $validateData = substr($validateData, 0, $characterLength);

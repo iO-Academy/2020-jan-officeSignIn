@@ -1,5 +1,6 @@
 import React from "react";
 import './visitorsTable.css';
+import {getBaseUrlApi} from '../../../index';
 const columnHeader = ['Name', 'Company', 'Time Signed In'];
 
 class VisitorsTable extends React.Component {
@@ -21,7 +22,9 @@ class VisitorsTable extends React.Component {
     }
 
     fetchVisitors = () => {
-        fetch('http://localhost:8080/api/admin', {
+        const url = getBaseUrlApi() + 'api/admin';
+        console.log(url);
+        fetch(url, {
             method: 'GET',
             headers: {
                 "Content-Type" : "application/json",

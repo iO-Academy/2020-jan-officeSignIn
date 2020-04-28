@@ -1,6 +1,6 @@
 import React from "react";
 import './SigninForm.css';
-import getBaseUrl from '../../../../index';
+import {getBaseUrlApi} from '../../../../index';
 
 class SigninForm extends React.Component {
     state = {
@@ -20,7 +20,7 @@ class SigninForm extends React.Component {
             'Name': this.state.Name,
             'Company': this.state.Company,
         };
-        await this.postVisitorToDb(getBaseUrl + 'api/visitorSignIn', 'POST', dataToSend);
+        await this.postVisitorToDb(getBaseUrlApi() + 'api/visitorSignIn', 'POST', dataToSend);
     };
 
     postVisitorToDb = async (url, requestMethod, dataToSend) => {

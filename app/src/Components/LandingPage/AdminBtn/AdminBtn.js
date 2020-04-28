@@ -7,7 +7,7 @@ class AdminBtn extends React.Component {
     };
 
     componentDidUpdate(prevProps) {
-        if (prevProps.adminBtnVisible != this.props.adminBtnVisible) {
+        if (prevProps.adminBtnVisible !== this.props.adminBtnVisible) {
             if(this.props.adminBtnVisible) {
                 this.setState({adminBtnClass: 'visible'})
             } else {

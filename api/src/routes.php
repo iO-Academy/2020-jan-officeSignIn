@@ -15,7 +15,7 @@ function getBaseUrl() {
     $isProd = false;
 
     if($isProd) {
-        return '{addProductionUrlHere}';
+        return '{addProductionApiUrlHere}';
     } else {
         return 'http://localhost:3000';
     }

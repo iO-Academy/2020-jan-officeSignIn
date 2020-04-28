@@ -1,6 +1,6 @@
 import React from "react";
 import './AdminModal.css';
-import getBaseUrl, {getBaseUrlApp} from "../../../index";
+import {getBaseUrlApi, getBaseUrlApp} from "../../../index";
 
 
 class AdminModal extends React.Component {
@@ -47,7 +47,7 @@ class AdminModal extends React.Component {
             'Passcode': this.state.passcode
         };
         this.setState({passcode: ''});
-        await this.postPasscodeToDb(getBaseUrl + 'adminLogin', 'POST', dataToSend);
+        await this.postPasscodeToDb(getBaseUrlApi() + 'adminLogin', 'POST', dataToSend);
     };
 
     postPasscodeToDb = async (url, requestMethod, dataToSend) => {

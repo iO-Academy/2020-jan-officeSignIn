@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import LandingPage from "./Components/LandingPage/LandingPage";
 import AdminPage from "./Components/AdminPage/AdminPage";
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 class Routing extends React.Component {
     render() {
@@ -28,10 +28,10 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-const getBaseUrl = () => {
+export const getBaseUrlApi = () => {
   let isProd = false;
   if(isProd) {
-    return '{productionApp}'
+    return '{productionApi}'
   } else {
     return 'http://localhost:8080/'
   }
@@ -46,4 +46,4 @@ export const getBaseUrlApp = () => {
     }
 };
 
-export default getBaseUrl()
+// export default getBaseUrlApi()

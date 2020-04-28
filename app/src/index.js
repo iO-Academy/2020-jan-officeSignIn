@@ -6,6 +6,32 @@ import AdminPage from "./Components/AdminPage/AdminPage";
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 class Routing extends React.Component {
+    constructor(props) {
+        super(props);
+
+        localStorage.setItem('apiUrl', this.getBaseUrlApi());
+        localStorage.setItem('appUrl', this.getBaseUrlApp());
+    }
+
+    getBaseUrlApi() {
+        let isProd = false;
+        if (isProd) {
+            return '{productionApi}'
+        } else {
+            return 'http://localhost:8080/'
+        }
+    }
+
+    getBaseUrlApp() {
+        let isProd = false;
+        if(isProd) {
+            return '{productionApp}'
+        } else {
+            return 'http://localhost:3000/'
+        }
+    }
+
+
     render() {
         return (
             <Router>
@@ -27,23 +53,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-export const getBaseUrlApi = () => {
-  let isProd = false;
-  if(isProd) {
-    return '{productionApi}'
-  } else {
-    return 'http://localhost:8080/'
-  }
-};
-
-export const getBaseUrlApp = () => {
-    let isProd = false;
-    if(isProd) {
-        return '{productionApp}'
-    } else {
-        return 'http://localhost:3000/'
-    }
-};
-
-// export default getBaseUrlApi()

@@ -1,7 +1,5 @@
 import React from "react";
 import './AdminModal.css';
-import {getBaseUrlApi, getBaseUrlApp} from "../../../index";
-
 
 class AdminModal extends React.Component {
     constructor(props) {
@@ -47,7 +45,7 @@ class AdminModal extends React.Component {
             'Passcode': this.state.passcode
         };
         this.setState({passcode: ''});
-        await this.postPasscodeToDb(getBaseUrlApi() + 'adminLogin', 'POST', dataToSend);
+        await this.postPasscodeToDb(localStorage.getItem('apiUrl') + 'adminLogin', 'POST', dataToSend);
     };
 
     postPasscodeToDb = async (url, requestMethod, dataToSend) => {
@@ -64,7 +62,7 @@ class AdminModal extends React.Component {
             this.updateResponse(responseData.message);
         } else if(responseData.success === true) {
             this.updateToken(responseData.token);
-            window.location.replace(getBaseUrlApp() + 'AdminPage');
+            window.location.replace(localStorage.getItem('appUrl') + 'AdminPage');
         }
     };
 

@@ -1,11 +1,10 @@
 import React from "react";
 import './logOutBtn.css';
-import {getBaseUrlApp} from '../../../index'
 
 class LogOutBtn extends React.Component {
     handleClick = () => {
-        localStorage.clear();
-        window.location.replace(getBaseUrlApp())
+        localStorage.removeItem('bearerToken');
+        window.location.replace(localStorage.getItem('appUrl'))
     };
 
     render() {

@@ -21,21 +21,20 @@ class VisitorsTable extends React.Component {
     }
 
     fetchVisitors = () => {
-        fetch('http://localhost:8080/api/admin', {
+        const url = localStorage.getItem('apiUrl') + '/api/admin';
+        fetch(url, {
             method: 'GET',
             headers: {
                 "Content-Type" : "application/json",
                 "Authorization" : "Bearer " + this.state.bearerToken
             }
         })
-            .then(data=>data.json())
-            .then((data)=>{
-                this.setState({
-                    visitorPackage: data
-                })
-                console.log(data)
+        .then(data=>data.json())
+        .then((data)=>{
+            this.setState({
+                visitorPackage: data
             })
-
+        })
     };
 
     generateRows = () => {

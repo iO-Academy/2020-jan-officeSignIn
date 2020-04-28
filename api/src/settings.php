@@ -23,6 +23,8 @@ return [
             'userName' => 'root',
             'password' => 'password'
         ],
+
+        // JWT key
         'jwtKey' => 'super_secret_key'
     ],
 ];

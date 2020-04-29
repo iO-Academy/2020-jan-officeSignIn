@@ -19,7 +19,7 @@ class AdminPage extends React.Component{
         if (localStorage.getItem('bearerToken') === null) {
             return window.location.replace(this.state.appUrl)
         }
-        this.fetchVisitors();
+        // this.fetchVisitors();
 
         setTimeout(() => {
             localStorage.removeItem('bearerToken');
@@ -27,24 +27,24 @@ class AdminPage extends React.Component{
         }, 300000)
     }
 
-    fetchVisitors = () => {
-        fetch(this.state.apiUrl + 'api/admin', {
-            method: 'GET',
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Bearer " + this.state.bearerToken
-            }
-        })
-            .then(data=>data.json())
-            .then((data)=>{
-                this.setState({
-                    success: data.Success
-                });
-                if (!(this.state.success)) {
-                    window.location.replace(this.state.appUrl)
-                }
-            })
-    };
+    // fetchVisitors = () => {
+    //     fetch(this.state.apiUrl + 'api/admin', {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type" : "application/json",
+    //             "Authorization" : "Bearer " + this.state.bearerToken
+    //         }
+    //     })
+    //         .then(data=>data.json())
+    //         .then((data)=>{
+    //             this.setState({
+    //                 success: data.Success
+    //             });
+    //             if (!(this.state.success)) {
+    //                 window.location.replace(this.state.appUrl)
+    //             }
+    //         })
+    // };
 
     render() {
         return (

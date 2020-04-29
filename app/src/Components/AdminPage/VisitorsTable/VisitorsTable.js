@@ -12,8 +12,6 @@ class VisitorsTable extends React.Component {
             },
             bearerToken: localStorage.getItem('bearerToken')
         };
-
-        console.log(this.state.bearerToken)
     }
 
     componentDidMount() {
@@ -34,6 +32,7 @@ class VisitorsTable extends React.Component {
             this.setState({
                 visitorPackage: data
             })
+            this.props.updateResponse('Hello this is a success message');
         })
     };
 

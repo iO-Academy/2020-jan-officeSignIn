@@ -32,7 +32,7 @@ This application is built using Slim framework, OOP and the MVC structure.
 
 **/api/visitorSignIn**
 
-POST
+###POST
 - Logs a new visitor to DB
 - Required
     - `Name` - visitor's first name 
@@ -51,7 +51,8 @@ POST
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
             
 **/api/admin**
-GET
+
+###GET
 
 You must be authenticated to retrieve data from this route.
 To test, passcode is 8974.
@@ -69,5 +70,39 @@ To test, passcode is 8974.
     - if unsuccessful
         - `status 400` 
             - `{ "Success": false, "Message": "No data retrieved or no data in database", "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+            
+**/api/visitorSignOut**
+            
+###PUT
+- Sets visitor to signed out in the database (signed in flag to 0)
+- Logs time visitor signed out in the DB
+
+Visitor signing themself out (if one match):
+
+- Required
+    - `Name` - visitor's first name 
+- Optional
+    - `Company` - company visitor represents
+    
+    OR
+
+Admin user signing a visitor out (or if multiple matches for visitor signing themself out):
+
+- Required
+
+    -`id` - visitor's id (on click of a specific visitor)
+    
+- Sends: 
+  - `{ "Name": "string", "Company": "string" }`
+
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Visitor successfully signed out", "Data": [] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "Name or ID is required", "Data": [] }`
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`

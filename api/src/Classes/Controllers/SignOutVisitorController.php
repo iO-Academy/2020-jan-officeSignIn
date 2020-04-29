@@ -56,7 +56,7 @@ class SignOutVisitorController extends ValidationEntity
             if ($successfulSignOut) {
                 $responseData = [
                     'Success' => true,
-                    'Message' => 'Thank you for signing out'
+                    'Message' => 'Visitor successfully signed out'
                 ];
                 $statusCode = 200;
             } else {
@@ -68,7 +68,7 @@ class SignOutVisitorController extends ValidationEntity
         } else {
             $responseData = [
                 'Success' => false,
-                'Message' => 'Name is required'
+                'Message' => 'Name or ID is required'
             ];
             $statusCode = 400;
         }

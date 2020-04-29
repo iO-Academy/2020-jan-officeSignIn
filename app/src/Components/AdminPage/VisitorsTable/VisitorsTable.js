@@ -35,6 +35,7 @@ class VisitorsTable extends React.Component {
             if (!data.Data.length > 0) {
                 this.props.updateResponse(data.Message);
             }
+            localStorage.removeItem('bearerToken')
         })
     };
 

@@ -31,14 +31,13 @@ class Routing extends React.Component {
         }
     }
 
-
     render() {
         return (
             <Router>
                 <div>
                     <Switch>
                         <Route exact path="/" component={ LandingPage }/>
-                        <Route onLeave= { () => localStorage.removeItem('bearerToken') } path="/adminPage" component={ AdminPage }/>
+                        <Route path="/adminPage" component={ AdminPage }/>
                         <Route component={ LandingPage }/>
                     </Switch>
                 </div>

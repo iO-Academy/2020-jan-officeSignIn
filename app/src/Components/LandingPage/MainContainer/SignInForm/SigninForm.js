@@ -50,7 +50,8 @@ class SigninForm extends React.Component {
                        value={this.state.Company}
                        onChange={(e) => this.handleUpdate(e, 'Company')}
                 />
-                <input className="signInButton" type="submit" value="Sign In"/>
+                <input className="visitorFormButton" type="submit" value="Sign In"/>
+                <input className="visitorFormButton signOutBtn" type="submit" value="Sign Out"/>
             </form>
             )
         }

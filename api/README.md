@@ -32,7 +32,7 @@ This application is built using Slim framework, OOP and the MVC structure.
 
 **/api/visitorSignIn**
 
-###POST
+### POST
 - Logs a new visitor to DB
 - Required
     - `Name` - visitor's first name 
@@ -52,7 +52,7 @@ This application is built using Slim framework, OOP and the MVC structure.
             
 **/api/admin**
 
-###GET
+### GET
 
 You must be authenticated to retrieve data from this route.
 To test, passcode is 8974.
@@ -75,7 +75,7 @@ To test, passcode is 8974.
             
 **/api/visitorSignOut**
             
-###PUT
+### PUT
 - Sets visitor to signed out in the database (signed in flag to 0)
 - Logs time visitor signed out in the DB
 

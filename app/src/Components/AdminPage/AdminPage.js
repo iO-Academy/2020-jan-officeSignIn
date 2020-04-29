@@ -22,10 +22,12 @@ class AdminPage extends React.Component{
         // this.fetchVisitors();
 
         setTimeout(() => {
-            localStorage.removeItem('bearerToken');
+
             window.location.replace(this.state.appUrl)
         }, 300000)
     }
+
+
 
     // fetchVisitors = () => {
     //     fetch(this.state.apiUrl + 'api/admin', {

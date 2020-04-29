@@ -38,7 +38,7 @@ class Routing extends React.Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={ LandingPage }/>
-                        <Route path="/adminPage" component={ AdminPage }/>
+                        <Route onLeave= { () => localStorage.removeItem('bearerToken') } path="/adminPage" component={ AdminPage }/>
                         <Route component={ LandingPage }/>
                     </Switch>
                 </div>

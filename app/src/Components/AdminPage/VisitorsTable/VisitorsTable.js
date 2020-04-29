@@ -32,7 +32,9 @@ class VisitorsTable extends React.Component {
             this.setState({
                 visitorPackage: data
             })
-            this.props.updateResponse('Hello this is a success message');
+            if (!data.Data.length > 0) {
+                this.props.updateResponse(data.Message);
+            }
         })
     };
 

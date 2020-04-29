@@ -42,12 +42,18 @@ class Authenticate
         $requestString = explode(' ', $authHeader);
         //Grab the bearer token string from the array
         $bearerToken = $requestString[1];
+        $segments = explode('.', $bearerToken);
+        if (count($segments) !== 3) {
+            return $response->withJson(["success"=>false, "message"=>"Malformed token"]);
+        }
         try {
             $decoded = JWT::decode($bearerToken, $this->jwtKey, array('HS256'));
         } catch (\Firebase\JWT\ExpiredException $e) {
             return $response->withJson(["success"=>false, "message"=>"Token has expired"]);
         } catch (\Firebase\JWT\SignatureInvalidException $e) {
             return $response->withJson(["success"=>false, "message"=>"Invalid token"]);
+        } catch (Exception $e) {
+            return $response->withJson(["success"=>false, "message"=>"Token error"]);
         }
         return $next($request, $response);
 //        return $response;

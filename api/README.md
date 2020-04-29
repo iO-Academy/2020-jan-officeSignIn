@@ -30,9 +30,9 @@ This application is built using Slim framework, OOP and the MVC structure.
 ## Routes
 - for local development use localhost:8080/whatYouRequire as your URL
 
+### POST
 **/api/visitorSignIn**
 
-### POST
 - Logs a new visitor to DB
 - Required
     - `Name` - visitor's first name 
@@ -50,9 +50,8 @@ This application is built using Slim framework, OOP and the MVC structure.
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
             
-**/api/admin**
-
 ### GET
+**/api/admin**
 
 You must be authenticated to retrieve data from this route.
 To test, passcode is 8974.
@@ -73,9 +72,10 @@ To test, passcode is 8974.
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
             
-**/api/visitorSignOut**
             
 ### PUT
+**/api/visitorSignOut**
+
 - Sets visitor to signed out in the database (signed in flag to 0)
 - Logs time visitor signed out in the DB
 

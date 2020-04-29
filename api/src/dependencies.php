@@ -41,4 +41,6 @@ return function (App $app) {
     $container['LoginController'] = new SignInApp\Factories\LoginControllerFactory();
 
     $container['Authenticate'] = new SignInApp\Factories\AuthenticateFactory();
+
+    $container['SignOutVisitorController'] = new \SignInApp\Factories\SignOutControllerFactory();
 };

@@ -7,8 +7,7 @@ class SigninForm extends React.Component {
 
         this.state = {
             Name: '',
-            Company: '',
-            submitPath: ''
+            Company: ''
         };
     }
 
@@ -18,58 +17,62 @@ class SigninForm extends React.Component {
         this.setState(updatedData);
     };
 
-    handleSignIn = async () =>{
+    handleSignIn = async (e) =>{
+        e.preventDefault();
         let dataToSend = {
             'Name': this.state.Name,
             'Company': this.state.Company,
         };
 
-        await this.postVisitorToDb(
+        await this.handleFetch(
             localStorage.getItem('apiUrl') + 'api/visitorSignIn',
             'POST',
-            dataToSend);
+            dataToSend
+        );
 
         this.setState({Name: ''});
         this.setState({Company: ''})
     };
 
-    postVisitorToDb = async (url, requestMethod, dataToSend) => {
+    handleSignOut = async (e) =>{
+        e.preventDefault();
+        let dataToSend = {
+            'Name': this.state.Name,
+            'Company': this.state.Company,
+        };
+
+        // await this.handleFetch(
+        //     localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+        //     'PUT',
+        //     dataToSend
+        // );
+
+        //console logs to check handler working and ready to run fetch once api route built
+        console.log('Signing out...');
+        console.log(`data values: ${dataToSend.Name} ${dataToSend.Company}`);
+
+        this.setState({Name: ''});
+        this.setState({Company: ''})
+    };
+
+    handleFetch = async (url, requestMethod, dataToSend) => {
         let requestData = JSON.stringify(dataToSend);
+
         const response = await fetch(url, {
             method: requestMethod.toUpperCase(),
             body: requestData,
             headers: {
             "Content-Type" : "application/json"
-        }
-    });
-         let responseData = await response.json();
-         this.props.updateResponse(responseData.Message);
-    };
+            }
+        });
 
-    submitForm = (e) => {
-        e.preventDefault();
-        let path = this.state.submitPath;
-        if (path === 'signIn') {
-            this.handleSignIn();
-        } else if (path === 'Sign Out') {
-            //call handleSignOut
-        } else {
-            return false;
-        }
-    };
-
-    setSubmitPathSignIn = () => {
-        this.setState({submitPath: 'signIn'});
-        console.log(this.state.submitPath)
-    };
-
-    setSubmitPathSignOut = () => {
-
+        let responseData = await response.json();
+        this.props.updateResponse(responseData.Message);
     };
 
     render() {
         return (
-            <form onSubmit={this.submitForm}>
+            <form>
                 <input id="Name" type="text" placeholder="Your first name and surname..."
                        value={this.state.Name}
                        onChange={(e) => this.handleUpdate(e, 'Name')}
@@ -79,8 +82,8 @@ class SigninForm extends React.Component {
                        value={this.state.Company}
                        onChange={(e) => this.handleUpdate(e, 'Company')}
                 />
-                <input className="visitorFormButton" type="submit" value="Sign In" onClick={this.setSubmitPathSignIn}/>
-                <input className="visitorFormButton signOutBtn" type="submit" value="Sign Out"/>
+                <input className="visitorFormButton" type="submit" value="Sign In" onClick={this.handleSignIn}/>
+                <input className="visitorFormButton signOutBtn" type="submit" value="Sign Out" onClick={this.handleSignOut}/>
             </form>
             )
         }

@@ -55,4 +55,21 @@ abstract class ValidationEntity
 
         return $validateData;
     }
+
+    /**
+     * Checks if what is given is a digit/number
+     *
+     * @param $validateData - the data to validate
+     *
+     * @return bool - whether the data number or not
+     */    public static function checkDigitInput($validateData)
+    {
+        if (preg_match('/^[\d]$/', $validateData)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
+

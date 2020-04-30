@@ -51,4 +51,24 @@ class VisitorModel
         $query->bindParam(':signedIn', $signedIn);
         return $query->execute();
     }
+
+    /**
+     *  Signs out a visitor (sets signed in flag to 0 in the database) and returns a bool based on success or failure
+     *
+     * @param $Name
+     * @param $Company
+     * @return bool
+     */
+    public function signOutVisitorByName($Name, $Company, $dateOfVisit, $timeOfSignOut, $signedIn) : bool
+    {
+        $query = $this->db->prepare("UPDATE `visitors` 
+                                                SET `SignedIn` = ':signedIn', `TimeOfSignOut` = ':timeOfSignOut'
+                                                WHERE `Name` = ':Name' AND (`Company` = '' OR `Company` = ':Company');");
+        $query->bindParam(':Name', $Name);
+        $query->bindParam(':Company', $Company);
+        $query->bindParam(':dateOfVisit', $dateOfVisit);
+        $query->bindParam(':timeOfSignOut', $timeOfSignOut);
+        $query->bindParam(':signedIn', $signedIn);
+        return $query->execute();
+    }
 }

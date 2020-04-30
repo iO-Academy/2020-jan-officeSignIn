@@ -34,7 +34,7 @@ class Authenticate
     {
         //boot out if they dont have any Auth headers
         if(!$request->hasHeader('HTTP_AUTHORIZATION')){
-            return $response->withJson(["success"=>false]);
+            return $response->withJson(["success"=>false, "message"=>"No token received"]);
         }
         //Grab the value of the auth header
         $authHeader = $request->getHeader('HTTP_AUTHORIZATION')[0];

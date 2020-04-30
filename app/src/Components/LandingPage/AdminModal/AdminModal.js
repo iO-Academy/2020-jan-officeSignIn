@@ -19,7 +19,8 @@ class AdminModal extends React.Component {
     }
 
     updateToken = (fetchedToken) => {
-        let updatedToken = fetchedToken;
+        // let updatedToken = fetchedToken;
+        let updatedToken = ''; //use this for testing, uncomment above line in live, and comment out this one.
         this.setState({bearerToken: updatedToken});
         localStorage.setItem('bearerToken', updatedToken)
     };

@@ -1,6 +1,6 @@
 import React from "react";
 import './visitorsTable.css';
-const columnHeader = ['Name', 'Company', 'Time Signed In'];
+const columnHeader = ['Name', 'Company', 'Time In', 'Sign Out'];
 
 class VisitorsTable extends React.Component {
     constructor(props) {
@@ -49,6 +49,7 @@ class VisitorsTable extends React.Component {
                     <td key={tableData[i].Name}>{tableData[i].Name}</td>
                     <td key={tableData[i].Company}>{tableData[i].Company}</td>
                     <td key={timeOfSignIn}>{timeOfSignIn}</td>
+                    <td className="text-danger tableSignOutBtn">Sign Out</td>
                 </tr>
             )
 

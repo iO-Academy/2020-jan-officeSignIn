@@ -23,9 +23,8 @@ class SignOutVisitorController extends ValidationEntity
     }
 
     /**
-     *  On invoke check input for Name value, if data there, call signOutVisitor method
-     *  from VisitorModel and response whether that was successful or not
-     *
+     *On invoke check input for Name or ID value, if data there, call appropriate methods from VisitorModel
+     * (signOutById or signOutByName) and respond as whether that was successful or not
      * @param Request $request
      * @param Response $response
      * @param array $args
@@ -34,44 +33,52 @@ class SignOutVisitorController extends ValidationEntity
     public function __invoke(Request $request, Response $response, array $args)
     {
         $requestData = $request->getParsedBody();
+        var_dump($requestData);
         $name = self::sanitiseString($requestData['Name']);
         $name = self::validateLength($name, 255);
         $company = self::sanitiseString($requestData['Company']);
         $company = self::validateLength($company, 255);
-        $dateOfVisit = date("Y-m-d");
-
+        $id = self::checkDigitInput($requestData['id']);
         $now = new DateTime('Europe/London');
         $timeOfSignOut = $now->format('H:i:s');
 
         $signedOut = 0;
         $responseData = [
             'Success' => false,
-            'Message' => 'Error',
+            'Message' => 'Unable to connect to server',
             'Data' => []
         ];
         $statusCode = 500;
 
-        if (strlen($name) > 0) {
-            $successfulSignOut = $this->visitorModel->signOutVisitor($name, $company, $dateOfVisit, $timeOfSignOut, $signedOut);
+        if (isset($id) == true) {
+            $successfulSignOut = $this->visitorModel->signOutVisitorById($id, $timeOfSignOut, $signedOut);
             if ($successfulSignOut) {
                 $responseData = [
                     'Success' => true,
                     'Message' => 'Visitor successfully signed out'
                 ];
                 $statusCode = 200;
-            } else {
-                $responseData = [
-                    'Success' => false,
-                    'Message' => 'Unable to connect to server'
-                ];
             }
-        } else {
+            return $response->withJson($responseData, $statusCode);
+
+        } if (strlen($name) > 0) {
+            $successfulSignOut = $this->visitorModel->signOutVisitorByName($name, $company, $timeOfSignOut, $signedOut);
+            if ($successfulSignOut) {
             $responseData = [
-                'Success' => false,
-                'Message' => 'Name or ID is required'
+                'Success' => true,
+                'Message' => 'Visitor successfully signed out'
             ];
-            $statusCode = 400;
+            $statusCode = 200;
+            }
+
+        } else {
+        $responseData = [
+            'Success' => false,
+            'Message' => 'Name or ID is required'
+        ];
+        $statusCode = 400;
         }
+
         return $response->withJson($responseData, $statusCode);
     }
 }

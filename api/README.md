@@ -91,11 +91,10 @@ Visitor signing themself out (if one match):
 Admin user signing a visitor out (or if multiple matches for visitor signing themself out):
 
 - Required
-
-    -`id` - visitor's id (on click of a specific visitor)
+    -`id` - visitor's database id (on click of a specific visitor)
     
 - Sends: 
-  - `{ "Name": "string", "Company": "string" }`
+  - `{ "ID": "integer" }`
 
 - Returns:
     - if successful 

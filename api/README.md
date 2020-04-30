@@ -79,16 +79,19 @@ To test, passcode is 8974.
 - Sets visitor to signed out in the database (signed in flag to 0)
 - Logs time visitor signed out in the DB
 
-Visitor signing themself out (if one match):
+1.Visitor signing themself out (if one match):
 
 - Required
     - `Name` - visitor's first name 
 - Optional
     - `Company` - company visitor represents
+
+- Sends: 
+    - `{ "Name": "string", "Company": "string" }`
     
     OR
 
-Admin user signing a visitor out (or if multiple matches for visitor signing themself out):
+2.Admin user signing a visitor out (or if multiple matches for visitor signing themself out):
 
 - Required
     

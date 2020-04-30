@@ -2,10 +2,15 @@ import React from "react";
 import './SigninForm.css';
 
 class SigninForm extends React.Component {
-    state = {
-        Name: '',
-        Company: ''
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            Name: '',
+            Company: '',
+            submitPath: ''
+        };
+    }
 
     handleUpdate = (e, stateValue) => {
         let updatedData = {};
@@ -13,16 +18,19 @@ class SigninForm extends React.Component {
         this.setState(updatedData);
     };
 
-    handleSignIn = async (e)=>{
-        e.preventDefault();
+    handleSignIn = async () =>{
         let dataToSend = {
             'Name': this.state.Name,
             'Company': this.state.Company,
         };
 
-        await this.postVisitorToDb( localStorage.getItem('apiUrl') + 'api/visitorSignIn',
+        await this.postVisitorToDb(
+            localStorage.getItem('apiUrl') + 'api/visitorSignIn',
             'POST',
             dataToSend);
+
+        this.setState({Name: ''});
+        this.setState({Company: ''})
     };
 
     postVisitorToDb = async (url, requestMethod, dataToSend) => {
@@ -38,9 +46,30 @@ class SigninForm extends React.Component {
          this.props.updateResponse(responseData.Message);
     };
 
+    submitForm = (e) => {
+        e.preventDefault();
+        let path = this.state.submitPath;
+        if (path === 'signIn') {
+            this.handleSignIn();
+        } else if (path === 'Sign Out') {
+            //call handleSignOut
+        } else {
+            return false;
+        }
+    };
+
+    setSubmitPathSignIn = () => {
+        this.setState({submitPath: 'signIn'});
+        console.log(this.state.submitPath)
+    };
+
+    setSubmitPathSignOut = () => {
+
+    };
+
     render() {
         return (
-            <form method="POST" onSubmit={this.handleSignIn}>
+            <form onSubmit={this.submitForm}>
                 <input id="Name" type="text" placeholder="Your first name and surname..."
                        value={this.state.Name}
                        onChange={(e) => this.handleUpdate(e, 'Name')}
@@ -50,7 +79,7 @@ class SigninForm extends React.Component {
                        value={this.state.Company}
                        onChange={(e) => this.handleUpdate(e, 'Company')}
                 />
-                <input className="visitorFormButton" type="submit" value="Sign In"/>
+                <input className="visitorFormButton" type="submit" value="Sign In" onClick={this.setSubmitPathSignIn}/>
                 <input className="visitorFormButton signOutBtn" type="submit" value="Sign Out"/>
             </form>
             )

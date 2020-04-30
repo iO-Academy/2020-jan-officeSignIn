@@ -28,6 +28,11 @@ return function (App $app) {
         return $db;
     };
 
+    //Error Handler
+    $container['errorHandler'] = function (Slim\Container $c) {
+        return new \SignInApp\ErrorHandlers\ErrorHandler();
+    };
+
     // JWT Key
     $container['jwtKey'] = function ($c) {
         return $c->get('settings')['jwtKey'];

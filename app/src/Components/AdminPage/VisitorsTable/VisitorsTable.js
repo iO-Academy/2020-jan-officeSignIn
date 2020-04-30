@@ -20,7 +20,7 @@ class VisitorsTable extends React.Component {
     }
 
     fetchVisitors = () => {
-        const url = localStorage.getItem('apiUrl') + '/api/admin';
+        const url = localStorage.getItem('apiUrl') + 'api/admin';
         fetch(url, {
             method: 'GET',
             headers: {

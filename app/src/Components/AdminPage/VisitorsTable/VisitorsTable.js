@@ -10,7 +10,8 @@ class VisitorsTable extends React.Component {
             visitorPackage: {
                 "Data": []
             },
-            bearerToken: localStorage.getItem('bearerToken')
+            bearerToken: localStorage.getItem('bearerToken'),
+            response: ''
         };
 
         console.log(this.state.bearerToken)
@@ -42,10 +43,38 @@ class VisitorsTable extends React.Component {
             "id": e.target.dataset.id
         };
 
+        // await this.handleFetch(
+        //     localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+        //     'PUT',
+        //     data
+        // );
+
+        //console logs to check handler working and ready to run fetch once api route built
         console.log(data);
     };
 
-    //move fetch from signin form to somewhere I can access it here... context?
+    //move fetch from sign in form to somewhere I can access it here... context?
+    handleFetch = async (url, requestMethod, dataToSend) => {
+        let requestData = JSON.stringify(dataToSend);
+
+        const response = await fetch(url, {
+            method: requestMethod.toUpperCase(),
+            body: requestData,
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        });
+
+        let responseData = await response.json();
+        this.props.updateResponse(responseData.Message);
+    };
+
+    updateResponse = (newResponse) => {
+        setTimeout(()=> {
+            this.clearResponse()
+        }, 3000);
+        this.setState({response : newResponse})
+    };
 
     generateRows = () => {
         let result = [];
@@ -81,6 +110,7 @@ class VisitorsTable extends React.Component {
     render() {
         return (
             <div className="col-12 visitorsTable">
+                <div className="responseMessage">{this.state.response}</div>
                 <table className="table table-bordered table-hover">
                     <thead>
                         <tr>

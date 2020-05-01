@@ -38,42 +38,12 @@ class VisitorsTable extends React.Component {
         })
     };
 
-    handleSignOut = async (e) => {
-        let data = {
-            "id": e.target.dataset.id
-        };
-
-        // await this.handleFetch(
-        //     localStorage.getItem('apiUrl') + 'api/visitorSignOut',
-        //     'PUT',
-        //     data
-        // );
-
-        //console logs to check handler working and ready to run fetch once api route built
-        console.log(data);
-    };
-
-    //move fetch from sign in form to somewhere I can access it here... context?
-    handleFetch = async (url, requestMethod, dataToSend) => {
-        let requestData = JSON.stringify(dataToSend);
-
-        const response = await fetch(url, {
-            method: requestMethod.toUpperCase(),
-            body: requestData,
-            headers: {
-                "Content-Type" : "application/json"
-            }
-        });
-
-        let responseData = await response.json();
-        this.props.updateResponse(responseData.Message);
-    };
-
-    updateResponse = (newResponse) => {
-        setTimeout(()=> {
-            this.clearResponse()
-        }, 3000);
-        this.setState({response : newResponse})
+    generateHeader = () => {
+        let result = [];
+        for(var i = 0; i < columnHeader.length; i++) {
+            result.push(<th key={columnHeader[i]}>{columnHeader[i]}</th>)
+        }
+        return result;
     };
 
     generateRows = () => {
@@ -99,12 +69,42 @@ class VisitorsTable extends React.Component {
         return result;
     };
 
-    generateHeader = () => {
-        let result = [];
-        for(var i = 0; i < columnHeader.length; i++) {
-            result.push(<th key={columnHeader[i]}>{columnHeader[i]}</th>)
-        }
-        return result;
+    handleSignOut = async (e) => {
+        let data = {
+            "id": e.target.dataset.id
+        };
+
+        // await this.handleFetch(
+        //     localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+        //     'PUT',
+        //     data
+        // );
+
+        //console logs to check handler working and ready to run fetch once api route built
+        console.log(data);
+    };
+
+    updateResponse = (newResponse) => {
+        setTimeout(()=> {
+            this.clearResponse()
+        }, 3000);
+        this.setState({response : newResponse})
+    };
+
+    //move fetch from sign in form to somewhere I can access it here... context?
+    handleFetch = async (url, requestMethod, dataToSend) => {
+        let requestData = JSON.stringify(dataToSend);
+
+        const response = await fetch(url, {
+            method: requestMethod.toUpperCase(),
+            body: requestData,
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        });
+
+        let responseData = await response.json();
+        this.props.updateResponse(responseData.Message);
     };
 
     render() {

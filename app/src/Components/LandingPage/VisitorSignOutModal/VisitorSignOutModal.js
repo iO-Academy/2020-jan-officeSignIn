@@ -9,9 +9,7 @@ class VisitorSignOutModal extends React.Component
 
         this.state = {
             modalClass: this.props.signOutModalVisible ? 'visible' : 'hidden',
-            visitorPackage: {
-                Data: []
-            },
+            visitorPackage: this.props.dataForSignOutModal,
             response: ''
         };
     }

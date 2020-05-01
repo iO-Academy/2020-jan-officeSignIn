@@ -5,6 +5,25 @@ import AdminBtn from "./AdminBtn/AdminBtn";
 import AdminModal from "./AdminModal/AdminModal";
 import VisitorSignOutModal from "./VisitorSignOutModal/VisitorSignOutModal";
 
+const fakeDataForTest = {
+    Data: [
+        {
+            "id": "7",
+            "Name": "Fishlegs",
+            "Company": "Hairy Hooligans",
+            "DateOfVisit": "2020-05-01",
+            "TimeOfSignIn": "14:22:15"
+        },
+        {
+            "id": "8",
+            "Name": "Hiccup",
+            "Company": "Hairy Hooligans",
+            "DateOfVisit": "2020-05-01",
+            "TimeOfSignIn": "14:22:20"
+        }
+    ]
+}
+
 class LandingPage extends React.Component {
     state = {
         modalVisible: false,
@@ -36,6 +55,7 @@ class LandingPage extends React.Component {
                 <AdminModal modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
                 <VisitorSignOutModal signOutModalVisible={this.state.signOutModalVisible}
                                      updateSignOutModalVisible={this.updateSignOutModalVisible}
+                                     dataForSignOutModal={fakeDataForTest}
                 />
                 <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
             </div>

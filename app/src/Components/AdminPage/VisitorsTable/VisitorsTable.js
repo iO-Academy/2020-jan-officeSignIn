@@ -80,8 +80,11 @@ class VisitorsTable extends React.Component {
         //     data
         // );
 
-        //console logs to check handler working and ready to run fetch once api route built
         console.log(data);
+
+        // After handleFetch completed, Update table:
+        // Calling this.fetchVisitors should automatically rerender table as there it uses setState
+        this.fetchVisitors()
     };
 
     updateResponse = (newResponse) => {
@@ -91,7 +94,6 @@ class VisitorsTable extends React.Component {
         this.setState({response : newResponse})
     };
 
-    //move fetch from sign in form to somewhere I can access it here... context?
     handleFetch = async (url, requestMethod, dataToSend) => {
         let requestData = JSON.stringify(dataToSend);
 

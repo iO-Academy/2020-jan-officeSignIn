@@ -30,9 +30,9 @@ class VisitorsTable extends React.Component {
         })
         .then(data=>data.json())
         .then((data)=>{
-            if (data.message === null || data.message ==='Invalid token' || data.message === 'Malformed token' ||
-            data.message === 'Token has expired' || data.message === 'Token error' ||
-                data.message === 'No token received') {
+            if (data.message === null || data.message ==='Invalid token' ||
+                data.message === 'Malformed token' || data.message === 'Token has expired' ||
+                data.message === 'Token error' || data.message === 'No token received') {
                 localStorage.removeItem('bearerToken');
                 window.location.replace(this.state.appUrl)
             }

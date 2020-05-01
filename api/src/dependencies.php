@@ -29,7 +29,7 @@ return function (App $app) {
     };
 
     //Error Handler
-    $container['errorHandler'] = function (Slim\Container $c) {
+    $container['errorHandler'] = function () {
         return new \SignInApp\ErrorHandlers\ErrorHandler();
     };
 

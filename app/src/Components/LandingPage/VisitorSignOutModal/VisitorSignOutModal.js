@@ -102,7 +102,6 @@ class VisitorSignOutModal extends React.Component
         console.log(visibleState)
         return (
             <div className={visibleState}>
-                <button className="closeModalBtn" onClick={this.props.updateSignOutModalVisible}>X</button>
                 <span className="instructions">When did you sign in?</span>
                 <div className="col-12 visitorsTable">
                     <table className="table table-bordered table-hover">
@@ -116,6 +115,7 @@ class VisitorSignOutModal extends React.Component
                         </tbody>
                     </table>
                 </div>
+                <button className="closeModalBtn" onClick={this.props.updateSignOutModalVisible}>X</button>
                 <div className="responseMessage">{this.state.response}</div>
             </div>
         )

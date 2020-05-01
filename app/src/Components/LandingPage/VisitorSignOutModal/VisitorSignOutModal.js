@@ -1,6 +1,6 @@
 import React from "react";
 import './VisitorSignOutModal.css'
-const columnHeader = ['Name', 'Time Signed In'];
+const columnHeader = ['Name', 'Time Signed In', ''];
 
 class VisitorSignOutModal extends React.Component
 {
@@ -38,8 +38,11 @@ class VisitorSignOutModal extends React.Component
             result.push(
                 <tr key={i} data-id={tableData[i].id}>
                     <td key={tableData[i].Name}>{tableData[i].Name}</td>
-                    {/*<td key={tableData[i].Company}>{tableData[i].Company}</td>*/}
                     <td key={timeOfSignIn}>{timeOfSignIn}</td>
+                    <td className="text-danger tableSignOutBtn"
+                        data-id={tableData[i].id}
+                        onClick={this.handleSignOut}>Sign Out
+                    </td>
                 </tr>
             )
 
@@ -55,11 +58,51 @@ class VisitorSignOutModal extends React.Component
         return result;
     };
 
+    handleSignOut = async (e) => {
+        let data = {
+            "id": e.target.dataset.id
+        };
+
+        // await this.handleFetch(
+        //     localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+        //     'PUT',
+        //     data
+        // );
+
+        console.log(data);
+
+        // After handleFetch completed, either update Table OR send back to Login Page
+
+    };
+
+    updateResponse = (newResponse) => {
+        setTimeout(()=> {
+            this.clearResponse()
+        }, 3000);
+        this.setState({response : newResponse})
+    };
+
+    handleFetch = async (url, requestMethod, dataToSend) => {
+        let requestData = JSON.stringify(dataToSend);
+
+        const response = await fetch(url, {
+            method: requestMethod.toUpperCase(),
+            body: requestData,
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        });
+
+        let responseData = await response.json();
+        this.props.updateResponse(responseData.Message);
+    };
+
     render() {
         let visibleState = 'signOutModal ' + this.state.modalClass;
         console.log(visibleState)
         return (
             <div className={visibleState}>
+                <button className="closeModalBtn" onClick={this.props.updateSignOutModalVisible}>X</button>
                 <span className="instructions">When did you sign in?</span>
                 <div className="col-12 visitorsTable">
                     <table className="table table-bordered table-hover">
@@ -73,7 +116,6 @@ class VisitorSignOutModal extends React.Component
                         </tbody>
                     </table>
                 </div>
-                <button className="closeModalBtn" onClick={this.props.updateSignOutModalVisible}>X</button>
                 <div className="responseMessage">{this.state.response}</div>
             </div>
         )

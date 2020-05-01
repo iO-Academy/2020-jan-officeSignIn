@@ -37,6 +37,16 @@ class VisitorsTable extends React.Component {
         })
     };
 
+    handleSignOut = async (e) => {
+        let data = {
+            "id": e.target.dataset.id
+        };
+
+        console.log(data);
+    };
+
+    //move fetch from signin form to somewhere I can access it here... context?
+
     generateRows = () => {
         let result = [];
         let tableData = this.state.visitorPackage.Data;
@@ -45,11 +55,14 @@ class VisitorsTable extends React.Component {
             let timeOfSignIn = tableData[i].TimeOfSignIn;
             timeOfSignIn = timeOfSignIn.substring(0,5);
             result.push(
-                <tr key={i} data-id={tableData[i].id}>
+                <tr key={i}>
                     <td key={tableData[i].Name}>{tableData[i].Name}</td>
                     <td key={tableData[i].Company}>{tableData[i].Company}</td>
                     <td key={timeOfSignIn}>{timeOfSignIn}</td>
-                    <td className="text-danger tableSignOutBtn">Sign Out</td>
+                    <td className="text-danger tableSignOutBtn"
+                        data-id={tableData[i].id}
+                        onClick={this.handleSignOut}>Sign Out
+                    </td>
                 </tr>
             )
 

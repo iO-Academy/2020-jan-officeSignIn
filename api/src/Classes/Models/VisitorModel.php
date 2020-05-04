@@ -53,37 +53,42 @@ class VisitorModel
     }
 
     /**
-     *  Signs out a visitor (sets signed in flag to 0 in the database) and returns a bool based on success or failure
+     *  Getting visitors by name match.
      *
      * @param $Name
-     * @param $Company (optional)
      * @return array
      */
-    public function getVisitorsByName($Name, $Company)
+    public function getSignedInVisitorsByName($Name)
     {
-        //query to collect all people with same name/matches, (not fetching those will null company value)
+        $query = $this->db->prepare(
+            "SELECT `id`, `Name`, `TimeOfSignIn` 
+                        FROM `visitors`
+                        WHERE `Name` = :Name
+                        AND `SignedIn` = 1 ");
+        $query->bindParam(':Name', $Name);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
+     *  Getting visitors by name and company match.
+     *
+     * @param $Name
+     * @param $Company
+     * @return array
+     */
+    public function getSignedInVisitorsByNameAndCompany($Name, $Company)
+    {
         $query = $this->db->prepare(
             "SELECT `id`, `Name`, `TimeOfSignIn` 
                         FROM `visitors`
                         WHERE `Name` = :Name 
-                        AND (`Company` = 'NULL' OR `Company` = '' OR `Company` = :Company)");
+                        AND `Company` = :Company
+                        AND `SignedIn` = 1 ");
         $query->bindParam(':Name', $Name);
         $query->bindParam(':Company', $Company);
         $query->execute();
         return $query->fetchAll();
-
-//        //if one result comes back sign them out, otherwise return all matches
-//        if (count($allNameMatches) == 1) {
-//            $query = $this->db->prepare("UPDATE `visitors`
-//                                                    SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
-//                                                    WHERE `Name` = :Name AND ((`Company` = 'NULL') OR (`Company` = :Company));");
-//            $query->bindParam(':Name', $Name);
-//            $query->bindParam(':Company', $Company);
-//            $query->bindParam(':timeOfSignOut', $timeOfSignOut);
-//            return $query->execute();
-//        } else {
-//            return $allNameMatches;
-//        }
     }
 
     /**

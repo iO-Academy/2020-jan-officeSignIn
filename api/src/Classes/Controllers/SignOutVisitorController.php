@@ -33,16 +33,25 @@ class SignOutVisitorController extends ValidationEntity
     public function __invoke(Request $request, Response $response, array $args)
     {
         $requestData = $request->getParsedBody();
-        var_dump($requestData);
         $name = self::sanitiseString($requestData['Name']);
-        $name = self::validateLength($name, 255);
+        $sanitisedName = self::validateLength($name, 255);
         $company = self::sanitiseString($requestData['Company']);
-        $company = self::validateLength($company, 255);
-        $id = self::checkDigitInput($requestData['id']);
+        $sanitisedCompany = self::validateLength($company, 255);
         $now = new DateTime('Europe/London');
         $timeOfSignOut = $now->format('H:i:s');
+        $id = $requestData['id'];
+        
 
-        $signedOut = 0;
+        if (!self::checkDigitInput($requestData['id'])) {
+            $responseData = [
+                'Success' => false,
+                'Message' => 'This is not a valid ID'
+            ];
+            $statusCode = 400;
+
+            return $response->withJson($responseData, $statusCode);
+        };
+
         $responseData = [
             'Success' => false,
             'Message' => 'Unable to connect to server',
@@ -50,9 +59,11 @@ class SignOutVisitorController extends ValidationEntity
         ];
         $statusCode = 500;
 
+        var_dump($id);
+
         if (isset($id) == true) {
-            $successfulSignOut = $this->visitorModel->signOutVisitorById($id, $timeOfSignOut, $signedOut);
-            if ($successfulSignOut) {
+            $signOutData = $this->visitorModel->signOutVisitorById($id, $timeOfSignOut);
+            if ($signOutData) {
                 $responseData = [
                     'Success' => true,
                     'Message' => 'Visitor successfully signed out'
@@ -61,23 +72,45 @@ class SignOutVisitorController extends ValidationEntity
             }
             return $response->withJson($responseData, $statusCode);
 
-        } if (strlen($name) > 0) {
-            $successfulSignOut = $this->visitorModel->signOutVisitorByName($name, $company, $timeOfSignOut, $signedOut);
-            if ($successfulSignOut) {
-            $responseData = [
-                'Success' => true,
-                'Message' => 'Visitor successfully signed out'
+        }
+
+        if (strlen($name) > 0) {
+            $signOutData = $this->visitorModel->getVisitorsByName($sanitisedName, $sanitisedCompany);
+
+            if (count ($signOutData) == 1) {
+                $resultOfSignOut = $this->visitorModel->signOutVisitorById($signOutData['id'], $timeOfSignOut);
+
+                    if ($resultOfSignOut == true ) {
+                        $responseData = [
+                            'Success' => true,
+                            'Message' => 'Visitor successfully signed out'
+                        ];
+                        $statusCode = 200;
+                    } else {
+                        $responseData = [
+                            'Success' => false,
+                            'Message' => 'Name or ID is required'
+                        ];
+                        $statusCode = 400;
+                    }
+                }
+
+            if (count ($signOutData) > 1) {
+                $responseData = [
+                    'Success' => false,
+                    'Message' => 'Multiple matches found',
+                    'Data' => $signOutData
                 ];
-                $statusCode = 200;
+                $statusCode = 422;
             }
 
         } else {
-        $responseData = [
-            'Success' => false,
-            'Message' => 'Name or ID is required'
-            ];
-            $statusCode = 400;
-        }
+            $responseData = [
+                'Success' => false,
+                'Message' => 'Name or ID is required'
+                ];
+                $statusCode = 400;
+            }
 
         return $response->withJson($responseData, $statusCode);
     }

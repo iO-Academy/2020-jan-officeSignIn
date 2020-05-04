@@ -64,7 +64,7 @@ abstract class ValidationEntity
      * @return bool - whether the data number or not
      */    public static function checkDigitInput($validateData)
     {
-        if (preg_match('/^[\d]$/', $validateData)) {
+        if (preg_match('/^[\d]{1,11}$/', $validateData)) {
             return true;
         } else {
             return false;

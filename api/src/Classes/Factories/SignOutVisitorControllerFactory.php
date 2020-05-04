@@ -5,7 +5,7 @@ namespace SignInApp\Factories;
 use Psr\Container\ContainerInterface;
 use SignInApp\Controllers\SignOutVisitorController;
 
-class SignOutControllerFactory
+class SignOutVisitorControllerFactory
 {
     /**
      * Instantiates a new SignOutVisitorController with a VisitorModel injected as a dependency

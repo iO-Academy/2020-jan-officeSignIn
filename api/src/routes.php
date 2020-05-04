@@ -22,7 +22,7 @@ function getBaseUrl() {
 }
 
 return function (App $app) {
-    $app->options('/{routes:.+}', function ($request, $response, $args) {
+    $app->options('/{routes:.+}', function (Request $request, Response $response, $args) {
         return $response;
     });
 

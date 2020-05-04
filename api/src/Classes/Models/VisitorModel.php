@@ -57,18 +57,33 @@ class VisitorModel
      *
      * @param $Name
      * @param $Company (optional)
-     * @return bool
+     * @return array
      */
-    public function signOutVisitorByName($Name, $Company, $timeOfSignOut, $signedIn) : bool
+    public function getVisitorsByName($Name, $Company)
     {
-        $query = $this->db->prepare("UPDATE `visitors` 
-                                                SET `SignedIn` = ':signedIn', `TimeOfSignOut` = ':timeOfSignOut'
-                                                WHERE `Name` = ':Name' AND (`Company` = '' OR `Company` = ':Company');");
+        //query to collect all people with same name/matches, (not fetching those will null company value)
+        $query = $this->db->prepare(
+            "SELECT `id`, `Name`, `TimeOfSignIn` 
+                        FROM `visitors`
+                        WHERE `Name` = :Name 
+                        AND (`Company` = 'NULL' OR `Company` = '' OR `Company` = :Company)");
         $query->bindParam(':Name', $Name);
         $query->bindParam(':Company', $Company);
-        $query->bindParam(':timeOfSignOut', $timeOfSignOut);
-        $query->bindParam(':signedIn', $signedIn);
-        return $query->execute();
+        $query->execute();
+        return $query->fetchAll();
+
+//        //if one result comes back sign them out, otherwise return all matches
+//        if (count($allNameMatches) == 1) {
+//            $query = $this->db->prepare("UPDATE `visitors`
+//                                                    SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
+//                                                    WHERE `Name` = :Name AND ((`Company` = 'NULL') OR (`Company` = :Company));");
+//            $query->bindParam(':Name', $Name);
+//            $query->bindParam(':Company', $Company);
+//            $query->bindParam(':timeOfSignOut', $timeOfSignOut);
+//            return $query->execute();
+//        } else {
+//            return $allNameMatches;
+//        }
     }
 
     /**
@@ -77,14 +92,13 @@ class VisitorModel
      * @param $id
      * @return bool
      */
-    public function signOutVisitorById($id, $timeOfSignOut, $signedIn) : bool
+    public function signOutVisitorById($id, $timeOfSignOut) : bool
     {
         $query = $this->db->prepare("UPDATE `visitors` 
-                                                SET `SignedIn` = ':signedIn', `TimeOfSignOut` = ':timeOfSignOut'
-                                                WHERE `id` = ':id';");
+                                                SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
+                                                WHERE `id` = :id;");
         $query->bindParam(':id', $id);
         $query->bindParam(':timeOfSignOut', $timeOfSignOut);
-        $query->bindParam(':signedIn', $signedIn);
         return $query->execute();
     }
 }

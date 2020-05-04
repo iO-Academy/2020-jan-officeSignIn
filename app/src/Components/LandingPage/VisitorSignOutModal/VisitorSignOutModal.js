@@ -71,7 +71,8 @@ class VisitorSignOutModal extends React.Component
 
         console.log(data);
 
-        // After handleFetch completed, either update Table OR send back to Login Page
+        // After handleFetch completed, display message on modal - success or failure,
+        // and send you back after 3 seconds to login page if success.
 
     };
 

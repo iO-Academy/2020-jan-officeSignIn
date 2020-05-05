@@ -62,9 +62,10 @@ class VisitorModel
     {
         $query = $this->db->prepare(
             "SELECT `id`, `Name`, `TimeOfSignIn` 
-                        FROM `visitors`
-                        WHERE `Name` = :Name
-                        AND `SignedIn` = 1 ");
+            FROM `visitors`
+            WHERE `Name` = :Name
+            AND `SignedIn` = 1 "
+        );
         $query->bindParam(':Name', $Name);
         $query->execute();
         return $query->fetchAll();
@@ -81,10 +82,11 @@ class VisitorModel
     {
         $query = $this->db->prepare(
             "SELECT `id`, `Name`, `TimeOfSignIn` 
-                        FROM `visitors`
-                        WHERE `Name` = :Name 
-                        AND `Company` = :Company
-                        AND `SignedIn` = 1 ");
+            FROM `visitors`
+            WHERE `Name` = :Name 
+            AND `Company` = :Company
+            AND `SignedIn` = 1 "
+        );
         $query->bindParam(':Name', $Name);
         $query->bindParam(':Company', $Company);
         $query->execute();
@@ -99,9 +101,11 @@ class VisitorModel
      */
     public function signOutVisitorById($id, $timeOfSignOut) : bool
     {
-        $query = $this->db->prepare("UPDATE `visitors` 
-                                                SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
-                                                WHERE `id` = :id;");
+        $query = $this->db->prepare(
+            "UPDATE `visitors` 
+            SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
+            WHERE `id` = :id;"
+        );
         $query->bindParam(':id', $id);
         $query->bindParam(':timeOfSignOut', $timeOfSignOut);
         return $query->execute();

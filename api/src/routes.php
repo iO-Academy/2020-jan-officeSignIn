@@ -38,10 +38,10 @@ return function (App $app) {
     //Api Routes
     $app->post('/api/visitorSignIn', 'AddVisitorController');
     $app->get('/api/admin', 'GetAllSignedInVisitorsController')->add('Authenticate');
+    $app->put('/api/visitorSignOut', 'SignOutVisitorController');
 
     $app->post('/adminLogin', 'LoginController');
 
-    $app->put('/api/visitorSignOut', 'SignOutVisitorController');
 
     // Catch-all route to serve a 404 Not Found page if none of the routes match
     // NOTE: make sure this route is defined last

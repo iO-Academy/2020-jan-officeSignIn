@@ -51,4 +51,63 @@ class VisitorModel
         $query->bindParam(':signedIn', $signedIn);
         return $query->execute();
     }
+
+    /**
+     *  Getting visitors by name match.
+     *
+     * @param $Name
+     * @return array
+     */
+    public function getSignedInVisitorsByName($Name)
+    {
+        $query = $this->db->prepare(
+            "SELECT `id`, `Name`, `TimeOfSignIn` 
+            FROM `visitors`
+            WHERE `Name` = :Name
+            AND `SignedIn` = 1 "
+        );
+        $query->bindParam(':Name', $Name);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
+     *  Getting visitors by name and company match.
+     *
+     * @param $Name
+     * @param $Company
+     * @return array
+     */
+    public function getSignedInVisitorsByNameAndCompany($Name, $Company)
+    {
+        $query = $this->db->prepare(
+            "SELECT `id`, `Name`, `TimeOfSignIn` 
+            FROM `visitors`
+            WHERE `Name` = :Name 
+            AND `Company` = :Company
+            AND `SignedIn` = 1 "
+        );
+        $query->bindParam(':Name', $Name);
+        $query->bindParam(':Company', $Company);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
+     *  Signs out a visitor (sets signed in flag to 0 in the database) and returns a bool based on success or failure
+     *
+     * @param $id
+     * @return bool
+     */
+    public function signOutVisitorById($id, $timeOfSignOut) : bool
+    {
+        $query = $this->db->prepare(
+            "UPDATE `visitors` 
+            SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
+            WHERE `id` = :id;"
+        );
+        $query->bindParam(':id', $id);
+        $query->bindParam(':timeOfSignOut', $timeOfSignOut);
+        return $query->execute();
+    }
 }

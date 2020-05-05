@@ -28,6 +28,11 @@ return function (App $app) {
         return $db;
     };
 
+    //Error Handler
+    $container['errorHandler'] = function () {
+        return new \SignInApp\ErrorHandlers\ErrorHandler();
+    };
+
     // JWT Key
     $container['jwtKey'] = function ($c) {
         return $c->get('settings')['jwtKey'];

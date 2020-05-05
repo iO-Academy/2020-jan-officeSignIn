@@ -99,24 +99,23 @@ class SignOutVisitorController extends ValidationEntity
                     $statusCode = 200;
                 }
 
-                if (count($signOutData) > 1) {
-                    $responseData = [
-                        'Success' => false,
-                        'Message' => 'Multiple matches found',
-                        'Data' => $signOutData
-                    ];
-                    $statusCode = 422;
-                }
-
-            } else {
-                $responseData = [
-                    'Success' => false,
-                    'Message' => 'Name or ID is required'
-                ];
-                $statusCode = 400;
+            } elseif (count($signOutData) > 1) {
+            $responseData = [
+                'Success' => false,
+                'Message' => 'Multiple matches found',
+                'Data' => $signOutData
+            ];
+                $statusCode = 422;
             }
-            return $response->withJson($responseData, $statusCode);
+
+        } else {
+            $responseData = [
+                'Success' => false,
+                'Message' => 'Name or ID is required'
+                ];
+            $statusCode = 400;
         }
+        return $response->withJson($responseData, $statusCode);
 
     }
 }

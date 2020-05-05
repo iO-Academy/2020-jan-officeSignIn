@@ -30,7 +30,8 @@ class LandingPage extends React.Component {
     }
 
     getSignOutData = (data) => {
-       this.setState({dataForSignOut: data})
+       this.setState({dataForSignOutModal: data, signOutModalVisible: true})
+        console.log(this.state.dataForSignOutModal);
     }
 
     render() {

@@ -18,6 +18,10 @@ class VisitorSignOutModal extends React.Component
         if (prevProps.signOutModalVisible !== this.props.signOutModalVisible) {
             this.determineVisibleState()
         }
+        if (prevProps.dataForSignOutModal !== this.props.dataForSignOutModal) {
+            console.log(this.props.dataForSignOutModal);
+            this.setState({visitorPackage: this.props.dataForSignOutModal})
+        }
     }
 
     determineVisibleState () {
@@ -30,23 +34,25 @@ class VisitorSignOutModal extends React.Component
 
     generateRows = () => {
         let result = [];
-        let tableData = this.state.visitorPackage.Data;
+        if (this.state.visitorPackage !== {}) {
+            let tableData = this.state.visitorPackage;
 
-        for(var i = 0; i < tableData.length; i++) {
-            let timeOfSignIn = tableData[i].TimeOfSignIn;
-            timeOfSignIn = timeOfSignIn.substring(0,5);
-            result.push(
-                <tr key={i} data-id={tableData[i].id}>
-                    <td key={tableData[i].Name}>{tableData[i].Name}</td>
-                    <td key={timeOfSignIn}>{timeOfSignIn}</td>
-                    <td className="text-danger tableSignOutBtn"
-                        data-id={tableData[i].id}
-                        onClick={this.handleSignOut}>Sign Out
-                    </td>
-                </tr>
-            )
-
+            for(var i = 0; i < tableData.length; i++) {
+                let timeOfSignIn = tableData[i].TimeOfSignIn;
+                timeOfSignIn = timeOfSignIn.substring(0,5);
+                result.push(
+                    <tr key={i} data-id={tableData[i].id}>
+                        <td key={tableData[i].Name}>{tableData[i].Name}</td>
+                        <td key={timeOfSignIn}>{timeOfSignIn}</td>
+                        <td className="text-danger tableSignOutBtn"
+                            data-id={tableData[i].id}
+                            onClick={this.handleSignOut}>Sign Out
+                        </td>
+                    </tr>
+                )
+            }
         }
+
         return result;
     };
 

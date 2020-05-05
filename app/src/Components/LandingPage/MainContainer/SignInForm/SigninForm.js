@@ -68,9 +68,9 @@ class SigninForm extends React.Component {
 
         let responseData = await response.json();
         this.props.updateResponse(responseData.Message);
-        if (responseData.Data.length > 0) {
+        // console.log(responseData.Data);
+        if (responseData.Data !== null) {
             this.props.getSignOutData(responseData.Data);
-            this.props.updateSignOutModalVisible();
         }
     };
 

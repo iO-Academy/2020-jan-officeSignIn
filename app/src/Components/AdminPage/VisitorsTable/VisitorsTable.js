@@ -83,16 +83,14 @@ class VisitorsTable extends React.Component {
             "id": e.target.dataset.id
         };
 
-        // await this.handleFetch(
-        //     localStorage.getItem('apiUrl') + 'api/visitorSignOut',
-        //     'PUT',
-        //     data
-        // );
+        await this.handleFetch(
+            localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+            'PUT',
+            data
+        );
 
         console.log(data);
 
-        // After handleFetch completed, Update table:
-        // Calling this.fetchVisitors should automatically rerender table as there it uses setState
         this.fetchVisitors()
     };
 

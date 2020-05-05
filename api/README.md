@@ -89,16 +89,6 @@ To test, passcode is 8974.
 - Sends: 
     - `{ "Name": "string", "Company": "string" }`
     
-    - Returns:
-        - if successful 
-            - `status 200`
-            - `{ "Success": true, "Message": "Visitor successfully signed out", "Data": [] }`  
-        - if unsuccessful
-            - `status 422` 
-                - `{ "Success": false, "Message": "Multiple matches found", "Data": [all matches on same name and their time of sign out] }`
-            - `status 500` 
-                - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
-    
     OR
 
 2.Admin user signing a visitor out (or if multiple matches for visitor signing themself out):

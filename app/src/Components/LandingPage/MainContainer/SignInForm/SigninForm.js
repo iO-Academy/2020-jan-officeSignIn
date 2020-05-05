@@ -41,11 +41,11 @@ class SigninForm extends React.Component {
             'Company': this.state.Company,
         };
 
-        // await this.handleFetch(
-        //     localStorage.getItem('apiUrl') + 'api/visitorSignOut',
-        //     'PUT',
-        //     dataToSend
-        // );
+        await this.handleFetch(
+            localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+            'PUT',
+            dataToSend
+        );
 
         //console logs to check handler working and ready to run fetch once api route built
         console.log('Signing out...');

@@ -13,10 +13,17 @@ input {
     padding: 8px;
 }
 
-.signInButton {
+.visitorFormButton {
     background-color: #94BA66;
     color: #ffffff;
     width: 150px;
-    font: 700 25px Arial, sans-serif;
+    font-weight: 700;
+    font-size: 25px;
     cursor: pointer;
+    display: inline-block;
+    margin: 10px
+}
+
+.signOutBtn {
+    background-color: #F27424;
 }

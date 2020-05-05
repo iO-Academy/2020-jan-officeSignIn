@@ -88,34 +88,35 @@ class SignOutVisitorController extends ValidationEntity
                 $signOutData = $this->visitorModel->getSignedInVisitorsByName($sanitisedName);
             }
 
-            if (count ($signOutData) == 1) {
+            if (count($signOutData) == 1) {
                 $resultOfSignOut = $this->visitorModel->signOutVisitorById($signOutData[0]['id'], $timeOfSignOut);
 
-                    if ($resultOfSignOut == true ) {
-                        $responseData = [
-                            'Success' => true,
-                            'Message' => 'Visitor successfully signed out'
-                        ];
-                        $statusCode = 200;
-                    }
+                if ($resultOfSignOut == true) {
+                    $responseData = [
+                        'Success' => true,
+                        'Message' => 'Visitor successfully signed out'
+                    ];
+                    $statusCode = 200;
+                }
 
-            if (count ($signOutData) > 1) {
+                if (count($signOutData) > 1) {
+                    $responseData = [
+                        'Success' => false,
+                        'Message' => 'Multiple matches found',
+                        'Data' => $signOutData
+                    ];
+                    $statusCode = 422;
+                }
+
+            } else {
                 $responseData = [
                     'Success' => false,
-                    'Message' => 'Multiple matches found',
-                    'Data' => $signOutData
-                ];
-                $statusCode = 422;
-            }
-
-        } else {
-            $responseData = [
-                'Success' => false,
-                'Message' => 'Name or ID is required'
+                    'Message' => 'Name or ID is required'
                 ];
                 $statusCode = 400;
             }
+            return $response->withJson($responseData, $statusCode);
+        }
 
-        return $response->withJson($responseData, $statusCode);
     }
 }

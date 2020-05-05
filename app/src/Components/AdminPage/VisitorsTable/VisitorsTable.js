@@ -11,7 +11,6 @@ class VisitorsTable extends React.Component {
                 "Data": []
             },
             bearerToken: localStorage.getItem('bearerToken'),
-            response: '',
             appUrl: localStorage.getItem('appUrl')
         };
     }
@@ -49,7 +48,7 @@ class VisitorsTable extends React.Component {
 
     generateHeader = () => {
         let result = [];
-        for(var i = 0; i < columnHeader.length; i++) {
+        for(let i = 0; i < columnHeader.length; i++) {
             result.push(<th key={columnHeader[i]}>{columnHeader[i]}</th>)
         }
         return result;
@@ -59,7 +58,7 @@ class VisitorsTable extends React.Component {
         let result = [];
         let tableData = this.state.visitorPackage.Data;
 
-        for(var i = 0; i < tableData.length; i++) {
+        for(let i = 0; i < tableData.length; i++) {
             let timeOfSignIn = tableData[i].TimeOfSignIn;
             timeOfSignIn = timeOfSignIn.substring(0,5);
             result.push(

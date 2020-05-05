@@ -18,7 +18,7 @@ class AdminContainer extends React.Component {
             this.clearResponse()
         }, 3000);
         this.setState({response : newResponse})
-    }
+    };
 
     clearResponse = () => {
         this.setState({response : ''})

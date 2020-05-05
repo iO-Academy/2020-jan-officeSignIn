@@ -83,22 +83,14 @@ class VisitorsTable extends React.Component {
             "id": e.target.dataset.id
         };
 
-        await this.handleFetch(
+        let responseData = await this.handleFetch(
             localStorage.getItem('apiUrl') + 'api/visitorSignOut',
             'PUT',
             data
         );
 
-        console.log(data);
-
+        this.props.updateSignOutResponse(responseData.Message);
         this.fetchVisitors()
-    };
-
-    updateResponse = (newResponse) => {
-        setTimeout(()=> {
-            this.clearResponse()
-        }, 3000);
-        this.setState({response : newResponse})
     };
 
     handleFetch = async (url, requestMethod, dataToSend) => {
@@ -114,12 +106,12 @@ class VisitorsTable extends React.Component {
 
         let responseData = await response.json();
         this.props.updateResponse(responseData.Message);
+        return responseData;
     };
 
     render() {
         return (
             <div className="col-12 visitorsTable">
-                <div className="responseMessage">{this.state.response}</div>
                 <table className="table table-bordered table-hover">
                     <thead>
                         <tr>

@@ -3,7 +3,9 @@ import './logOutBtn.css';
 
 class LogOutBtn extends React.Component {
     handleClick = () => {
-        localStorage.removeItem('bearerToken');
+        if (!localStorage.getItem('bearerToken')) {
+            localStorage.removeItem('bearerToken');
+        }
         window.location.replace(localStorage.getItem('appUrl'))
     };
 

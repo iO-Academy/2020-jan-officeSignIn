@@ -11,10 +11,9 @@ class VisitorsTable extends React.Component {
                 "Data": []
             },
             bearerToken: localStorage.getItem('bearerToken'),
-            response: ''
+            response: '',
+            appUrl: localStorage.getItem('appUrl')
         };
-
-        console.log(this.state.bearerToken)
     }
 
     componentDidMount() {
@@ -22,7 +21,7 @@ class VisitorsTable extends React.Component {
     }
 
     fetchVisitors = () => {
-        const url = localStorage.getItem('apiUrl') + '/api/admin';
+        const url = localStorage.getItem('apiUrl') + 'api/admin';
         fetch(url, {
             method: 'GET',
             headers: {
@@ -32,9 +31,19 @@ class VisitorsTable extends React.Component {
         })
         .then(data=>data.json())
         .then((data)=>{
+            if (data.message === null || data.message ==='Invalid token' ||
+                data.message === 'Malformed token' || data.message === 'Token has expired' ||
+                data.message === 'Token error' || data.message === 'No token received') {
+                localStorage.removeItem('bearerToken');
+                window.location.replace(this.state.appUrl)
+            }
             this.setState({
                 visitorPackage: data
-            })
+            });
+            if (!data.Data.length > 0) {
+                this.props.updateResponse(data.Message);
+            }
+            localStorage.removeItem('bearerToken')
         })
     };
 

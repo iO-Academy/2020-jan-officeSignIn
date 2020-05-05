@@ -28,6 +28,11 @@ return function (App $app) {
         return $db;
     };
 
+    //Error Handler
+    $container['errorHandler'] = function () {
+        return new \SignInApp\ErrorHandlers\ErrorHandler();
+    };
+
     // JWT Key
     $container['jwtKey'] = function ($c) {
         return $c->get('settings')['jwtKey'];
@@ -39,6 +44,8 @@ return function (App $app) {
     $container['AddVisitorController'] = new \SignInApp\Factories\AddVisitorControllerFactory();
     $container['GetAllSignedInVisitorsController'] = new SignInApp\Factories\GetAllSignedInVisitorsControllerFactory();
     $container['LoginController'] = new SignInApp\Factories\LoginControllerFactory();
+    $container['SignOutVisitorController'] = new \SignInApp\Factories\SignOutVisitorControllerFactory();
 
     $container['Authenticate'] = new SignInApp\Factories\AuthenticateFactory();
+
 };

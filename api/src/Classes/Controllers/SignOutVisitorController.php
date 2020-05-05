@@ -40,17 +40,6 @@ class SignOutVisitorController extends ValidationEntity
         $now = new DateTime('Europe/London');
         $timeOfSignOut = $now->format('H:i:s');
         $id = $requestData['id'];
-        
-
-        if (!self::checkDigitInput($requestData['id'])) {
-            $responseData = [
-                'Success' => false,
-                'Message' => 'This is not a valid ID'
-            ];
-            $statusCode = 400;
-
-            return $response->withJson($responseData, $statusCode);
-        };
 
         $responseData = [
             'Success' => false,
@@ -59,9 +48,27 @@ class SignOutVisitorController extends ValidationEntity
         ];
         $statusCode = 500;
 
-        var_dump($id);
+        if (isset($id) && count($requestData) > 1) {
+            $responseData = [
+                'Success' => false,
+                'Message' => 'Too many parameters'
+            ];
+            $statusCode = 400;
+
+            return $response->withJson($responseData, $statusCode);
+        }
 
         if (isset($id) == true) {
+            if (!self::checkDigitInput($requestData['id'])) {
+                $responseData = [
+                    'Success' => false,
+                    'Message' => 'This is not a valid ID'
+                ];
+                $statusCode = 400;
+
+                return $response->withJson($responseData, $statusCode);
+            };
+
             $signOutData = $this->visitorModel->signOutVisitorById($id, $timeOfSignOut);
             if ($signOutData) {
                 $responseData = [
@@ -75,8 +82,11 @@ class SignOutVisitorController extends ValidationEntity
         }
 
         if (strlen($name) > 0) {
-            $signOutData = $this->visitorModel->getVisitorsByName($sanitisedName, $sanitisedCompany);
-
+            if (strlen($sanitisedCompany) > 0) {
+                $signOutData = $this->visitorModel->getSignedInVisitorsByNameAndCompany($sanitisedName, $sanitisedCompany);
+            } else {
+                $signOutData = $this->visitorModel->getSignedInVisitorsByName($sanitisedName);
+            }
 
             if (count($signOutData) == 1) {
                 $resultOfSignOut = $this->visitorModel->signOutVisitorById($signOutData[0]['id'], $timeOfSignOut);

@@ -25,7 +25,11 @@ class MainContainer extends React.Component {
             <main>
                 <div className="mainContainer">
                     <Logo/>
-                    <SigninForm updateResponse={this.updateResponse}/>
+                    <SigninForm
+                        updateResponse={this.updateResponse}
+                        updateSignOutModalVisible={this.props.updateSignOutModalVisible}
+                        getSignOutData={this.props.getSignOutData}
+                    />
                     <MessageBox response={this.state.response}/>
                 </div>
             </main>

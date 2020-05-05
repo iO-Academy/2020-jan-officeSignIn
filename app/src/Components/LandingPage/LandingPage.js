@@ -5,30 +5,12 @@ import AdminBtn from "./AdminBtn/AdminBtn";
 import AdminModal from "./AdminModal/AdminModal";
 import VisitorSignOutModal from "./VisitorSignOutModal/VisitorSignOutModal";
 
-const fakeDataForTest = {
-    Data: [
-        {
-            "id": "7",
-            "Name": "Fishlegs",
-            "Company": "Hairy Hooligans",
-            "DateOfVisit": "2020-05-01",
-            "TimeOfSignIn": "14:22:15"
-        },
-        {
-            "id": "8",
-            "Name": "Hiccup",
-            "Company": "Hairy Hooligans",
-            "DateOfVisit": "2020-05-01",
-            "TimeOfSignIn": "14:22:20"
-        }
-    ]
-}
-
 class LandingPage extends React.Component {
     state = {
         modalVisible: false,
         adminBtnVisible: true,
-        signOutModalVisible: true
+        signOutModalVisible: false,
+        dataForSignOutModal: {}
     };
 
     updateModalVisible = () => {
@@ -47,15 +29,22 @@ class LandingPage extends React.Component {
         }
     }
 
+    getSignOutData = (data) => {
+       this.setState({dataForSignOut: data})
+    }
+
     render() {
         return (
             <div>
                 <h1>Mayden Academy Visitor sign-in</h1>
-                <MainContainer/>
+                <MainContainer
+                    updateSignOutModalVisible={this.updateSignOutModalVisible}
+                    getSignOutData={this.getSignOutData}
+                />
                 <AdminModal modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
                 <VisitorSignOutModal signOutModalVisible={this.state.signOutModalVisible}
                                      updateSignOutModalVisible={this.updateSignOutModalVisible}
-                                     dataForSignOutModal={fakeDataForTest}
+                                     dataForSignOutModal={this.state.dataForSignOutModal}
                 />
                 <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
             </div>

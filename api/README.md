@@ -30,9 +30,9 @@ This application is built using Slim framework, OOP and the MVC structure.
 ## Routes
 - for local development use localhost:8080/whatYouRequire as your URL
 
+### POST
 **/api/visitorSignIn**
 
-POST
 - Logs a new visitor to DB
 - Required
     - `Name` - visitor's first name 
@@ -50,8 +50,8 @@ POST
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
             
+### GET
 **/api/admin**
-GET
 
 You must be authenticated to retrieve data from this route.
 To test, passcode is 8974.
@@ -69,5 +69,53 @@ To test, passcode is 8974.
     - if unsuccessful
         - `status 400` 
             - `{ "Success": false, "Message": "No data retrieved or no data in database", "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+            
+            
+### PUT
+**/api/visitorSignOut**
+
+- Sets visitor to signed out in the database (signed in flag to 0)
+- Logs time visitor signed out in the DB
+
+1.Visitor signing themself out (if one match):
+
+- Required
+    - `Name` - visitor's first name 
+- Optional
+    - `Company` - company visitor represents
+
+- Sends: 
+    - `{ "Name": "string", "Company": "string" }`
+    
+    - Returns:
+        - if successful 
+            - `status 200`
+            - `{ "Success": true, "Message": "Visitor successfully signed out", "Data": [] }`  
+        - if unsuccessful
+            - `status 422` 
+                - `{ "Success": false, "Message": "Multiple matches found", "Data": [all matches on same name and their time of sign out] }`
+            - `status 500` 
+                - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+    
+    OR
+
+2.Admin user signing a visitor out (or if multiple matches for visitor signing themself out):
+
+- Required
+    
+    - `id` - visitor's database id (on click of a specific visitor)
+    
+- Sends: 
+  - `{ "ID": "integer" }`
+
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Visitor successfully signed out", "Data": [] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "Name or ID is required", "Data": [] }`
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`

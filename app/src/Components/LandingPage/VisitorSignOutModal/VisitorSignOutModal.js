@@ -34,7 +34,7 @@ class VisitorSignOutModal extends React.Component
 
     generateRows = () => {
         let result = [];
-        if (this.state.visitorPackage !== {}) {
+        if (this.state.visitorPackage.length > 1) {
             let tableData = this.state.visitorPackage;
 
             for(var i = 0; i < tableData.length; i++) {

@@ -67,7 +67,7 @@ class SignOutVisitorController extends ValidationEntity
                 $statusCode = 400;
 
                 return $response->withJson($responseData, $statusCode);
-            };
+            }
 
             $signOutData = $this->visitorModel->signOutVisitorById($id, $timeOfSignOut);
             if ($signOutData) {
@@ -88,13 +88,13 @@ class SignOutVisitorController extends ValidationEntity
                 $signOutData = $this->visitorModel->getSignedInVisitorsByName($sanitisedName);
             }
 
-        if (count($signOutData) == 0) {
-            $responseData = [
-                'Success' => false,
-                'Message' => 'No visitor found'
-            ];
-            $statusCode = 404;
-        }
+            if (count($signOutData) == 0) {
+                $responseData = [
+                    'Success' => false,
+                    'Message' => 'No visitor found'
+                ];
+                $statusCode = 404;
+            }
 
             if (count($signOutData) == 1) {
                 $resultOfSignOut = $this->visitorModel->signOutVisitorById($signOutData[0]['id'], $timeOfSignOut);

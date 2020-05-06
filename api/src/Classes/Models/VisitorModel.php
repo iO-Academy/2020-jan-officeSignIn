@@ -26,8 +26,10 @@ class VisitorModel
     public function getAllSignedInVisitors() :array
     {
         $query = $this->db->prepare(
-            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn` FROM `visitors`
-            WHERE `DateOfVisit` = CURDATE() AND `SignedIn` = 1;'
+            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn` 
+            FROM `visitors`
+            WHERE `DateOfVisit` = CURDATE() 
+            AND `SignedIn` = 1;'
         );
         $query->execute();
         return $query->fetchAll();
@@ -42,8 +44,10 @@ class VisitorModel
      */
     public function addVisitor($Name, $Company, $dateOfVisit, $timeOfSignIn, $signedIn) : bool
     {
-        $query = $this->db->prepare("INSERT INTO `visitors` (`Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `SignedIn`) 
-            VALUES (:Name, :Company, :dateOfVisit, :timeOfSignIn, :signedIn);");
+        $query = $this->db->prepare(
+            "INSERT INTO `visitors` (`Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `SignedIn`) 
+            VALUES (:Name, :Company, :dateOfVisit, :timeOfSignIn, :signedIn);"
+        );
         $query->bindParam(':Name', $Name);
         $query->bindParam(':Company', $Company);
         $query->bindParam(':dateOfVisit', $dateOfVisit);

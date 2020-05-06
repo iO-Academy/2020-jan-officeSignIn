@@ -1,6 +1,6 @@
 import React from "react";
 import './VisitorSignOutModal.css'
-const columnHeader = ['Name', 'Time Signed In', ''];
+const columnHeader = ['Name', 'Time Signed In', 'Sign Out'];
 
 class VisitorSignOutModal extends React.Component
 {

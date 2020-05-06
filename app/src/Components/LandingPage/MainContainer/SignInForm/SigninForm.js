@@ -2,10 +2,14 @@ import React from "react";
 import './SigninForm.css';
 
 class SigninForm extends React.Component {
-    state = {
-        Name: '',
-        Company: ''
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            Name: '',
+            Company: ''
+        };
+    }
 
     handleUpdate = (e, stateValue) => {
         let updatedData = {};
@@ -13,34 +17,61 @@ class SigninForm extends React.Component {
         this.setState(updatedData);
     };
 
-    handleSignIn = async (e)=>{
+    handleSignIn = async (e) =>{
         e.preventDefault();
         let dataToSend = {
             'Name': this.state.Name,
             'Company': this.state.Company,
         };
 
-        await this.postVisitorToDb( localStorage.getItem('apiUrl') + 'api/visitorSignIn',
+        await this.handleFetch(
+            localStorage.getItem('apiUrl') + 'api/visitorSignIn',
             'POST',
-            dataToSend);
+            dataToSend
+        );
+
+        this.setState({Name: ''});
+        this.setState({Company: ''})
     };
 
-    postVisitorToDb = async (url, requestMethod, dataToSend) => {
+    handleSignOut = async (e) =>{
+        e.preventDefault();
+        let dataToSend = {
+            'Name': this.state.Name,
+            'Company': this.state.Company,
+        };
+
+        await this.handleFetch(
+            localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+            'PUT',
+            dataToSend
+        );
+
+        this.setState({Name: ''});
+        this.setState({Company: ''})
+    };
+
+    handleFetch = async (url, requestMethod, dataToSend) => {
         let requestData = JSON.stringify(dataToSend);
+
         const response = await fetch(url, {
             method: requestMethod.toUpperCase(),
             body: requestData,
             headers: {
             "Content-Type" : "application/json"
+            }
+        });
+
+        let responseData = await response.json();
+        this.props.updateResponse(responseData.Message);
+        if (responseData.Data !== undefined) {
+            this.props.getSignOutData(responseData.Data);
         }
-    });
-         let responseData = await response.json();
-         this.props.updateResponse(responseData.Message);
     };
 
     render() {
         return (
-            <form method="POST" onSubmit={this.handleSignIn}>
+            <form>
                 <input id="Name" type="text" placeholder="Your first name and surname..."
                        value={this.state.Name}
                        onChange={(e) => this.handleUpdate(e, 'Name')}
@@ -50,7 +81,8 @@ class SigninForm extends React.Component {
                        value={this.state.Company}
                        onChange={(e) => this.handleUpdate(e, 'Company')}
                 />
-                <input className="signInButton" type="submit" value="Sign In"/>
+                <input className="visitorFormButton" type="submit" value="Sign In" onClick={this.handleSignIn}/>
+                <input className="visitorFormButton signOutBtn" type="submit" value="Sign Out" onClick={this.handleSignOut}/>
             </form>
             )
         }

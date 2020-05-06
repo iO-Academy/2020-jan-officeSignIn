@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.29)
 # Database: maydenSignIn
-# Generation Time: 2020-04-22 13:56:42 +0000
+# Generation Time: 2020-05-06 14:33:43 +0000
 # ************************************************************
 
 
@@ -49,8 +49,8 @@ DROP TABLE IF EXISTS `visitors`;
 
 CREATE TABLE `visitors` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `Name` varchar(256) NOT NULL DEFAULT 'null',
-  `Company` varchar(256) DEFAULT 'null',
+  `Name` varchar(256) NOT NULL DEFAULT '',
+  `Company` varchar(256) DEFAULT '',
   `DateOfVisit` date NOT NULL DEFAULT '2999-12-25',
   `TimeOfSignIn` time NOT NULL DEFAULT '00:00:00',
   `TimeOfSignOut` time NOT NULL DEFAULT '00:00:00',
@@ -63,11 +63,11 @@ LOCK TABLES `visitors` WRITE;
 
 INSERT INTO `visitors` (`id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`, `SignedIn`)
 VALUES
-	(1,'Charlie','MarioTown','2020-04-22','23:59:59','12:43:43',1),
-	(2,'Bob','Gulp','2020-04-22','13:59:59','15:43:43',0),
+	(1,'Charlie','Mayden','2020-04-22','23:59:59','12:43:43',1),
+	(2,'Daniella','Gulp','2020-04-22','13:59:59','15:43:43',0),
 	(3,'Chris','OfficeSpot','2020-04-22','23:59:59','23:59:59',0),
-	(4,'Roger','','2020-04-22','23:59:59','23:59:59',1),
-	(5,'Davey','Beaky','2020-04-22','14:55:00','00:00:00',1);
+	(4,'Lucy','','2020-04-22','23:59:59','15:28:14',0),
+	(5,'David','Microsoft','2020-04-22','14:55:00','00:00:00',1);
 
 /*!40000 ALTER TABLE `visitors` ENABLE KEYS */;
 UNLOCK TABLES;

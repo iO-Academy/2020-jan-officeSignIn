@@ -3,3 +3,7 @@
     color: #222;
     margin: 0 auto;
 }
+
+.tableSignOutBtn {
+    cursor: pointer;
+}

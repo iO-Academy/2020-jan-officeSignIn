@@ -13,12 +13,23 @@ class AdminContainer extends React.Component {
         this.setState({response : newResponse})
     };
 
+    updateSignOutResponse = (newResponse) => {
+        setTimeout(()=> {
+            this.clearResponse()
+        }, 3000);
+        this.setState({response : newResponse})
+    };
+
+    clearResponse = () => {
+        this.setState({response : ''})
+    };
+
     render() {
         return (
             <main>
                 <div className="adminContainer">
                     <Logo/>
-                    <VisitorsTable updateResponse={this.updateResponse}/>
+                    <VisitorsTable updateResponse={this.updateResponse} updateSignOutResponse={this.updateSignOutResponse}/>
                     <MessageBox response={this.state.response}/>
                 </div>
             </main>

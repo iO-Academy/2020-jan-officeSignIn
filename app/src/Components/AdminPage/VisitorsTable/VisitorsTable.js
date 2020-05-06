@@ -72,7 +72,6 @@ class VisitorsTable extends React.Component {
                     </td>
                 </tr>
             )
-
         }
         return result;
     };

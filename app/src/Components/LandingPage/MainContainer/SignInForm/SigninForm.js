@@ -69,7 +69,7 @@ class SigninForm extends React.Component {
         let responseData = await response.json();
         this.props.updateResponse(responseData.Message);
         // console.log(responseData.Data);
-        if (responseData.Data !== null) {
+        if (responseData.Data !== undefined) {
             this.props.getSignOutData(responseData.Data);
         }
     };

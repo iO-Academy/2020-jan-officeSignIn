@@ -69,11 +69,11 @@ class VisitorSignOutModal extends React.Component
             "id": e.target.dataset.id
         };
 
-        // await this.handleFetch(
-        //     localStorage.getItem('apiUrl') + 'api/visitorSignOut',
-        //     'PUT',
-        //     data
-        // );
+        await this.handleFetch(
+            localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+            'PUT',
+            data
+        );
 
         console.log(data);
 
@@ -101,7 +101,8 @@ class VisitorSignOutModal extends React.Component
         });
 
         let responseData = await response.json();
-        this.props.updateResponse(responseData.Message);
+        console.log(responseData)
+        // this.props.updateResponse(responseData.Message);
     };
 
     render() {

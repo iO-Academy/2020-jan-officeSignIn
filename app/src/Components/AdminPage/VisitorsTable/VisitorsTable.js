@@ -1,6 +1,6 @@
 import React from "react";
 import './visitorsTable.css';
-const columnHeader = ['Name', 'Company', 'Time Signed In'];
+const columnHeader = ['Name', 'Company', 'Time In', 'Sign Out'];
 
 class VisitorsTable extends React.Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class VisitorsTable extends React.Component {
             }
             this.setState({
                 visitorPackage: data
-            })
+            });
             if (!data.Data.length > 0) {
                 this.props.updateResponse(data.Message);
             }
@@ -46,31 +46,65 @@ class VisitorsTable extends React.Component {
         })
     };
 
-    generateRows = () => {
+    generateHeader = () => {
         let result = [];
-        let tableData = this.state.visitorPackage.Data;
-
-        for(var i = 0; i < tableData.length; i++) {
-            let timeOfSignIn = tableData[i].TimeOfSignIn;
-            timeOfSignIn = timeOfSignIn.substring(0,5);
-            result.push(
-                <tr key={i} data-id={tableData[i].id}>
-                    <td key={tableData[i].Name}>{tableData[i].Name}</td>
-                    <td key={tableData[i].Company}>{tableData[i].Company}</td>
-                    <td key={timeOfSignIn}>{timeOfSignIn}</td>
-                </tr>
-            )
-
+        for(let i = 0; i < columnHeader.length; i++) {
+            result.push(<th key={columnHeader[i]}>{columnHeader[i]}</th>)
         }
         return result;
     };
 
-    generateHeader = () => {
+    generateRows = () => {
         let result = [];
-        for(var i = 0; i < columnHeader.length; i++) {
-            result.push(<th key={columnHeader[i]}>{columnHeader[i]}</th>)
+        let tableData = this.state.visitorPackage.Data;
+
+        for(let i = 0; i < tableData.length; i++) {
+            let timeOfSignIn = tableData[i].TimeOfSignIn;
+            timeOfSignIn = timeOfSignIn.substring(0,5);
+            result.push(
+                <tr key={i}>
+                    <td key={tableData[i].Name}>{tableData[i].Name}</td>
+                    <td key={tableData[i].Company}>{tableData[i].Company}</td>
+                    <td key={timeOfSignIn}>{timeOfSignIn}</td>
+                    <td className="text-danger tableSignOutBtn"
+                        data-id={tableData[i].id}
+                        onClick={this.handleSignOut}>Sign Out
+                    </td>
+                </tr>
+            )
         }
         return result;
+    };
+
+    handleSignOut = async (e) => {
+        let data = {
+            "id": e.target.dataset.id
+        };
+
+        let responseData = await this.handleFetch(
+            localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+            'PUT',
+            data
+        );
+
+        this.props.updateSignOutResponse(responseData.Message);
+        this.fetchVisitors()
+    };
+
+    handleFetch = async (url, requestMethod, dataToSend) => {
+        let requestData = JSON.stringify(dataToSend);
+
+        const response = await fetch(url, {
+            method: requestMethod.toUpperCase(),
+            body: requestData,
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        });
+
+        let responseData = await response.json();
+        this.props.updateResponse(responseData.Message);
+        return responseData;
     };
 
     render() {

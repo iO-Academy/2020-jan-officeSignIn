@@ -68,20 +68,24 @@ class VisitorSignOutModal extends React.Component
     handleSignOut = async (e) => {
         let data = {
             "id": e.target.dataset.id
+            // "id": "blabla"
         };
 
-        await this.handleFetch(
-            localStorage.getItem('apiUrl') + 'api/visitorSignOut',
-            'PUT',
-            data
-        );
+        if (!this.state.success) {
+            await this.handleFetch(
+                localStorage.getItem('apiUrl') + 'api/visitorSignOut',
+                'PUT',
+                data
+            );
+        }
     };
 
     updateResponse = (newResponse) => {
         setTimeout(()=> {
             this.clearResponse();
-            if (this.state.success == true)
+            if (this.state.success)
             {
+                this.setState({"success": false});
                 this.props.updateSignOutModalVisible();
             }
         }, 3000);

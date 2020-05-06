@@ -31,13 +31,12 @@ class LandingPage extends React.Component {
 
     getSignOutData = (data) => {
        this.setState({dataForSignOutModal: data, signOutModalVisible: true})
-        // console.log(this.state.dataForSignOutModal);
     }
 
     render() {
         return (
             <div>
-                <h1>Mayden Academy Visitor sign-in</h1>
+                <h1>Mayden Academy Visitor Sign In</h1>
                 <MainContainer
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
                     getSignOutData={this.getSignOutData}

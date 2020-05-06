@@ -47,10 +47,6 @@ class SigninForm extends React.Component {
             dataToSend
         );
 
-        //console logs to check handler working and ready to run fetch once api route built
-        console.log('Signing out...');
-        console.log(`data values: ${dataToSend.Name} ${dataToSend.Company}`);
-
         this.setState({Name: ''});
         this.setState({Company: ''})
     };
@@ -68,7 +64,6 @@ class SigninForm extends React.Component {
 
         let responseData = await response.json();
         this.props.updateResponse(responseData.Message);
-        // console.log(responseData.Data);
         if (responseData.Data !== undefined) {
             this.props.getSignOutData(responseData.Data);
         }

@@ -20,7 +20,6 @@ class VisitorSignOutModal extends React.Component
             this.determineVisibleState()
         }
         if (prevProps.dataForSignOutModal !== this.props.dataForSignOutModal) {
-            console.log(this.props.dataForSignOutModal);
             this.setState({visitorPackage: this.props.dataForSignOutModal})
         }
     }
@@ -108,7 +107,6 @@ class VisitorSignOutModal extends React.Component
         });
 
         let responseData = await response.json();
-        console.log(responseData)
         if (responseData.Success) {
             this.setState({"success": true});
         }
@@ -117,7 +115,6 @@ class VisitorSignOutModal extends React.Component
 
     render() {
         let visibleState = 'signOutModal ' + this.state.modalClass;
-        console.log(visibleState)
         return (
             <div className={visibleState}>
                 <span className="instructions">When did you sign in?</span>

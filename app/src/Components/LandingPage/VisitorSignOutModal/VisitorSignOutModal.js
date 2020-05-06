@@ -67,7 +67,6 @@ class VisitorSignOutModal extends React.Component
     handleSignOut = async (e) => {
         let data = {
             "id": e.target.dataset.id
-            // "id": "blabla"
         };
 
         if (!this.state.success) {

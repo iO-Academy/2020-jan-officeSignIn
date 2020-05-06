@@ -10,7 +10,8 @@ class VisitorSignOutModal extends React.Component
         this.state = {
             modalClass: this.props.signOutModalVisible ? 'visible' : 'hidden',
             visitorPackage: this.props.dataForSignOutModal,
-            response: ''
+            response: '',
+            success: false
         };
     }
 
@@ -74,19 +75,21 @@ class VisitorSignOutModal extends React.Component
             'PUT',
             data
         );
-
-        console.log(data);
-
-        // After handleFetch completed, display message on modal - success or failure,
-        // and send you back after 3 seconds to login page if success.
-
     };
 
     updateResponse = (newResponse) => {
         setTimeout(()=> {
-            this.clearResponse()
+            this.clearResponse();
+            if (this.state.success == true)
+            {
+                this.props.updateSignOutModalVisible();
+            }
         }, 3000);
         this.setState({response : newResponse})
+    };
+
+    clearResponse = () => {
+        this.setState({response : ''})
     };
 
     handleFetch = async (url, requestMethod, dataToSend) => {
@@ -102,7 +105,10 @@ class VisitorSignOutModal extends React.Component
 
         let responseData = await response.json();
         console.log(responseData)
-        // this.props.updateResponse(responseData.Message);
+        if (responseData.Success) {
+            this.setState({"success": true});
+        }
+        this.updateResponse(responseData.Message);
     };
 
     render() {

@@ -3,11 +3,14 @@ import './LandingPage.css';
 import MainContainer from "./MainContainer/MainContainer";
 import AdminBtn from "./AdminBtn/AdminBtn";
 import AdminModal from "./AdminModal/AdminModal";
+import VisitorSignOutModal from "./VisitorSignOutModal/VisitorSignOutModal";
 
 class LandingPage extends React.Component {
     state = {
         modalVisible: false,
-        adminBtnVisible: true
+        adminBtnVisible: true,
+        signOutModalVisible: false,
+        dataForSignOutModal: {}
     };
 
     updateModalVisible = () => {
@@ -18,12 +21,31 @@ class LandingPage extends React.Component {
         }
     }
 
+    updateSignOutModalVisible = () => {
+        if(!this.state.signOutModalVisible) {
+            this.setState({signOutModalVisible: true})
+        } else {
+            this.setState({signOutModalVisible: false})
+        }
+    }
+
+    getSignOutData = (data) => {
+       this.setState({dataForSignOutModal: data, signOutModalVisible: true})
+    }
+
     render() {
         return (
             <div>
-                <h1>Mayden Academy Visitor sign-in</h1>
-                <MainContainer/>
+                <h1>Mayden Academy Visitor Sign In</h1>
+                <MainContainer
+                    updateSignOutModalVisible={this.updateSignOutModalVisible}
+                    getSignOutData={this.getSignOutData}
+                />
                 <AdminModal modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
+                <VisitorSignOutModal signOutModalVisible={this.state.signOutModalVisible}
+                                     updateSignOutModalVisible={this.updateSignOutModalVisible}
+                                     dataForSignOutModal={this.state.dataForSignOutModal}
+                />
                 <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
             </div>
         )

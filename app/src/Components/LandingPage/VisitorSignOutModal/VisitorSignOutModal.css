@@ -1,0 +1,62 @@
+.signOutModal {
+    font: 700 35px Arial, sans-serif;
+    width: 700px;
+    min-height: 500px;
+    background-color: #ffffff;
+    position: absolute;
+    padding: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.instructions {
+    color: #295074;
+}
+
+/*.closeModalBtn {*/
+/*    position: absolute;*/
+/*    right: 40px;*/
+/*    bottom: 30px;*/
+/*    width: 40px;*/
+/*    height: 40px;*/
+/*    background-color: #F27424;*/
+/*    border: 2px solid #295074;*/
+/*    border-radius: 5px;*/
+/*    color: #ffffff;*/
+/*    margin: 0 5px 5px 0;*/
+/*    line-height: 33px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+span {
+    line-height: 65px;
+}
+
+.responseMessage {
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    color: #e74c3c;
+}
+
+@media only screen and (max-width: 800px) {
+    .mainContainer {
+        width: 500px;
+    }
+}

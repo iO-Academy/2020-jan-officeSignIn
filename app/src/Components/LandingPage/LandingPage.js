@@ -19,7 +19,7 @@ class LandingPage extends React.Component {
         } else {
             this.setState({modalVisible: false, adminBtnVisible: true})
         }
-    }
+    };
 
     updateSignOutModalVisible = () => {
         if(!this.state.signOutModalVisible) {
@@ -27,11 +27,11 @@ class LandingPage extends React.Component {
         } else {
             this.setState({signOutModalVisible: false})
         }
-    }
+    };
 
     getSignOutData = (data) => {
        this.setState({dataForSignOutModal: data, signOutModalVisible: true})
-    }
+    };
 
     render() {
         return (
@@ -41,12 +41,18 @@ class LandingPage extends React.Component {
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
                     getSignOutData={this.getSignOutData}
                 />
-                <AdminModal modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
-                <VisitorSignOutModal signOutModalVisible={this.state.signOutModalVisible}
-                                     updateSignOutModalVisible={this.updateSignOutModalVisible}
-                                     dataForSignOutModal={this.state.dataForSignOutModal}
+                <AdminModal
+                    modalVisible={this.state.modalVisible}
+                    updateModalVisible={this.updateModalVisible}
                 />
-                <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
+                <VisitorSignOutModal
+                    signOutModalVisible={this.state.signOutModalVisible}
+                    updateSignOutModalVisible={this.updateSignOutModalVisible}
+                    dataForSignOutModal={this.state.dataForSignOutModal}
+                />
+                <AdminBtn
+                    adminBtnVisible={this.state.adminBtnVisible}
+                    updateModalVisible={this.updateModalVisible}/>
             </div>
         )
     }

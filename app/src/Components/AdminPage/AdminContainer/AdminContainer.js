@@ -29,8 +29,8 @@ class AdminContainer extends React.Component {
             <main>
                 <div className="adminContainer">
                     <Logo/>
-                    <VisitorsTable updateResponse={this.updateResponse} updateSignOutResponse={this.updateSignOutResponse}/>
                     <MessageBox response={this.state.response}/>
+                    <VisitorsTable updateResponse={this.updateResponse} updateSignOutResponse={this.updateSignOutResponse}/>
                 </div>
             </main>
         )

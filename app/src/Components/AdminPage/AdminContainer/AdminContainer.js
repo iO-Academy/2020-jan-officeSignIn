@@ -3,6 +3,7 @@ import './adminContainer.css';
 import Logo from '../../LandingPage/MainContainer/Logo/Logo';
 import VisitorsTable from "../VisitorsTable/VisitorsTable";
 import MessageBox from "../../LandingPage/MainContainer/MessageBox/MessageBox"
+import LogOutBtn from "../LogOutBtn/LogOutBtn";
 
 class AdminContainer extends React.Component {
     state = {
@@ -29,6 +30,7 @@ class AdminContainer extends React.Component {
             <main>
                 <div className="adminContainer">
                     <Logo/>
+                    <LogOutBtn/>
                     <MessageBox response={this.state.response}/>
                     <VisitorsTable updateResponse={this.updateResponse} updateSignOutResponse={this.updateSignOutResponse}/>
                 </div>

@@ -10,11 +10,3 @@
     border-color: #295074;
     cursor: pointer;
 }
-
-.visible {
-    display: block;
-}
-
-.hidden {
-    display: none;
-}

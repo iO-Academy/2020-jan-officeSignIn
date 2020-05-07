@@ -1,5 +1,13 @@
 h1.adminPage {
-    padding: 20px;
-    margin: 40px auto;
+    padding-top: 60px;
+    padding-bottom: 30px;
     color: #ffffff;
+}
+
+.adminPageBackgroundColor {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    background-color: #295074;
 }

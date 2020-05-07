@@ -3,10 +3,9 @@ body {
     text-align: center;
 }
 
-h1 {
+.landingPage h1 {
     color: #ffffff;
-    margin-top: 20px;
-    font-family:'truenoRg', sans-serif;
+    margin-top: 50px;
 }
 
 

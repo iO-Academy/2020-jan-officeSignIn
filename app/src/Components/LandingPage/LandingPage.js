@@ -35,8 +35,8 @@ class LandingPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Mayden Academy Visitor Sign In</h1>
+            <div className="landingPage">
+                <h1 className="landingPage">Mayden Academy Visitor Sign In</h1>
                 <MainContainer
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
                     getSignOutData={this.getSignOutData}

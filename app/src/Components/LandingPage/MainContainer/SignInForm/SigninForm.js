@@ -71,13 +71,13 @@ class SigninForm extends React.Component {
 
     render() {
         return (
-            <form>
-                <input id="Name" type="text" placeholder="Your first name and surname..."
+            <form className="signInForm">
+                <input id="Name" type="text" className="signInFormInput" placeholder="Your first name and surname..."
                        value={this.state.Name}
                        onChange={(e) => this.handleUpdate(e, 'Name')}
                        required
                 />
-                <input id="Company" type="text" placeholder="Your organisation..."
+                <input id="Company" type="text" className="signInFormInput" placeholder="Your organisation..."
                        value={this.state.Company}
                        onChange={(e) => this.handleUpdate(e, 'Company')}
                 />

@@ -19,6 +19,7 @@
 
 .instructions {
     color: #295074;
+    line-height: 65px;
 }
 
 .keypadContainer {
@@ -92,10 +93,6 @@
 .logInBtn:active {
     background-color:#ffffff;
     color: #94BA66;
-}
-
-span {
-    line-height: 65px;
 }
 
 .responseMessage {

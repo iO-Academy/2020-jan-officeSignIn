@@ -37,6 +37,7 @@ class LandingPage extends React.Component {
     render() {
         return (
             <div className="landingPage">
+                <div className="landingPageBackgroundColor"> </div>
                 <h1>Mayden Academy Visitor Sign In</h1>
                 <MainContainer
                     updateSignOutModalVisible={this.updateSignOutModalVisible}

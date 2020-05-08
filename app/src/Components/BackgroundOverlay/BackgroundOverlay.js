@@ -13,8 +13,10 @@ class BackgroundOverlay extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.modalVisible !== this.props.modalVisible) {
-            if(this.props.modalVisible) {
+        if (prevProps.modalVisible !== this.props.modalVisible ||
+            prevProps.signOutModalVisible !== this.props.signOutModalVisible) {
+
+            if (this.props.modalVisible || this.props.signOutModalVisible) {
                 this.setState({modalClass: 'visible'})
             } else {
                 this.setState({modalClass: 'hidden'})

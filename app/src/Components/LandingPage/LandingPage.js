@@ -44,6 +44,7 @@ class LandingPage extends React.Component {
                 />
                 <BackgroundOverlay
                     modalVisible={this.state.modalVisible}
+                    signOutModalVisible={this.state.signOutModalVisible}
                 />
                 <AdminModal
                     modalVisible={this.state.modalVisible}

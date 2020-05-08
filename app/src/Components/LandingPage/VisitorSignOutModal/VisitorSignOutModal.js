@@ -86,7 +86,7 @@ class VisitorSignOutModal extends React.Component
                 this.setState({"success": false});
                 this.props.updateSignOutModalVisible();
             }
-        }, 3000);
+        }, 5000);
         this.setState({response : newResponse})
     };
 

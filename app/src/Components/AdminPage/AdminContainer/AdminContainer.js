@@ -7,7 +7,7 @@ import LogOutBtn from "../LogOutBtn/LogOutBtn";
 
 class AdminContainer extends React.Component {
     state = {
-        response: 'This is a test This is a test This is a test This is a test'
+        response: ''
     };
 
     updateResponse = (newResponse) => {
@@ -17,7 +17,7 @@ class AdminContainer extends React.Component {
     updateSignOutResponse = (newResponse) => {
         setTimeout(()=> {
             this.clearResponse()
-        }, 3000);
+        }, 5000);
         this.setState({response : newResponse})
     };
 
@@ -30,7 +30,9 @@ class AdminContainer extends React.Component {
             <main>
                 <div className="adminContainer">
                     <Logo/>
-                    <LogOutBtn/>
+                    <div className="adminContainerButtons">
+                        <LogOutBtn/>
+                    </div>
                     <MessageBox response={this.state.response}/>
                     <VisitorsTable updateResponse={this.updateResponse} updateSignOutResponse={this.updateSignOutResponse}/>
                 </div>

@@ -69,7 +69,7 @@ class AdminModal extends React.Component {
     updateResponse = (newResponse) => {
         setTimeout(()=> {
             this.clearResponse()
-        }, 3000);
+        }, 5000);
         this.setState({response : newResponse})
     };
 

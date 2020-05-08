@@ -31,7 +31,8 @@ class SigninForm extends React.Component {
         );
 
         this.setState({Name: ''});
-        this.setState({Company: ''})
+        this.setState({Company: ''});
+
     };
 
     handleSignOut = async (e) =>{
@@ -64,13 +65,19 @@ class SigninForm extends React.Component {
 
         let responseData = await response.json();
 
-        console.log(responseData.Success)
-
         if (responseData.Success === false) {
             this.props.updateResponse('Name Required')
         }
 
-        //handle successful sign in
+        if (responseData.Success) {
+            setTimeout( () => {
+                setTimeout(() => {
+                    this.props.toggleSuccessTick()
+                },400);
+                this.props.setSuccessTickHidden()
+            }, 3000);
+            this.props.toggleSuccessTick()
+        }
 
         if (responseData.Data !== undefined) {
             this.props.getSignOutData(responseData.Data);

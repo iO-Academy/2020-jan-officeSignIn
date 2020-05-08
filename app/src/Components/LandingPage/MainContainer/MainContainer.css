@@ -20,6 +20,17 @@
     color: #e74c3c;
 }
 
+.successTick {
+    height: 400px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: lawngreen;
+    font-size: 300px;
+}
+
 @media screen and (max-width: 800px) {
     .mainContainer {
         width: 500px;

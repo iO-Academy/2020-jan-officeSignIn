@@ -30,7 +30,9 @@ class MainContainer extends React.Component {
                         updateSignOutModalVisible={this.props.updateSignOutModalVisible}
                         getSignOutData={this.props.getSignOutData}
                     />
-                    <MessageBox response={this.state.response}/>
+                    <div className="responseMessageFailed">
+                        <MessageBox response={this.state.response}/>
+                    </div>
                 </div>
             </main>
         )

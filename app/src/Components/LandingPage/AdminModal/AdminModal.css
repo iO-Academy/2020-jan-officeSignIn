@@ -98,11 +98,16 @@
 }
 
 .responseMessage {
-    font-size: 1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
     padding: 0;
     margin: 0;
     color: #e74c3c;
     height: 30px;
+}
+
+.responseMessageSuccess {
+    color: #94BA66;
 }
 
 @media only screen and (max-width: 800px) {

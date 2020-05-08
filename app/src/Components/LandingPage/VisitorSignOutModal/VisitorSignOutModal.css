@@ -27,14 +27,6 @@ span {
     line-height: 65px;
 }
 
-.responseMessage {
-    font-size: 1rem;
-    padding: 0;
-    margin: 0;
-    color: #e74c3c;
-    height: 30px;
-}
-
 @media only screen and (max-width: 800px) {
     .mainContainer {
         width: 500px;

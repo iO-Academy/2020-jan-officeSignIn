@@ -40,7 +40,7 @@ class VisitorsTable extends React.Component {
                 visitorPackage: data
             });
             if (!data.Data.length > 0) {
-                this.props.updateResponse(data.Message);
+                this.props.updateResponse('No visitors currently signed in');
             }
             localStorage.removeItem('bearerToken')
         })

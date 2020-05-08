@@ -130,7 +130,7 @@ class VisitorSignOutModal extends React.Component
                     </table>
                 </div>
                 <button className="closeModalBtn" onClick={this.props.updateSignOutModalVisible}>X</button>
-                <div className="responseMessage">{this.state.response}</div>
+                <div className="responseMessage responseMessageSuccess">{this.state.response}</div>
             </div>
         )
     }

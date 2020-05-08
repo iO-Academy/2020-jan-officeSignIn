@@ -63,7 +63,15 @@ class SigninForm extends React.Component {
         });
 
         let responseData = await response.json();
-        this.props.updateResponse(responseData.Message);
+
+        console.log(responseData.Success)
+
+        if (responseData.Success === false) {
+            this.props.updateResponse('Name Required')
+        }
+
+        //handle successful sign in
+
         if (responseData.Data !== undefined) {
             this.props.getSignOutData(responseData.Data);
         }

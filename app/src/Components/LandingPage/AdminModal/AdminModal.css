@@ -1,5 +1,7 @@
 .adminModal {
-    font: 700 35px Arial, sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    text-align: center;
     width: 700px;
     min-height: 500px;
     background-color: #ffffff;

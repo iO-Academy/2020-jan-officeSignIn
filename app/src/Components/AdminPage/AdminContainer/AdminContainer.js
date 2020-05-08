@@ -7,7 +7,7 @@ import LogOutBtn from "../LogOutBtn/LogOutBtn";
 
 class AdminContainer extends React.Component {
     state = {
-        response: ''
+        response: 'This is a test This is a test This is a test This is a test'
     };
 
     updateResponse = (newResponse) => {

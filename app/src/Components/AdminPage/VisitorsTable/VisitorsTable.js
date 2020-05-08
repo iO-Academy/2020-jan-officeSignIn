@@ -36,9 +36,13 @@ class VisitorsTable extends React.Component {
                 localStorage.removeItem('bearerToken');
                 window.location.replace(this.state.appUrl)
             }
+
             this.setState({
                 visitorPackage: data
             });
+
+            this.props.setAdminContainerVisible();
+
             if (!data.Data.length > 0) {
                 this.props.updateResponse('No visitors currently signed in');
             }

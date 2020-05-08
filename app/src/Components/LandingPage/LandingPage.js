@@ -4,6 +4,7 @@ import MainContainer from "./MainContainer/MainContainer";
 import AdminBtn from "./AdminBtn/AdminBtn";
 import AdminModal from "./AdminModal/AdminModal";
 import VisitorSignOutModal from "./VisitorSignOutModal/VisitorSignOutModal";
+import BackgroundOverlay from "../BackgroundOverlay/BackgroundOverlay";
 
 class LandingPage extends React.Component {
     state = {
@@ -36,10 +37,13 @@ class LandingPage extends React.Component {
     render() {
         return (
             <div className="landingPage">
-                <h1 className="landingPage">Mayden Academy Visitor Sign In</h1>
+                <h1>Mayden Academy Visitor Sign In</h1>
                 <MainContainer
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
                     getSignOutData={this.getSignOutData}
+                />
+                <BackgroundOverlay
+                    modalVisible={this.state.modalVisible}
                 />
                 <AdminModal
                     modalVisible={this.state.modalVisible}

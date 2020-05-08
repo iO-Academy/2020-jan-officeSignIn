@@ -3,11 +3,3 @@ h1.adminPage {
     color: #ffffff;
     text-align: center;
 }
-
-.adminPageBackgroundColor {
-    height: 100vh;
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-    background-color: #295074;
-}

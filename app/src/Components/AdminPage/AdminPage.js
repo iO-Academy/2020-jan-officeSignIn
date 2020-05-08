@@ -28,7 +28,6 @@ class AdminPage extends React.Component{
     render() {
         return (
             <div>
-                <div className="adminPageBackgroundColor"></div>
                 <h1 className={'adminPage'}>All visitors currently signed in today:</h1>
                 <AdminContainer/>
             </div>

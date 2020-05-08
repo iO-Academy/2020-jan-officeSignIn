@@ -24,14 +24,20 @@ class SigninForm extends React.Component {
             'Company': this.state.Company,
         };
 
-        await this.handleFetch(
+        let responseData = await this.handleFetch(
             localStorage.getItem('apiUrl') + 'api/visitorSignIn',
             'POST',
             dataToSend
         );
 
-        this.setState({Name: ''});
-        this.setState({Company: ''});
+        this.setState({
+            Name: '',
+            Company: ''
+        });
+
+        if (responseData.Success === false) {
+            this.props.updateResponse('Name required to sign in.')
+        }
 
     };
 
@@ -42,14 +48,24 @@ class SigninForm extends React.Component {
             'Company': this.state.Company,
         };
 
-        await this.handleFetch(
+        let responseData = await this.handleFetch(
             localStorage.getItem('apiUrl') + 'api/visitorSignOut',
             'PUT',
             dataToSend
         );
 
-        this.setState({Name: ''});
-        this.setState({Company: ''})
+        this.setState({
+            Name: '',
+            Company: ''
+        });
+
+        if (responseData.Message === 'Multiple matches found') {
+            this.props.updateResponse(responseData.Message);
+            return responseData.Message
+        } else if (responseData.Success === false) {
+            this.props.updateResponse('Unable to sign out, name not found.')
+        }
+
     };
 
     handleFetch = async (url, requestMethod, dataToSend) => {
@@ -65,23 +81,21 @@ class SigninForm extends React.Component {
 
         let responseData = await response.json();
 
-        if (responseData.Success === false) {
-            this.props.updateResponse('Name Required')
-        }
-
         if (responseData.Success) {
             setTimeout( () => {
                 setTimeout(() => {
                     this.props.toggleSuccessTick()
                 },400);
                 this.props.setSuccessTickHidden()
-            }, 3000);
+            }, 2000);
             this.props.toggleSuccessTick()
         }
 
         if (responseData.Data !== undefined) {
             this.props.getSignOutData(responseData.Data);
         }
+
+        return responseData;
     };
 
     render() {

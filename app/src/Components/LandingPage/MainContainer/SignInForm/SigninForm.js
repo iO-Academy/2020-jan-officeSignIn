@@ -63,7 +63,7 @@ class SigninForm extends React.Component {
             this.props.updateResponse('');
             return responseData.Message
         } else if (responseData.Success === false) {
-            this.props.updateResponse('Unable to sign out, name not found.')
+            this.props.updateResponse('To sign out, please enter the name you signed in with.')
         }
 
     };

@@ -60,7 +60,7 @@ class SigninForm extends React.Component {
         });
 
         if (responseData.Message === 'Multiple matches found') {
-            this.props.updateResponse(responseData.Message);
+            this.props.updateResponse('');
             return responseData.Message
         } else if (responseData.Success === false) {
             this.props.updateResponse('Unable to sign out, name not found.')

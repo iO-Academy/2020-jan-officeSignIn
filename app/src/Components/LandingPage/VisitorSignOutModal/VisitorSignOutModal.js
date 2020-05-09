@@ -83,11 +83,13 @@ class VisitorSignOutModal extends React.Component
             this.clearResponse();
             if (this.state.success)
             {
-                this.setState({"success": false});
-                this.props.updateSignOutModalVisible();
+                this.setState({success: false});
+                if (this.props.signOutModalVisible) {
+                    this.props.updateSignOutModalVisible();
+                }
             }
         }, 5000);
-        this.setState({response : newResponse})
+        this.setState({response: newResponse})
     };
 
     clearResponse = () => {

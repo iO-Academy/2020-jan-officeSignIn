@@ -1,5 +1,6 @@
 import React from "react";
 import './VisitorSignOutModal.css'
+import {Spring} from "react-spring/renderprops-universal";
 const columnHeader = ['Name', 'Time Signed In', 'Sign Out'];
 
 class VisitorSignOutModal extends React.Component
@@ -11,16 +12,27 @@ class VisitorSignOutModal extends React.Component
             modalClass: this.props.signOutModalVisible ? 'visible' : 'hidden',
             visitorPackage: this.props.dataForSignOutModal,
             response: '',
-            success: false
+            success: false,
+            successTick: false,
+            successTickVisible: 'hiddenOpacity'
         };
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevProps.signOutModalVisible !== this.props.signOutModalVisible) {
             this.determineVisibleState()
         }
+
         if (prevProps.dataForSignOutModal !== this.props.dataForSignOutModal) {
             this.setState({visitorPackage: this.props.dataForSignOutModal})
+        }
+
+        if (prevState.successTick !== this.state.successTick) {
+            if (this.state.successTick) {
+                this.setState({successTickVisible: 'visible'})
+            } else {
+                this.setState({successTickVisible: 'hiddenOpacity'})
+            }
         }
     }
 
@@ -70,25 +82,39 @@ class VisitorSignOutModal extends React.Component
         };
 
         if (!this.state.success) {
-            await this.handleFetch(
+            let responseData = await this.handleFetch(
                 localStorage.getItem('apiUrl') + 'api/visitorSignOut',
                 'PUT',
                 data
             );
+
+            if (responseData.Success) {
+                setTimeout( () => {
+                    setTimeout(() => {
+                        this.toggleSuccessTick()
+                    },400);
+                    this.setSuccessTickHidden()
+                }, 2000);
+                this.toggleSuccessTick()
+            }
+
         }
+
     };
 
     updateResponse = (newResponse) => {
         setTimeout(()=> {
             this.clearResponse();
-            if (this.state.success)
-            {
+
+            if (this.state.success) {
                 this.setState({success: false});
+
                 if (this.props.signOutModalVisible) {
                     this.props.updateSignOutModalVisible();
                 }
+
             }
-        }, 5000);
+        }, 2500);
         this.setState({response: newResponse})
     };
 
@@ -109,15 +135,37 @@ class VisitorSignOutModal extends React.Component
 
         let responseData = await response.json();
         if (responseData.Success) {
-            this.setState({"success": true});
+            this.setState({success: true});
         }
-        this.updateResponse(responseData.Message);
+        this.updateResponse('');
+        return responseData
+    };
+
+    toggleSuccessTick = () => {
+        this.setState({successTick: !this.state.successTick})
+    };
+
+    setSuccessTickHidden = () => {
+        this.setState({successTickVisible: 'hiddenOpacity'})
     };
 
     render() {
-        let visibleState = 'signOutModal ' + this.state.modalClass;
+        const visibleState = 'signOutModal ' + this.state.modalClass;
+        const successTickClass = 'successTick ' + this.state.successTickVisible;
         return (
             <div className={visibleState}>
+                {!this.state.successTick ? (<div> </div>) : (
+                    <Spring
+                        from={{marginTop: -1000}}
+                        to={{marginTop: 0}}
+                    >
+                        {props => (
+                            <div  className={successTickClass} style={props}>
+                                &#10004;
+                            </div>
+                        )}
+                    </Spring>
+                )}
                 <span className="instructions">When did you sign in?</span>
                 <div className="col-12 visitorsTable">
                     <table className="table table-bordered table-hover">

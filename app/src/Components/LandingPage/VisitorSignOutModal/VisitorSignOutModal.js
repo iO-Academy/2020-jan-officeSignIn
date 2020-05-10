@@ -114,7 +114,7 @@ class VisitorSignOutModal extends React.Component
                 }
 
             }
-        }, 2500);
+        }, 2000);
         this.setState({response: newResponse})
     };
 

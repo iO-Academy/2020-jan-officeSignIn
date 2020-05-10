@@ -18,7 +18,10 @@ class AdminBtn extends React.Component {
 
     handleClick = () => {
         this.props.updateModalVisible();
-        this.props.updateSignOutModalVisible();
+
+        if (this.props.signOutModalVisible) {
+            this.props.updateSignOutModalVisible();
+        }
     };
 
     render() {

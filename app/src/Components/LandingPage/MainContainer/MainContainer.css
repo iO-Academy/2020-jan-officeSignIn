@@ -27,8 +27,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: lawngreen;
+    color: #7CFC00;
     font-size: 300px;
+    z-index: 5;
 }
 
 @media screen and (max-width: 800px) {

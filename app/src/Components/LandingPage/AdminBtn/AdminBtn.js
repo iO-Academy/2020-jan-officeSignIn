@@ -16,10 +16,15 @@ class AdminBtn extends React.Component {
         }
     }
 
+    handleClick = () => {
+        this.props.updateModalVisible();
+        this.props.updateSignOutModalVisible();
+    };
+
     render() {
         let adminBtnVisibility = 'adminBtn ' + this.state.adminBtnClass
         return (
-            <button className={adminBtnVisibility} onClick={()=>this.props.updateModalVisible()}>Admin</button>
+            <button className={adminBtnVisibility} onClick={this.handleClick}>Admin</button>
         )
     }
 }

@@ -1,7 +1,6 @@
 .logOutBtn {
-    position: absolute;
-    top: 3%;
-    right: 5%;
+    float: right;
+    margin-right: 40px;
     background-color: #F27424;
     color: #ffffff;
     width: 150px;
@@ -9,4 +8,5 @@
     font-size: 25px;
     border-radius: 5px;
     cursor: pointer;
+    border: 1px solid #295074;
 }

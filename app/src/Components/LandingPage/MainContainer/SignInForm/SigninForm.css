@@ -1,8 +1,8 @@
-form {
+.signInForm {
     margin-top: 20px;
 }
 
-input {
+.signInFormInput {
     border-radius: 5px;
     border: 1px solid #295074;
     display: block;
@@ -21,9 +21,12 @@ input {
     font-size: 25px;
     cursor: pointer;
     display: inline-block;
-    margin: 10px
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #295074;
 }
 
 .signOutBtn {
     background-color: #F27424;
+    border: 1px solid #295074;
 }

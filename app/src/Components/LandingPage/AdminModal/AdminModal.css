@@ -1,5 +1,7 @@
 .adminModal {
-    font: 700 35px Arial, sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    text-align: center;
     width: 700px;
     min-height: 500px;
     background-color: #ffffff;
@@ -17,16 +19,9 @@
     0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
-.visible {
-    display: block;
-}
-
-.hidden {
-    display: none;
-}
-
 .instructions {
     color: #295074;
+    line-height: 65px;
 }
 
 .keypadContainer {
@@ -50,22 +45,28 @@
 
 .keypadBtn {
     background-color: #288FB0;
-    border: 2px solid #295074;
+    border: 1px solid #295074;
     border-radius: 5px;
     color: #ffffff;
     width: 100px;
     height: 100px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logInBtn {
     background-color: #94BA66;
-    border: 2px solid #295074;
+    border: 1px solid #295074;
     border-radius: 5px;
     color: #ffffff;
     width: 225px;
     height: 100px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .closeModalBtn {
@@ -75,12 +76,15 @@
     width: 40px;
     height: 40px;
     background-color: #F27424;
-    border: 2px solid #295074;
+    border: 1px solid #295074;
     border-radius: 5px;
     color: #ffffff;
     margin: 0 5px 5px 0;
     line-height: 33px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .keypadBtn:active, .closeModalBtn:active {
@@ -93,15 +97,17 @@
     color: #94BA66;
 }
 
-span {
-    line-height: 65px;
-}
-
 .responseMessage {
-    font-size: 1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
     padding: 0;
     margin: 0;
     color: #e74c3c;
+    height: 30px;
+}
+
+.responseMessageSuccess {
+    color: #94BA66;
 }
 
 @media only screen and (max-width: 800px) {

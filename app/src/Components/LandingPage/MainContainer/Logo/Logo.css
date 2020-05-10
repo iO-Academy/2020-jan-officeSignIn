@@ -1,3 +1,5 @@
 img {
-    margin-top: 30px;
+    padding: 30px;
+    margin: 0 auto;
+    display: block;
 }

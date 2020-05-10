@@ -1,5 +1,7 @@
 .signOutModal {
-    font: 700 35px Arial, sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    text-align: center;
     width: 700px;
     min-height: 500px;
     background-color: #ffffff;
@@ -17,27 +19,12 @@
     0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
-.visible {
-    display: block;
-}
-
-.hidden {
-    display: none;
-}
-
 .instructions {
     color: #295074;
 }
 
 span {
     line-height: 65px;
-}
-
-.responseMessage {
-    font-size: 1rem;
-    padding: 0;
-    margin: 0;
-    color: #e74c3c;
 }
 
 @media only screen and (max-width: 800px) {

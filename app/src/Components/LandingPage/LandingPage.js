@@ -4,6 +4,7 @@ import MainContainer from "./MainContainer/MainContainer";
 import AdminBtn from "./AdminBtn/AdminBtn";
 import AdminModal from "./AdminModal/AdminModal";
 import VisitorSignOutModal from "./VisitorSignOutModal/VisitorSignOutModal";
+import BackgroundOverlay from "../BackgroundOverlay/BackgroundOverlay";
 
 class LandingPage extends React.Component {
     state = {
@@ -19,7 +20,7 @@ class LandingPage extends React.Component {
         } else {
             this.setState({modalVisible: false, adminBtnVisible: true})
         }
-    }
+    };
 
     updateSignOutModalVisible = () => {
         if(!this.state.signOutModalVisible) {
@@ -27,26 +28,37 @@ class LandingPage extends React.Component {
         } else {
             this.setState({signOutModalVisible: false})
         }
-    }
+    };
 
     getSignOutData = (data) => {
        this.setState({dataForSignOutModal: data, signOutModalVisible: true})
-    }
+    };
 
     render() {
         return (
-            <div>
+            <div className="landingPage">
+                <div className="landingPageBackgroundColor"> </div>
                 <h1>Mayden Academy Visitor Sign In</h1>
                 <MainContainer
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
                     getSignOutData={this.getSignOutData}
                 />
-                <AdminModal modalVisible={this.state.modalVisible} updateModalVisible={this.updateModalVisible}/>
-                <VisitorSignOutModal signOutModalVisible={this.state.signOutModalVisible}
-                                     updateSignOutModalVisible={this.updateSignOutModalVisible}
-                                     dataForSignOutModal={this.state.dataForSignOutModal}
+                <BackgroundOverlay
+                    modalVisible={this.state.modalVisible}
+                    signOutModalVisible={this.state.signOutModalVisible}
                 />
-                <AdminBtn adminBtnVisible={this.state.adminBtnVisible} updateModalVisible={this.updateModalVisible}/>
+                <AdminModal
+                    modalVisible={this.state.modalVisible}
+                    updateModalVisible={this.updateModalVisible}
+                />
+                <VisitorSignOutModal
+                    signOutModalVisible={this.state.signOutModalVisible}
+                    updateSignOutModalVisible={this.updateSignOutModalVisible}
+                    dataForSignOutModal={this.state.dataForSignOutModal}
+                />
+                <AdminBtn
+                    adminBtnVisible={this.state.adminBtnVisible}
+                    updateModalVisible={this.updateModalVisible}/>
             </div>
         )
     }

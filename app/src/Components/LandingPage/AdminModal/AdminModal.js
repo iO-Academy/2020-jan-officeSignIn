@@ -69,7 +69,7 @@ class AdminModal extends React.Component {
     updateResponse = (newResponse) => {
         setTimeout(()=> {
             this.clearResponse()
-        }, 3000);
+        }, 5000);
         this.setState({response : newResponse})
     };
 
@@ -84,23 +84,23 @@ class AdminModal extends React.Component {
                     <span className="instructions">Please enter the admin passcode</span>
                     <div className="keypadContainer">
                         <div className="keypadRow">
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'1', this.state.passcode)}><span>1</span></div>
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'2', this.state.passcode)}><span>2</span></div>
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'3', this.state.passcode)}><span>3</span></div>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'1', this.state.passcode)}><span>1</span></button>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'2', this.state.passcode)}><span>2</span></button>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'3', this.state.passcode)}><span>3</span></button>
                         </div>
                         <div className="keypadRow">
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'4', this.state.passcode)}><span>4</span></div>
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'5', this.state.passcode)}><span>5</span></div>
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'6', this.state.passcode)}><span>6</span></div>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'4', this.state.passcode)}><span>4</span></button>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'5', this.state.passcode)}><span>5</span></button>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'6', this.state.passcode)}><span>6</span></button>
                         </div>
                         <div className="keypadRow">
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'7', this.state.passcode)}><span>7</span></div>
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'8', this.state.passcode)}><span>8</span></div>
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'9', this.state.passcode)}><span>9</span></div>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'7', this.state.passcode)}><span>7</span></button>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'8', this.state.passcode)}><span>8</span></button>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'9', this.state.passcode)}><span>9</span></button>
                         </div>
                         <div className="keypadRow">
-                            <div className="keypadBtn" onClick={(e) => this.captureInput(e,'0', this.state.passcode)}><span>0</span></div>
-                            <div className="logInBtn" onClick={this.handleLogin}><span>Log In</span></div>
+                            <button className="keypadBtn" onClick={(e) => this.captureInput(e,'0', this.state.passcode)}><span>0</span></button>
+                            <button className="logInBtn" onClick={this.handleLogin}><span>Log In</span></button>
                         </div>
                     </div>
                     <button className="closeModalBtn" onClick={this.props.updateModalVisible}>X</button>

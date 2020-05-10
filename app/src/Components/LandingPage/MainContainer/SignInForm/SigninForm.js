@@ -24,14 +24,21 @@ class SigninForm extends React.Component {
             'Company': this.state.Company,
         };
 
-        await this.handleFetch(
+        let responseData = await this.handleFetch(
             localStorage.getItem('apiUrl') + 'api/visitorSignIn',
             'POST',
             dataToSend
         );
 
-        this.setState({Name: ''});
-        this.setState({Company: ''})
+        this.setState({
+            Name: '',
+            Company: ''
+        });
+
+        if (responseData.Success === false) {
+            this.props.updateResponse('Name required to sign in.')
+        }
+
     };
 
     handleSignOut = async (e) =>{
@@ -41,14 +48,24 @@ class SigninForm extends React.Component {
             'Company': this.state.Company,
         };
 
-        await this.handleFetch(
+        let responseData = await this.handleFetch(
             localStorage.getItem('apiUrl') + 'api/visitorSignOut',
             'PUT',
             dataToSend
         );
 
-        this.setState({Name: ''});
-        this.setState({Company: ''})
+        this.setState({
+            Name: '',
+            Company: ''
+        });
+
+        if (responseData.Message === 'Multiple matches found') {
+            this.props.updateResponse('');
+            return responseData.Message
+        } else if (responseData.Success === false) {
+            this.props.updateResponse('To sign out, please enter the name you signed in with.')
+        }
+
     };
 
     handleFetch = async (url, requestMethod, dataToSend) => {
@@ -63,21 +80,33 @@ class SigninForm extends React.Component {
         });
 
         let responseData = await response.json();
-        this.props.updateResponse(responseData.Message);
+
+        if (responseData.Success) {
+            setTimeout( () => {
+                setTimeout(() => {
+                    this.props.toggleSuccessTick()
+                },400);
+                this.props.setSuccessTickHidden()
+            }, 2000);
+            this.props.toggleSuccessTick()
+        }
+
         if (responseData.Data !== undefined) {
             this.props.getSignOutData(responseData.Data);
         }
+
+        return responseData;
     };
 
     render() {
         return (
-            <form>
-                <input id="Name" type="text" placeholder="Your first name and surname..."
+            <form className="signInForm">
+                <input id="Name" type="text" className="signInFormInput" placeholder="Your first name and surname..."
                        value={this.state.Name}
                        onChange={(e) => this.handleUpdate(e, 'Name')}
                        required
                 />
-                <input id="Company" type="text" placeholder="Your organisation..."
+                <input id="Company" type="text" className="signInFormInput" placeholder="Your organisation..."
                        value={this.state.Company}
                        onChange={(e) => this.handleUpdate(e, 'Company')}
                 />

@@ -3,10 +3,16 @@ import './adminContainer.css';
 import Logo from '../../LandingPage/MainContainer/Logo/Logo';
 import VisitorsTable from "../VisitorsTable/VisitorsTable";
 import MessageBox from "../../LandingPage/MainContainer/MessageBox/MessageBox"
+import LogOutBtn from "../LogOutBtn/LogOutBtn";
 
 class AdminContainer extends React.Component {
     state = {
-        response: ''
+        response: '',
+        adminContainerVisible: 'hidden'
+    };
+
+    setAdminContainerVisible = () => {
+        this.setState({adminContainerVisible: 'visible'})
     };
 
     updateResponse = (newResponse) => {
@@ -16,7 +22,7 @@ class AdminContainer extends React.Component {
     updateSignOutResponse = (newResponse) => {
         setTimeout(()=> {
             this.clearResponse()
-        }, 3000);
+        }, 5000);
         this.setState({response : newResponse})
     };
 
@@ -25,12 +31,22 @@ class AdminContainer extends React.Component {
     };
 
     render() {
+        const adminContainerClass = 'adminContainer ' + this.state.adminContainerVisible;
         return (
             <main>
-                <div className="adminContainer">
+                <div className={adminContainerClass}>
                     <Logo/>
-                    <VisitorsTable updateResponse={this.updateResponse} updateSignOutResponse={this.updateSignOutResponse}/>
-                    <MessageBox response={this.state.response}/>
+                    <div className="adminContainerButtons">
+                        <LogOutBtn/>
+                    </div>
+                    <MessageBox
+                        response={this.state.response}
+                    />
+                    <VisitorsTable
+                        updateResponse={this.updateResponse}
+                        updateSignOutResponse={this.updateSignOutResponse}
+                        setAdminContainerVisible={this.setAdminContainerVisible}
+                    />
                 </div>
             </main>
         )

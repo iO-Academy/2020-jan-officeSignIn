@@ -43,9 +43,10 @@ class VisitorModel
     public function getAllSignedOutVisitors() : array
     {
         $query = $this->db->prepare(
-            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut` 
+            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`
             FROM `visitors`
-            WHERE `SignedIn` = 0;'
+            WHERE `SignedIn` = 0
+            ORDER BY `DateOfVisit` DESC, `TimeOfSignOut` DESC;'
         );
         $query->execute();
         return $query->fetchAll();

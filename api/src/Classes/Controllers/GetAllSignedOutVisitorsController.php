@@ -3,8 +3,8 @@
 namespace SignInApp\Controllers;
 
 
-use http\Env\Request as Request;
-use http\Env\Response as Response;
+use Slim\Http\Request;
+use Slim\Http\Response;
 use SignInApp\Models\VisitorModel;
 
 class GetAllSignedOutVisitorsController
@@ -33,7 +33,7 @@ class GetAllSignedOutVisitorsController
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, array $args) : Response
+    public function __invoke(Request $request, Response $response, array $args)
     {
         $apiResponse = [
             'Success' => false,

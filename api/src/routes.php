@@ -39,7 +39,7 @@ return function (App $app) {
     $app->post('/api/visitorSignIn', 'AddVisitorController');
     $app->get('/api/admin', 'GetAllSignedInVisitorsController')->add('Authenticate');
     $app->put('/api/visitorSignOut', 'SignOutVisitorController');
-    $app->get('/api/signedOutVisitors', 'GetAllSignedOutVisitorsController')->add('Authenticate');;
+    $app->get('/api/signedOutVisitors', 'GetAllSignedOutVisitorsController')->add('Authenticate');
 
     //Route to acquire authenticated active token
     $app->post('/adminLogin', 'LoginController');

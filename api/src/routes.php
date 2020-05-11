@@ -41,7 +41,7 @@ return function (App $app) {
     $app->put('/api/visitorSignOut', 'SignOutVisitorController');
     $app->get('/api/signedOutVisitors', 'GetAllSignedOutVisitorsController')->add('Authenticate');;
 
-    //Keypad route
+    //Route to acquire authenticated active token
     $app->post('/adminLogin', 'LoginController');
 
 

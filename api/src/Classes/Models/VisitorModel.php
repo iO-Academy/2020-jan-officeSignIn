@@ -38,7 +38,7 @@ class VisitorModel
     /**
      * queries database to return all signed out visitors who signed out today
      *
-     * @return array
+     * @return array sorted by date then time of sign out
      */
     public function getAllSignedOutVisitors() : array
     {

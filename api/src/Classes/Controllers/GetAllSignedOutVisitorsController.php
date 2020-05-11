@@ -2,7 +2,6 @@
 
 namespace SignInApp\Controllers;
 
-
 use Slim\Http\Request;
 use Slim\Http\Response;
 use SignInApp\Models\VisitorModel;

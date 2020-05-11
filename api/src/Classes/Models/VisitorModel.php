@@ -36,6 +36,23 @@ class VisitorModel
     }
 
     /**
+     * queries database to return all signed out visitors who signed out today
+     *
+     * @return array
+     */
+    public function getAllSignedOutVisitors() : array
+    {
+        $query = $this->db->prepare(
+            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut` 
+            FROM `visitors`
+            WHERE `DateOfVisit` = CURDATE() 
+            AND `SignedIn` = 0;'
+        );
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
      *  Adds new visitor to the database and returns a bool based on success or failure
      *
      * @param $Name

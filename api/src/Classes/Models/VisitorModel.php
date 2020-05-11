@@ -45,8 +45,7 @@ class VisitorModel
         $query = $this->db->prepare(
             'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut` 
             FROM `visitors`
-            WHERE `DateOfVisit` = CURDATE() 
-            AND `SignedIn` = 0;'
+            WHERE `SignedIn` = 0;'
         );
         $query->execute();
         return $query->fetchAll();

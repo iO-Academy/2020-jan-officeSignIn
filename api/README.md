@@ -119,3 +119,26 @@ To test, passcode is 8974.
             - `{ "Success": false, "Message": "Name or ID is required", "Data": [] }`
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+            
+
+### GET
+**/api/signedOutVisitors**
+
+You must be authenticated to retrieve data from this route.
+To test, passcode is 8974.
+
+- Gets all visitors currently signed out
+- Required
+    - None
+- Optional
+    - None
+    
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Successfully retrieved signed out visitors", "Data": [ { retrieved data } ] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "No data retrieved or no data in database", "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`

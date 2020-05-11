@@ -38,14 +38,18 @@ return function (App $app) {
         return $c->get('settings')['jwtKey'];
     };
 
+    //Models
     $container['VisitorModel'] = new \SignInApp\Factories\VisitorModelFactory();
     $container['AdminModel'] = new \SignInApp\Factories\AdminModelFactory();
 
+    //Controllers
     $container['AddVisitorController'] = new \SignInApp\Factories\AddVisitorControllerFactory();
     $container['GetAllSignedInVisitorsController'] = new SignInApp\Factories\GetAllSignedInVisitorsControllerFactory();
     $container['LoginController'] = new SignInApp\Factories\LoginControllerFactory();
     $container['SignOutVisitorController'] = new \SignInApp\Factories\SignOutVisitorControllerFactory();
+    $container['GetAllSignedOutVisitorsController'] = new SignInApp\Factories\GetAllSignedOutVisitorsControllerFactory();
 
+    //Authentication
     $container['Authenticate'] = new SignInApp\Factories\AuthenticateFactory();
 
 };

@@ -9,12 +9,35 @@ import TableSelector from "../TableSelector/TableSelector";
 class AdminContainer extends React.Component {
     state = {
         response: '',
-        adminContainerVisible: 'hidden'
+        adminContainerVisible: 'hidden',
+        signedInTableVisible: true,
+        signedOutTableVisible: false
     };
 
     setAdminContainerVisible = () => {
         this.setState({adminContainerVisible: 'visible'})
     };
+
+    viewSignedInVisitorTable = () => {
+        this.setState({
+            signedInTableVisible: true,
+            signedOutTableVisible: false
+        });
+    };
+
+    viewSignedOutVisitorTable = () => {
+        this.setState({
+            signedInTableVisible: false,
+            signedOutTableVisible: true
+        });
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.signedInTableVisible !== this.state.signedInTableVisible) {
+            console.log(this.state.signedInTableVisible)
+            console.log(this.state.signedOutTableVisible)
+        }
+    }
 
     updateResponse = (newResponse) => {
         this.setState({response : newResponse})
@@ -37,7 +60,12 @@ class AdminContainer extends React.Component {
             <main>
                 <div className={adminContainerClass}>
                     <Logo/>
-                    <TableSelector/>
+                    <TableSelector
+                        signedInTableVisible={this.state.signedInTableVisible}
+                        signedOutTableVisible={this.state.signedOutTableVisible}
+                        viewSignedInVisitorTable={this.viewSignedInVisitorTable}
+                        viewSignedOutVisitorTable={this.viewSignedOutVisitorTable}
+                    />
                     <div className="adminContainerButtons">
                         <LogOutBtn/>
                     </div>

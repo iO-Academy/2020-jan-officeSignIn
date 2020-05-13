@@ -60,13 +60,13 @@ class AdminContainer extends React.Component {
             <main>
                 <div className={adminContainerClass}>
                     <Logo/>
-                    <TableSelector
-                        signedInTableVisible={this.state.signedInTableVisible}
-                        signedOutTableVisible={this.state.signedOutTableVisible}
-                        viewSignedInVisitorTable={this.viewSignedInVisitorTable}
-                        viewSignedOutVisitorTable={this.viewSignedOutVisitorTable}
-                    />
                     <div className="adminContainerButtons">
+                        <TableSelector
+                            signedInTableVisible={this.state.signedInTableVisible}
+                            signedOutTableVisible={this.state.signedOutTableVisible}
+                            viewSignedInVisitorTable={this.viewSignedInVisitorTable}
+                            viewSignedOutVisitorTable={this.viewSignedOutVisitorTable}
+                        />
                         <LogOutBtn/>
                     </div>
                     <MessageBox

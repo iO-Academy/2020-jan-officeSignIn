@@ -2,12 +2,27 @@ import React from "react";
 import './tableSelector.css'
 
 class TableSelector extends React.Component  {
+    state = {
+        currentlySelectedTable: 'View currently signed in visitors'
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.signedInTableVisible !== this.props.signedInTableVisible ||
+        prevProps.signedOutTableVisible !== this.props.signedOutTableVisible) {
+            if (this.props.signedInTableVisible) {
+                this.setState({currentlySelectedTable: 'View currently signed in visitors'})
+            } else if (this.props.signedOutTableVisible) {
+                this.setState({currentlySelectedTable: 'View all signed out visitors'})
+            }
+        }
+    }
+
     render() {
         return (
             <div className="dropdown">
                 <button className="btn btn-secondary dropdown-toggle tableSelectorBtn" type="button" id="tableSelector"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
+                    {this.state.currentlySelectedTable}
                 </button>
                 <div className="dropdown-menu" aria-labelledby="tableSelector">
                     <button className="dropdown-item" type="button"

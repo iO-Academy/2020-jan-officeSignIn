@@ -2,7 +2,7 @@ import React from "react";
 import './visitorsTable.css';
 const columnHeader = ['Name', 'Company', 'Time In', 'Sign Out'];
 
-class VisitorsTable extends React.Component {
+class VisitorsTableSignedIn extends React.Component {
     constructor(props) {
         super(props);
 
@@ -129,4 +129,4 @@ class VisitorsTable extends React.Component {
     }
 }
 
-export default VisitorsTable;
+export default VisitorsTableSignedIn;

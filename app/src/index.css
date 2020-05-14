@@ -11,6 +11,8 @@ code {
     monospace;
 }
 
+/* global visibility classes */
+
 .visible {
   visibility: visible;
   opacity: 1;
@@ -26,6 +28,14 @@ code {
 .hiddenOpacity {
   opacity: 0;
   transition: opacity 0.4s;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
 }
 
 /* global hover effects */

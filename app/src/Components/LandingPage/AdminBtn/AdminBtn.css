@@ -11,36 +11,3 @@
     border: 1px solid #295074;
     cursor: pointer;
 }
-
-/* hover effects */
-
-.adminBtn {
-    overflow: hidden;
-    transition: 0.2s transform ease-in-out;
-    will-change: transform;
-    z-index: 0;
-}
-
-.adminBtn::after {
-    background-color: #e0712b;
-    border-radius: 5px;
-    content: '';
-    display: block;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    transform: translate(-100%, 0);
-    transform-origin: top left;
-    transition: 0.2s transform ease-out;
-    will-change: transform;
-    z-index: -1;
-}
-.adminBtn:hover::after {
-    transform: translate(0, 0);
-}
-.adminBtn:hover {
-    color: #FFFFFF;
-    will-change: transform;
-}

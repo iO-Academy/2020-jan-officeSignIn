@@ -65,19 +65,33 @@ class VisitorsTableSignedOut extends React.Component {
         for(let i = 0; i < tableData.length; i++) {
             let timeOfSignIn = tableData[i].TimeOfSignIn;
             let timeOfSignOut = tableData[i].TimeOfSignOut;
+            let dateOfVisit = this.reformatDateOfVisit(tableData[i].DateOfVisit);
+
             timeOfSignIn = timeOfSignIn.substring(0,5);
             timeOfSignOut = timeOfSignOut.substring(0,5);
+
             result.push(
                 <tr key={i} className="d-flex">
                     <td className="col-3">{tableData[i].Name}</td>
                     <td className="col-3">{tableData[i].Company}</td>
-                    <td className="col-2">{tableData[i].DateOfVisit}</td>
+                    <td className="col-2">{dateOfVisit}</td>
                     <td className="col-2">{timeOfSignIn}</td>
                     <td className="col-2">{timeOfSignOut}</td>
                 </tr>
             )
         }
         return result;
+    };
+
+    reformatDateOfVisit = (originalDateFormat) => {
+        let yearMonthDay = originalDateFormat.split('-');
+        let permutation = [2, 1, 0];
+        let dayMonthYear = [];
+
+        permutation.forEach((i) => {
+            dayMonthYear.push(yearMonthDay[i])
+        });
+        return dayMonthYear.join('/');
     };
 
     render() {

@@ -85,6 +85,7 @@ class VisitorModel
             "SELECT `id`, `Name`, `TimeOfSignIn` 
             FROM `visitors`
             WHERE `Name` = :Name
+            AND `DateOfVisit` = CURDATE() 
             AND `SignedIn` = 1 "
         );
         $query->bindParam(':Name', $Name);
@@ -105,6 +106,7 @@ class VisitorModel
             "SELECT `id`, `Name`, `TimeOfSignIn` 
             FROM `visitors`
             WHERE `Name` = :Name 
+            AND `DateOfVisit` = CURDATE() 
             AND `Company` = :Company
             AND `SignedIn` = 1 "
         );

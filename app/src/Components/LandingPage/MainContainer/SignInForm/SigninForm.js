@@ -101,7 +101,8 @@ class SigninForm extends React.Component {
     render() {
         return (
             <form className="signInForm">
-                <input id="Name" type="text" className="signInFormInput" placeholder="Your first name and surname..."
+                <input id="Name" type="text" className="signInFormInput"
+                       placeholder="Your first name and surname..."
                        value={this.state.Name}
                        onChange={(e) => this.handleUpdate(e, 'Name')}
                        required
@@ -110,8 +111,10 @@ class SigninForm extends React.Component {
                        value={this.state.Company}
                        onChange={(e) => this.handleUpdate(e, 'Company')}
                 />
-                <input className="visitorFormButton" type="submit" value="Sign In" onClick={this.handleSignIn}/>
-                <input className="visitorFormButton signOutBtn" type="submit" value="Sign Out" onClick={this.handleSignOut}/>
+                <button className="visitorFormButton btnHoverEffectGreen" type="submit" value="Sign In"
+                        onClick={this.handleSignIn}>Sign In</button>
+                <button className="visitorFormButton signOutBtn btnHoverEffectOrange"
+                        type="submit" value="Sign Out" onClick={this.handleSignOut}>Sign Out</button>
             </form>
             )
         }

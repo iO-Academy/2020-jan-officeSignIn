@@ -11,7 +11,7 @@ class LogOutBtn extends React.Component {
 
     render() {
         return (
-            <button className="logOutBtn" onClick={this.handleClick}>Log Out</button>
+            <button className="logOutBtn btnHoverEffectOrange" onClick={this.handleClick}>Log Out</button>
         )
     }
 }

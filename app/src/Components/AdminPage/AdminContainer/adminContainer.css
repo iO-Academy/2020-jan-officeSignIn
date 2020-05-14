@@ -21,6 +21,10 @@
 
 }
 
+.dropdown-toggle::after {
+    margin-left: 0.555em;
+}
+
 @media only screen and (max-width: 800px) {
     .adminContainer {
         width: 500px;

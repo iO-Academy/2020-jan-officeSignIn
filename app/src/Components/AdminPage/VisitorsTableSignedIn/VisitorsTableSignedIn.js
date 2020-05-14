@@ -11,12 +11,23 @@ class VisitorsTableSignedIn extends React.Component {
                 "Data": []
             },
             bearerToken: localStorage.getItem('bearerToken'),
-            appUrl: localStorage.getItem('appUrl')
+            appUrl: localStorage.getItem('appUrl'),
+            signedInTableVisible: 'd-block'
         };
     }
 
     componentDidMount() {
         this.fetchVisitors();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.signedInTableVisible !== this.props.signedInTableVisible) {
+            if (this.props.signedInTableVisible) {
+                this.setState({signedInTableVisible: 'd-block'})
+            } else if (!this.props.signedInTableVisible) {
+                this.setState({signedInTableVisible: 'd-none'})
+            }
+        }
     }
 
     fetchVisitors = () => {
@@ -112,8 +123,9 @@ class VisitorsTableSignedIn extends React.Component {
     };
 
     render() {
+        const signedInTableClass = 'col-12 visitorsTable ' + this.state.signedInTableVisible;
         return (
-            <div className="col-12 visitorsTable">
+            <div className={signedInTableClass}>
                 <table className="table table-bordered table-hover">
                     <thead>
                         <tr>

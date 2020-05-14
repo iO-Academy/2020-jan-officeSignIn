@@ -1,7 +1,5 @@
 import React from "react";
 import '../VisitorsTableSignedIn/visitorsTable.css';
-const columnHeader = ['Name', 'Company', 'Date', 'Time In', 'Time Out'];
-
 
 class VisitorsTableSignedOut extends React.Component {
     constructor(props) {
@@ -29,7 +27,6 @@ class VisitorsTableSignedOut extends React.Component {
                 this.setState({signedOutTableVisible: 'd-none'})
             }
         }
-        console.log('update found...')
     }
 
     fetchVisitors = () => {

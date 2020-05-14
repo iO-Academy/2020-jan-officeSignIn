@@ -78,10 +78,8 @@ class AdminContainer extends React.Component {
                         updateSignOutResponse={this.updateSignOutResponse}
                         setAdminContainerVisible={this.setAdminContainerVisible}
                         signedInTableVisible={this.state.signedInTableVisible}
-                        signedOutTableVisible={this.state.signedOutTableVisible}
                     />
                     <VisitorsTableSignedOut
-                        signedInTableVisible={this.state.signedInTableVisible}
                         signedOutTableVisible={this.state.signedOutTableVisible}
                     />
                 </div>

@@ -33,13 +33,6 @@ class AdminContainer extends React.Component {
         });
     };
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.signedInTableVisible !== this.state.signedInTableVisible) {
-            console.log(this.state.signedInTableVisible)
-            console.log(this.state.signedOutTableVisible)
-        }
-    }
-
     updateResponse = (newResponse) => {
         this.setState({response : newResponse})
     };

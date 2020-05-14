@@ -1,7 +1,7 @@
 import React from "react";
 import './adminContainer.css';
 import Logo from '../../LandingPage/MainContainer/Logo/Logo';
-import VisitorsTableSignedIn from "../VisitorsTableSignedIn/VisitorsTable";
+import VisitorsTableSignedIn from "../VisitorsTableSignedIn/VisitorsTableSignedIn";
 import MessageBox from "../../LandingPage/MainContainer/MessageBox/MessageBox"
 import LogOutBtn from "../LogOutBtn/LogOutBtn";
 import TableSelector from "../TableSelector/TableSelector";
@@ -77,9 +77,12 @@ class AdminContainer extends React.Component {
                         updateResponse={this.updateResponse}
                         updateSignOutResponse={this.updateSignOutResponse}
                         setAdminContainerVisible={this.setAdminContainerVisible}
+                        signedInTableVisible={this.state.signedInTableVisible}
+                        signedOutTableVisible={this.state.signedOutTableVisible}
                     />
                     <VisitorsTableSignedOut
-
+                        signedInTableVisible={this.state.signedInTableVisible}
+                        signedOutTableVisible={this.state.signedOutTableVisible}
                     />
                 </div>
             </main>

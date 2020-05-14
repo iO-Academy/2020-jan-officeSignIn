@@ -12,12 +12,24 @@ class VisitorsTableSignedOut extends React.Component {
                 "Data": []
             },
             bearerToken: localStorage.getItem('bearerToken'),
-            appUrl: localStorage.getItem('appUrl')
+            appUrl: localStorage.getItem('appUrl'),
+            signedOutTableVisible: 'd-none'
         };
     }
 
     componentDidMount() {
         this.fetchVisitors();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.signedOutTableVisible !== this.props.signedOutTableVisible) {
+            if (this.props.signedOutTableVisible) {
+                this.setState({signedOutTableVisible: 'd-block'})
+            } else if (!this.props.signedOutTableVisible) {
+                this.setState({signedOutTableVisible: 'd-none'})
+            }
+        }
+        console.log('update found...')
     }
 
     fetchVisitors = () => {
@@ -60,11 +72,11 @@ class VisitorsTableSignedOut extends React.Component {
             timeOfSignOut = timeOfSignOut.substring(0,5);
             result.push(
                 <tr key={i} className="d-flex">
-                    <td key={tableData[i].Name} className="col-3">{tableData[i].Name}</td>
-                    <td key={tableData[i].Company} className="col-3">{tableData[i].Company}</td>
-                    <td key={tableData[i].Company} className="col-2">{tableData[i].DateOfVisit}</td>
-                    <td key={timeOfSignIn} className="col-2">{timeOfSignIn}</td>
-                    <td key={timeOfSignOut} className="col-2">{timeOfSignOut}</td>
+                    <td className="col-3">{tableData[i].Name}</td>
+                    <td className="col-3">{tableData[i].Company}</td>
+                    <td className="col-2">{tableData[i].DateOfVisit}</td>
+                    <td className="col-2">{timeOfSignIn}</td>
+                    <td className="col-2">{timeOfSignOut}</td>
                 </tr>
             )
         }
@@ -72,8 +84,9 @@ class VisitorsTableSignedOut extends React.Component {
     };
 
     render() {
+        const signedOutTableClass = 'col-12 visitorsTable ' + this.state.signedOutTableVisible;
         return (
-            <div className="col-12 visitorsTable">
+            <div className={signedOutTableClass}>
                 <table className="table table-bordered table-hover">
                     <thead>
                     <tr className="d-flex">

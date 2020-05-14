@@ -49,14 +49,6 @@ class VisitorsTableSignedOut extends React.Component {
             })
     };
 
-    generateHeader = () => {
-        let result = [];
-        for(let i = 0; i < columnHeader.length; i++) {
-            result.push(<th key={columnHeader[i]}>{columnHeader[i]}</th>)
-        }
-        return result;
-    };
-
     generateRows = () => {
         let result = [];
         let tableData = this.state.visitorPackage.Data;
@@ -84,8 +76,12 @@ class VisitorsTableSignedOut extends React.Component {
             <div className="col-12 visitorsTable">
                 <table className="table table-bordered table-hover">
                     <thead>
-                    <tr>
-                        {/*{this.generateHeader()}*/}
+                    <tr className="d-flex">
+                        <th key="Name" className="col-3">Name</th>
+                        <th key="Company" className="col-3">Company</th>
+                        <th key="Date" className="col-2">Date</th>
+                        <th key="Time in" className="col-2">Time in</th>
+                        <th key="Time out" className="col-2">Time out</th>
                     </tr>
                     </thead>
                     <tbody>

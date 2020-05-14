@@ -31,7 +31,8 @@ code {
 /* global hover effects */
 
 .btnHoverEffectOrange ,
-.btnHoverEffectGreen {
+.btnHoverEffectGreen,
+.btnHoverEffectBlue {
   overflow: hidden;
   transition: 0.2s transform ease-in-out;
   will-change: transform;
@@ -39,7 +40,8 @@ code {
 }
 
 .btnHoverEffectOrange::after,
-.btnHoverEffectGreen::after {
+.btnHoverEffectGreen::after,
+.btnHoverEffectBlue::after {
   background-color: #E0712B;
   border-radius: 5px;
   content: '';
@@ -56,15 +58,21 @@ code {
   z-index: -1;
 }
 .btnHoverEffectOrange:hover::after,
-.btnHoverEffectGreen:hover::after {
+.btnHoverEffectGreen:hover::after,
+.btnHoverEffectBlue:hover::after {
   transform: translate(0, 0);
 }
 .btnHoverEffectOrange:hover,
-.btnHoverEffectGreen:hover {
+.btnHoverEffectGreen:hover,
+.btnHoverEffectBlue:hover {
   color: #FFFFFF;
   will-change: transform;
 }
 
 .btnHoverEffectGreen::after {
   background-color: #83A65A;
+}
+
+.btnHoverEffectBlue::after {
+  background-color: #247e9c;
 }

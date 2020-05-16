@@ -52,9 +52,25 @@ class VisitorModel
         return $query->fetchAll();
     }
 
+    /**
+     * Given a starting position / id returns an array of signed out visitors limited to the specified count
+     * 
+     * @param $count
+     * @param $start
+     * @return array
+     */
     public function getBatchOfSignedOutVisitors($count, $start)
     {
-        $query = $this->db->prepare();
+        $query = $this->db->prepare(
+            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`
+            FROM `visitors`
+            WHERE `SignedIn` = 0
+            AND `id` < :id
+            ORDER BY `DateOfVisit` DESC, `TimeOfSignOut` DESC
+            LIMIT :count;'
+        );
+        $query->bindParam(':id', $start);
+        $query->bindParam(':count', $count);
         $query->execute();
         return $query->fetchAll();
     }

@@ -52,6 +52,13 @@ class VisitorModel
         return $query->fetchAll();
     }
 
+    public function getBatchOfSignedOutVisitors($count, $start)
+    {
+        $query = $this->db->prepare();
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     /**
      *  Adds new visitor to the database and returns a bool based on success or failure
      *

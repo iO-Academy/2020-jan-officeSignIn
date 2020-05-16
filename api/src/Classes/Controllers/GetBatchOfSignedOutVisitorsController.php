@@ -34,16 +34,24 @@ class GetBatchOfSignedOutVisitorsController extends ValidationEntity
 
         if (strlen($count) < 1 || strlen($start) < 1 ||
             self::checkDigitInput($count) === false || self::checkDigitInput($start) === false) {
-            $responseData = [
-                'Success' => false,
-                'Message' => 'Count and Start can not be empty and must be a number'
-            ];
             $statusCode = 400;
-
+            $responseData['Message'] = 'Count and Start can not be empty and must be a number';
+            return $response->withJson($responseData, $statusCode);
         }
 
-        var_dump($count);
-        var_dump($start);
+        $responseData['Data'] = $this->visitorModel->getBatchOfSignedOutVisitors($count, $start);
+        if (count($responseData['Data']) > 0) {
+            $statusCode = 200;
+            $apiResponse['Success'] = true;
+            $apiResponse['Message'] = 'Successfully retrieved signed out visitors';
+        } else {
+            $statusCode = 404;
+            $apiResponse['Message'] = 'No data retrieved or no data in database';
+            $apiResponse['Data'] = [];
+        }
+
+//        var_dump($count);
+//        var_dump($start);
 
         return $response->withJson($responseData, $statusCode);
 

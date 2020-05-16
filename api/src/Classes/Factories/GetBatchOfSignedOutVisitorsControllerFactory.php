@@ -1,6 +1,6 @@
 <?php
 
-namespace SignInApp;
+namespace SignInApp\Factories;
 
 use Psr\Container\ContainerInterface;
 use SignInApp\Controllers\GetBatchOfSignedOutVisitorsController;
@@ -17,6 +17,6 @@ class GetBatchOfSignedOutVisitorsControllerFactory
     public function __invoke(ContainerInterface $container)
     {
         $visitorModel = $container->get('VisitorModel');
-        return GetBatchOfSignedOutVisitorsController($visitorModel);
+        return new GetBatchOfSignedOutVisitorsController($visitorModel);
     }
 }

@@ -32,6 +32,10 @@ class VisitorsTableSignedOut extends React.Component {
                 this.setState({signedOutTableVisible: 'd-none'})
             }
         }
+
+        if (prevProps.visitorSignedOut !== this.props.visitorSignedOut) {
+            this.initialTableRenderData()
+        }
     }
 
     fetchVisitors = async (count, start) => {

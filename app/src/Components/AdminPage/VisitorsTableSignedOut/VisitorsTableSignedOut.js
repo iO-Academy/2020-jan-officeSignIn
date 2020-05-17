@@ -1,14 +1,13 @@
 import React from "react";
 import '../VisitorsTableSignedIn/visitorsTable.css';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 class VisitorsTableSignedOut extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            visitorPackage: {
-                "Data": []
-            },
+            visitorPackage: [],
             bearerToken: localStorage.getItem('bearerToken'),
             appUrl: localStorage.getItem('appUrl'),
             signedOutTableVisible: 'd-none'
@@ -16,7 +15,12 @@ class VisitorsTableSignedOut extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchVisitors(15, 999999);
+        this.initialTableRenderData()
+    }
+
+    initialTableRenderData = async () => {
+        let firstBatch = await this.fetchVisitors(15, 999999);
+        this.setState({visitorPackage: firstBatch})
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -29,39 +33,39 @@ class VisitorsTableSignedOut extends React.Component {
         }
     }
 
-    fetchVisitors = (count, start) => {
+    fetchVisitors = async (count, start) => {
         const url = localStorage.getItem('apiUrl') +
             `api/signedOutVisitorsByBatch?count=${count}&start=${start}`;
-        fetch(url, {
+        let data = await fetch(url, {
             method: 'GET',
             headers: {
                 "Content-Type" : "application/json",
                 "Authorization" : "Bearer " + this.state.bearerToken
             }
         })
-            .then(data=>data.json())
-            .then((data)=>{
-                if (data.message === null || data.message ==='Invalid token' ||
-                    data.message === 'Malformed token' || data.message === 'Token has expired' ||
-                    data.message === 'Token error' || data.message === 'No token received') {
-                    localStorage.removeItem('bearerToken');
-                    window.location.replace(this.state.appUrl)
-                }
+        data = await data.json()
+        await this.checkAuthorisation(data)
 
-                this.setState({
-                    visitorPackage: data
-                });
-
-                if (!data.Data.length > 0) {
-                    this.props.updateResponse('No visitors currently signed Out');
-                }
-                localStorage.removeItem('bearerToken')
-            })
+        if (!data.Data.length > 0) {
+            this.props.updateResponse('No visitors currently signed Out');
+        }
+        
+        localStorage.removeItem('bearerToken')
+        return data.Data
     };
+
+    checkAuthorisation = (data) => {
+        if (data.message === null || data.message ==='Invalid token' ||
+            data.message === 'Malformed token' || data.message === 'Token has expired' ||
+            data.message === 'Token error' || data.message === 'No token received') {
+            localStorage.removeItem('bearerToken');
+            window.location.replace(this.state.appUrl)
+        }
+    }
 
     generateRows = () => {
         let result = [];
-        let tableData = this.state.visitorPackage.Data;
+        let tableData = this.state.visitorPackage;
 
         for(let i = 0; i < tableData.length; i++) {
             let timeOfSignIn = tableData[i].TimeOfSignIn;
@@ -72,7 +76,7 @@ class VisitorsTableSignedOut extends React.Component {
             timeOfSignOut = timeOfSignOut.substring(0,5);
 
             result.push(
-                <tr key={i} className="d-flex">
+                <tr key={i} className="d-flex" data-id={tableData[i].id}>
                     <td className="col-3">{tableData[i].Name}</td>
                     <td className="col-3">{tableData[i].Company}</td>
                     <td className="col-2">{dateOfVisit}</td>
@@ -95,24 +99,44 @@ class VisitorsTableSignedOut extends React.Component {
         return dayMonthYear.join('/');
     };
 
+    updateTable = async () => {
+        const count = 15;
+        const start = await this.state.visitorPackage.slice(-1)[0].id;
+        let fetchNextBatch = await this.fetchVisitors(count, start)
+        await this.updateVisitorPackage(fetchNextBatch)
+        this.generateRows();
+        console.log(this.state.visitorPackage)
+    }
+
+    updateVisitorPackage = (data) => {
+        this.setState({visitorPackage: this.state.visitorPackage.concat(data)})
+    }
+
     render() {
         const signedOutTableClass = 'col-12 visitorsTable ' + this.state.signedOutTableVisible;
         return (
             <div className={signedOutTableClass}>
-                <table className="table table-bordered table-hover">
-                    <thead>
-                    <tr className="d-flex">
-                        <th key="Name" className="col-3">Name</th>
-                        <th key="Company" className="col-3">Company</th>
-                        <th key="Date" className="col-2">Date</th>
-                        <th key="Time in" className="col-2">Time in</th>
-                        <th key="Time out" className="col-2">Time out</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.generateRows()}
-                    </tbody>
-                </table>
+                <InfiniteScroll
+                    dataLength={this.state.visitorPackage.length}
+                    next={this.updateTable}
+                    hasMore={true}
+                    loader={<h4>loading...</h4>}
+                >
+                    <table className="table table-bordered table-hover">
+                        <thead>
+                        <tr className="d-flex">
+                            <th key="Name" className="col-3">Name</th>
+                            <th key="Company" className="col-3">Company</th>
+                            <th key="Date" className="col-2">Date</th>
+                            <th key="Time in" className="col-2">Time in</th>
+                            <th key="Time out" className="col-2">Time out</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {this.generateRows()}
+                        </tbody>
+                    </table>
+                </InfiniteScroll>
             </div>
         );
     }

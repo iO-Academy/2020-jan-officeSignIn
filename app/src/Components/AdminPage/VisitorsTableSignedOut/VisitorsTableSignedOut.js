@@ -10,7 +10,8 @@ class VisitorsTableSignedOut extends React.Component {
             visitorPackage: [],
             bearerToken: localStorage.getItem('bearerToken'),
             appUrl: localStorage.getItem('appUrl'),
-            signedOutTableVisible: 'd-none'
+            signedOutTableVisible: 'd-none',
+            hasMore: true
         };
     }
 
@@ -101,9 +102,15 @@ class VisitorsTableSignedOut extends React.Component {
 
     updateTable = async () => {
         const count = 15;
-        const start = await this.state.visitorPackage.slice(-1)[0].id;
+        const start = this.state.visitorPackage.slice(-1)[0].id;
+
+        if (start < 2) {
+            this.setState({hasMore: false})
+        }
+
         let fetchNextBatch = await this.fetchVisitors(count, start)
         this.updateVisitorPackage(fetchNextBatch)
+
         console.log(this.state.visitorPackage)
     }
 
@@ -122,8 +129,13 @@ class VisitorsTableSignedOut extends React.Component {
                 <InfiniteScroll
                     dataLength={this.state.visitorPackage.length}
                     next={this.updateTable}
-                    hasMore={true}
+                    hasMore={this.state.hasMore}
                     loader={<h5>loading...</h5>}
+                    endMessage={
+                        <h5 className="endMessage">
+                            <b>You have reached the end, no more signed out visitors logged.</b>
+                        </h5>
+                    }
                 >
                     <table className="table table-bordered table-hover">
                         <thead>

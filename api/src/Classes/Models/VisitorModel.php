@@ -53,6 +53,29 @@ class VisitorModel
     }
 
     /**
+     * Given a starting position / id returns an array of signed out visitors limited to the specified count
+     *
+     * @param $count
+     * @param $start
+     * @return array
+     */
+    public function getBatchOfSignedOutVisitors($count, $start)
+    {
+        $query = $this->db->prepare(
+            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`
+            FROM `visitors`
+            WHERE `SignedIn` = 0
+            AND `id` < :id
+            ORDER BY `DateOfVisit` DESC, `TimeOfSignOut` DESC
+            LIMIT :count;'
+        );
+        $query->bindParam(':id', $start, \PDO::PARAM_INT);
+        $query->bindParam(':count', $count, \PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
      *  Adds new visitor to the database and returns a bool based on success or failure
      *
      * @param $Name
@@ -85,6 +108,7 @@ class VisitorModel
             "SELECT `id`, `Name`, `TimeOfSignIn` 
             FROM `visitors`
             WHERE `Name` = :Name
+            AND `DateOfVisit` = CURDATE() 
             AND `SignedIn` = 1 "
         );
         $query->bindParam(':Name', $Name);
@@ -105,6 +129,7 @@ class VisitorModel
             "SELECT `id`, `Name`, `TimeOfSignIn` 
             FROM `visitors`
             WHERE `Name` = :Name 
+            AND `DateOfVisit` = CURDATE() 
             AND `Company` = :Company
             AND `SignedIn` = 1 "
         );

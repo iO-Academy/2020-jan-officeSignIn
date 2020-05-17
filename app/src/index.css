@@ -11,6 +11,8 @@ code {
     monospace;
 }
 
+/* global visibility classes */
+
 .visible {
   visibility: visible;
   opacity: 1;
@@ -26,4 +28,61 @@ code {
 .hiddenOpacity {
   opacity: 0;
   transition: opacity 0.4s;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}
+
+/* global hover effects */
+
+.btnHoverEffectOrange ,
+.btnHoverEffectGreen,
+.btnHoverEffectBlue {
+  overflow: hidden;
+  transition: 0.2s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+}
+
+.btnHoverEffectOrange::after,
+.btnHoverEffectGreen::after,
+.btnHoverEffectBlue::after {
+  background-color: #E0712B;
+  border-radius: 5px;
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0);
+  transform-origin: top left;
+  transition: 0.2s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+.btnHoverEffectOrange:hover::after,
+.btnHoverEffectGreen:hover::after,
+.btnHoverEffectBlue:hover::after {
+  transform: translate(0, 0);
+}
+.btnHoverEffectOrange:hover,
+.btnHoverEffectGreen:hover,
+.btnHoverEffectBlue:hover {
+  color: #FFFFFF;
+  will-change: transform;
+}
+
+.btnHoverEffectGreen::after {
+  background-color: #83A65A;
+}
+
+.btnHoverEffectBlue::after {
+  background-color: #247e9c;
 }

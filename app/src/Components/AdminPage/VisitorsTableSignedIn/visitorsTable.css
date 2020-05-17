@@ -8,3 +8,7 @@
 .tableSignOutBtn {
     cursor: pointer;
 }
+
+.endMessage {
+    font-weight: 300;
+}

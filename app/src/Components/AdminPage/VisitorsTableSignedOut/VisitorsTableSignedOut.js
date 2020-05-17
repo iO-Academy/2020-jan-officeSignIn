@@ -16,7 +16,7 @@ class VisitorsTableSignedOut extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchVisitors();
+        this.fetchVisitors(15, 999999);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -29,8 +29,9 @@ class VisitorsTableSignedOut extends React.Component {
         }
     }
 
-    fetchVisitors = () => {
-        const url = localStorage.getItem('apiUrl') + 'api/signedOutVisitors';
+    fetchVisitors = (count, start) => {
+        const url = localStorage.getItem('apiUrl') +
+            `api/signedOutVisitorsByBatch?count=${count}&start=${start}`;
         fetch(url, {
             method: 'GET',
             headers: {

@@ -54,7 +54,7 @@ class VisitorModel
 
     /**
      * Given a starting position / id returns an array of signed out visitors limited to the specified count
-     * 
+     *
      * @param $count
      * @param $start
      * @return array
@@ -69,8 +69,8 @@ class VisitorModel
             ORDER BY `DateOfVisit` DESC, `TimeOfSignOut` DESC
             LIMIT :count;'
         );
-        $query->bindParam(':id', $start);
-        $query->bindParam(':count', $count);
+        $query->bindParam(':id', $start, \PDO::PARAM_INT);
+        $query->bindParam(':count', $count, \PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll();
     }

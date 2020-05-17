@@ -21,6 +21,15 @@ class GetBatchOfSignedOutVisitorsController extends ValidationEntity
         $this->visitorModel = $visitorModel;
     }
 
+    /**
+     * takes the requested return amount and start value and returns response
+     * with signed out visitors limited to the count required
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
     public function __invoke(Request $request, Response $response, array $args)
     {
         $count = $_GET['count'];

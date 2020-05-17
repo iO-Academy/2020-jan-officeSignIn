@@ -12,7 +12,8 @@ class AdminContainer extends React.Component {
         response: '',
         adminContainerVisible: 'hidden',
         signedInTableVisible: true,
-        signedOutTableVisible: false
+        signedOutTableVisible: false,
+        visitorSignedOut: {}
     };
 
     setAdminContainerVisible = () => {
@@ -32,6 +33,10 @@ class AdminContainer extends React.Component {
             signedOutTableVisible: true
         });
     };
+
+    updateVisitorSignedOut = (data) => {
+        this.setState({visitorSignedOut: data})
+    }
 
     updateResponse = (newResponse) => {
         this.setState({response : newResponse})
@@ -71,10 +76,12 @@ class AdminContainer extends React.Component {
                         updateSignOutResponse={this.updateSignOutResponse}
                         setAdminContainerVisible={this.setAdminContainerVisible}
                         signedInTableVisible={this.state.signedInTableVisible}
+                        updateVisitorSignedOut={this.updateVisitorSignedOut}
                     />
                     <VisitorsTableSignedOut
                         updateResponse={this.updateResponse}
                         signedOutTableVisible={this.state.signedOutTableVisible}
+                        visitorSignedOut={this.state.visitorSignedOut}
                     />
                 </div>
             </main>

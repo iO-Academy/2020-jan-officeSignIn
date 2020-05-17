@@ -142,3 +142,28 @@ To test, passcode is 8974.
             - `{ "Success": false, "Message": "No data retrieved or no data in database", "Data": [] }`
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+            
+
+### GET
+**/api/signedOutVisitorsByBatch{count}{start}**
+
+You must be authenticated to retrieve data from this route.
+To test, passcode is 8974.
+
+- Gets a batch of visitors currently signed out. The batch returned depends on the amount you want returned, set by the count variable and the starting position within the db
+- Required query parameters 
+    - `count` - the amount of visitors you want returned
+    - `start` - the position within the db you want to start collecting the batch from
+- Optional
+    - None
+- Example request: `api/signedOutVisitorsByBatch?count=15&start=203`
+    
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Successfully retrieved signed out visitors", "Data": [ { retrieved data } ] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "No data retrieved or no data in database", "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`

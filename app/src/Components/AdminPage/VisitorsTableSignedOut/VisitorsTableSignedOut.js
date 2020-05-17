@@ -103,13 +103,16 @@ class VisitorsTableSignedOut extends React.Component {
         const count = 15;
         const start = await this.state.visitorPackage.slice(-1)[0].id;
         let fetchNextBatch = await this.fetchVisitors(count, start)
-        await this.updateVisitorPackage(fetchNextBatch)
-        this.generateRows();
+        this.updateVisitorPackage(fetchNextBatch)
         console.log(this.state.visitorPackage)
     }
 
     updateVisitorPackage = (data) => {
-        this.setState({visitorPackage: this.state.visitorPackage.concat(data)})
+        setTimeout(() => {
+            this.setState({
+                visitorPackage: this.state.visitorPackage.concat(data)
+            })
+        }, 750)
     }
 
     render() {
@@ -120,7 +123,7 @@ class VisitorsTableSignedOut extends React.Component {
                     dataLength={this.state.visitorPackage.length}
                     next={this.updateTable}
                     hasMore={true}
-                    loader={<h4>loading...</h4>}
+                    loader={<h5>loading...</h5>}
                 >
                     <table className="table table-bordered table-hover">
                         <thead>

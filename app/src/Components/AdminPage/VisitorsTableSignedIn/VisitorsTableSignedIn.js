@@ -103,6 +103,7 @@ class VisitorsTableSignedIn extends React.Component {
         );
 
         this.props.updateSignOutResponse(responseData.Message);
+        this.props.updateVisitorSignedOut(data)
         this.fetchVisitors()
     };
 

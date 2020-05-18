@@ -11,7 +11,8 @@ class SignOutVisitorsController
 {
     private $visitorModel;
 
-    /** Constructor assigns VisitorModel to this object
+    /**
+     *  Constructor assigns VisitorModel to this object
      *  SignOutVisitorsController constructor.
      *
      * @param VisitorModel $visitorModel
@@ -21,6 +22,15 @@ class SignOutVisitorsController
         $this->visitorModel = $visitorModel;
     }
 
+    /**
+     *  On invoke checks option set in request and updates signed out where signed in is 1 and date of visit
+     *  is not the current date
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
     public function __invoke(Request $request, Response $response, array $args)
     {
         $requestData = $request->getParsedBody();

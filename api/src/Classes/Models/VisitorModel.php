@@ -156,4 +156,22 @@ class VisitorModel
         $query->bindParam(':timeOfSignOut', $timeOfSignOut);
         return $query->execute();
     }
+
+    /**
+     * signs out all visitors who are currently signed in but DateOfVisit is not current days date
+     *
+     * @param $timeOfSignOut
+     * @return bool
+     */
+    public function signOutAllVisitorsUpToToday($timeOfSignOut) : bool
+    {
+        $query = $this->db->prepare(
+            'UPDATE `visitors` 
+            SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
+            WHERE `SignedIn` = 1
+            AND `DateOfVisit` < CURDATE();'
+        );
+        $query->bindParam(':timeOfSignOut', $timeOfSignOut);
+        return $query->execute();
+    }
 }

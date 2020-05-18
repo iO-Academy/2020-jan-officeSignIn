@@ -13,7 +13,7 @@ class SignOutVisitorController extends ValidationEntity
     private $visitorModel;
 
     /** Constructor assigns VisitorModel to this object
-     *  AddVisitorController constructor.
+     *  SignOutVisitorController constructor.
      *
      * @param VisitorModel $visitorModel
      */

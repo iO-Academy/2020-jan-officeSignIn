@@ -66,7 +66,7 @@ class VisitorModel
             FROM `visitors`
             WHERE `SignedIn` = 0
             AND `id` < :id
-            ORDER BY `DateOfVisit` DESC, `TimeOfSignOut` DESC
+            ORDER BY `id` DESC
             LIMIT :count;'
         );
         $query->bindParam(':id', $start, \PDO::PARAM_INT);

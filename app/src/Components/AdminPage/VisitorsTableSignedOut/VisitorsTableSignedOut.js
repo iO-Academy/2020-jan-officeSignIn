@@ -8,6 +8,7 @@ class VisitorsTableSignedOut extends React.Component {
 
         this.state = {
             visitorPackage: [],
+            lastFetchedVisitors: [],
             bearerToken: localStorage.getItem('bearerToken'),
             appUrl: localStorage.getItem('appUrl'),
             signedOutTableVisible: 'd-none',
@@ -21,7 +22,10 @@ class VisitorsTableSignedOut extends React.Component {
 
     initialTableRenderData = async () => {
         let firstBatch = await this.fetchVisitors(15, 999999);
-        this.setState({visitorPackage: firstBatch})
+        this.setState({
+            visitorPackage: firstBatch,
+            lastFetchedVisitors: firstBatch
+        })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -104,24 +108,31 @@ class VisitorsTableSignedOut extends React.Component {
         return dayMonthYear.join('/');
     };
 
+    //take original order and re-order descending by date and time of sign out
+    reorderVisitorPackage = (originalOrder) => {
+
+    }
+
     updateTable = async () => {
         const count = 15;
-        const start = this.state.visitorPackage.slice(-1)[0].id;
+        const start = this.state.lastFetchedVisitors.slice(-1)[0].id;
 
         if (start < 2) {
             this.setState({hasMore: false})
         }
 
-        let fetchNextBatch = await this.fetchVisitors(count, start)
-        this.updateVisitorPackage(fetchNextBatch)
+        let fetchedNextBatch = await this.fetchVisitors(count, start)
+        this.updateVisitorPackage(fetchedNextBatch)
 
         console.log(this.state.visitorPackage)
+        console.log(start)
     }
 
     updateVisitorPackage = (data) => {
         setTimeout(() => {
             this.setState({
-                visitorPackage: this.state.visitorPackage.concat(data)
+                visitorPackage: this.state.visitorPackage.concat(data),
+                lastFetchedVisitors: data
             })
         }, 750)
     }

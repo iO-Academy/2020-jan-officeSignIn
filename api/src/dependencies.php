@@ -49,6 +49,7 @@ return function (App $app) {
     $container['SignOutVisitorController'] = new \SignInApp\Factories\SignOutVisitorControllerFactory();
     $container['GetAllSignedOutVisitorsController'] = new SignInApp\Factories\GetAllSignedOutVisitorsControllerFactory();
     $container['GetBatchOfSignedOutVisitorsController'] = new SignInApp\Factories\GetBatchOfSignedOutVisitorsControllerFactory();
+    $container['SignOutVisitorsController'] = new SignInApp\Factories\SignOutVisitorsControllerFactory();
 
     //Authentication
     $container['Authenticate'] = new SignInApp\Factories\AuthenticateFactory();

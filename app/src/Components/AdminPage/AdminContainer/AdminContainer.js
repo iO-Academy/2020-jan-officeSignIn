@@ -9,12 +9,30 @@ import VisitorsTableSignedOut from "../VisitorsTableSignedOut/VisitorsTableSigne
 
 class AdminContainer extends React.Component {
     state = {
+        bearerToken: localStorage.getItem('bearerToken'),
         response: '',
         adminContainerVisible: 'hidden',
         signedInTableVisible: true,
         signedOutTableVisible: false,
         visitorSignedOut: {}
     };
+
+    componentDidMount() {
+        this.updateSignedOutDb()
+    }
+
+    updateSignedOutDb = async () => {
+        const url = localStorage.getItem('apiUrl') + 'api/signOutVisitors';
+        const option = JSON.stringify({ "Option" : "all-previous" })
+        const updatedVisitors = await fetch(url, {
+            method: "PUT",
+            body: option,
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + this.state.bearerToken
+            }
+        })
+    }
 
     setAdminContainerVisible = () => {
         this.setState({adminContainerVisible: 'visible'})

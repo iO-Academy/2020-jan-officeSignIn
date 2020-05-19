@@ -22,14 +22,15 @@ class VisitorsTableSignedOut extends React.Component {
     }
 
     initialTableRenderData = async () => {
-        let firstBatch = await this.fetchVisitors(15, 999999);
+        const count = 15;
+        let firstBatch = await this.fetchVisitors(count, 999999);
         let orderedPackage = this.reorderVisitorPackage(firstBatch)
         await this.setState({
             visitorPackage: orderedPackage,
             lastFetchedVisitors: orderedPackage
         })
 
-        if (firstBatch.length < 15) {
+        if (firstBatch.length < count) {
             this.setState({
                 endMessageVisibility: 'd-none',
                 hasMore: false

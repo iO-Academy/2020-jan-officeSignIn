@@ -12,6 +12,7 @@ class VisitorsTableSignedOut extends React.Component {
             bearerToken: localStorage.getItem('bearerToken'),
             appUrl: localStorage.getItem('appUrl'),
             signedOutTableVisible: 'd-none',
+            endMessageVisibility: 'd-block',
             hasMore: true
         };
     }
@@ -23,10 +24,17 @@ class VisitorsTableSignedOut extends React.Component {
     initialTableRenderData = async () => {
         let firstBatch = await this.fetchVisitors(15, 999999);
         let orderedPackage = this.reorderVisitorPackage(firstBatch)
-        this.setState({
+        await this.setState({
             visitorPackage: orderedPackage,
             lastFetchedVisitors: orderedPackage
         })
+
+        if (firstBatch.length < 15) {
+            this.setState({
+                endMessageVisibility: 'd-none',
+                hasMore: false
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -128,7 +136,8 @@ class VisitorsTableSignedOut extends React.Component {
 
         let fetchedNextBatch = await this.fetchVisitors(count, start)
         this.updateVisitorPackage(fetchedNextBatch)
-
+        console.log(this.state.visitorPackage)
+        console.log(start)
     }
 
     updateVisitorPackage = (data) => {
@@ -143,6 +152,7 @@ class VisitorsTableSignedOut extends React.Component {
 
     render() {
         const signedOutTableClass = 'col-12 visitorsTable ' + this.state.signedOutTableVisible;
+        const endMessageClass = 'endMessage ' + this.state.endMessageVisibility;
         return (
             <div className={signedOutTableClass}>
                 <InfiniteScroll
@@ -151,7 +161,7 @@ class VisitorsTableSignedOut extends React.Component {
                     hasMore={this.state.hasMore}
                     loader={<h5>loading...</h5>}
                     endMessage={
-                        <h5 className="endMessage">
+                        <h5 className={endMessageClass}>
                             <b>You have reached the end, no more signed out visitors logged.</b>
                         </h5>
                     }

@@ -22,9 +22,10 @@ class VisitorsTableSignedOut extends React.Component {
 
     initialTableRenderData = async () => {
         let firstBatch = await this.fetchVisitors(15, 999999);
+        let orderedPackage = this.reorderVisitorPackage(firstBatch)
         this.setState({
-            visitorPackage: firstBatch,
-            lastFetchedVisitors: firstBatch
+            visitorPackage: orderedPackage,
+            lastFetchedVisitors: orderedPackage
         })
     }
 
@@ -108,9 +109,13 @@ class VisitorsTableSignedOut extends React.Component {
         return dayMonthYear.join('/');
     };
 
-    //take original order and re-order descending by date and time of sign out
     reorderVisitorPackage = (originalOrder) => {
-
+        return originalOrder.sort((visitor_1, visitor_2) => {
+            if (new Date(visitor_1.DateOfVisit) > new Date(visitor_2.DateOfVisit)) return -1;
+            if (new Date(visitor_1.DateOfVisit) < new Date(visitor_2.DateOfVisit)) return 1;
+            if (visitor_1.TimeOfSignOut > visitor_2.TimeOfSignOut) return -1;
+            if (visitor_1.TimeOfSignOut < visitor_2.TimeOfSignOut) return 1;
+        })
     }
 
     updateTable = async () => {
@@ -124,14 +129,13 @@ class VisitorsTableSignedOut extends React.Component {
         let fetchedNextBatch = await this.fetchVisitors(count, start)
         this.updateVisitorPackage(fetchedNextBatch)
 
-        console.log(this.state.visitorPackage)
-        console.log(start)
     }
 
     updateVisitorPackage = (data) => {
+        let orderedPackage = this.reorderVisitorPackage(this.state.visitorPackage.concat(data))
         setTimeout(() => {
             this.setState({
-                visitorPackage: this.state.visitorPackage.concat(data),
+                visitorPackage: orderedPackage,
                 lastFetchedVisitors: data
             })
         }, 750)

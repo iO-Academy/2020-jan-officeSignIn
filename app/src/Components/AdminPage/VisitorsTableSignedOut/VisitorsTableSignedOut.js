@@ -8,9 +8,11 @@ class VisitorsTableSignedOut extends React.Component {
 
         this.state = {
             visitorPackage: [],
+            lastFetchedVisitors: [],
             bearerToken: localStorage.getItem('bearerToken'),
             appUrl: localStorage.getItem('appUrl'),
             signedOutTableVisible: 'd-none',
+            endMessageVisibility: 'd-block',
             hasMore: true
         };
     }
@@ -20,8 +22,20 @@ class VisitorsTableSignedOut extends React.Component {
     }
 
     initialTableRenderData = async () => {
-        let firstBatch = await this.fetchVisitors(15, 999999);
-        this.setState({visitorPackage: firstBatch})
+        const count = 15;
+        let firstBatch = await this.fetchVisitors(count, 999999);
+        let orderedPackage = this.reorderVisitorPackage(firstBatch)
+        await this.setState({
+            visitorPackage: orderedPackage,
+            lastFetchedVisitors: orderedPackage
+        })
+
+        if (firstBatch.length < count) {
+            this.setState({
+                endMessageVisibility: 'd-none',
+                hasMore: false
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -104,30 +118,42 @@ class VisitorsTableSignedOut extends React.Component {
         return dayMonthYear.join('/');
     };
 
+    reorderVisitorPackage = (originalOrder) => {
+        return originalOrder.sort((visitor_1, visitor_2) => {
+            if (new Date(visitor_1.DateOfVisit) > new Date(visitor_2.DateOfVisit)) return -1;
+            if (new Date(visitor_1.DateOfVisit) < new Date(visitor_2.DateOfVisit)) return 1;
+            if (visitor_1.TimeOfSignOut > visitor_2.TimeOfSignOut) return -1;
+            if (visitor_1.TimeOfSignOut < visitor_2.TimeOfSignOut) return 1;
+        })
+    }
+
     updateTable = async () => {
         const count = 15;
-        const start = this.state.visitorPackage.slice(-1)[0].id;
+        const start = this.state.lastFetchedVisitors.slice(-1)[0].id;
 
         if (start < 2) {
             this.setState({hasMore: false})
         }
 
-        let fetchNextBatch = await this.fetchVisitors(count, start)
-        this.updateVisitorPackage(fetchNextBatch)
-
+        let fetchedNextBatch = await this.fetchVisitors(count, start)
+        this.updateVisitorPackage(fetchedNextBatch)
         console.log(this.state.visitorPackage)
+        console.log(start)
     }
 
     updateVisitorPackage = (data) => {
+        let orderedPackage = this.reorderVisitorPackage(this.state.visitorPackage.concat(data))
         setTimeout(() => {
             this.setState({
-                visitorPackage: this.state.visitorPackage.concat(data)
+                visitorPackage: orderedPackage,
+                lastFetchedVisitors: data
             })
         }, 750)
     }
 
     render() {
-        const signedOutTableClass = 'col-12 visitorsTable ' + this.state.signedOutTableVisible;
+        const signedOutTableClass = 'col-12 visitorsTable vSignedOutTable ' + this.state.signedOutTableVisible;
+        const endMessageClass = 'endMessage ' + this.state.endMessageVisibility;
         return (
             <div className={signedOutTableClass}>
                 <InfiniteScroll
@@ -136,12 +162,12 @@ class VisitorsTableSignedOut extends React.Component {
                     hasMore={this.state.hasMore}
                     loader={<h5>loading...</h5>}
                     endMessage={
-                        <h5 className="endMessage">
+                        <h5 className={endMessageClass}>
                             <b>You have reached the end, no more signed out visitors logged.</b>
                         </h5>
                     }
                 >
-                    <table className="table table-bordered table-hover">
+                    <table className="table visitorSignedOutTable table-hover">
                         <thead>
                         <tr className="d-flex">
                             <th key="Name" className="col-3">Name</th>

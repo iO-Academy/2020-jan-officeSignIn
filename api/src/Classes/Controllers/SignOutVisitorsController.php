@@ -55,6 +55,7 @@ class SignOutVisitorsController
             $updatedVisitors = $this->visitorModel->signOutAllVisitorsUpToToday($timeOfSignOut);
             if ($updatedVisitors === true) {
                 $statusCode = 200;
+                $apiResponse['Success'] = true;
                 $apiResponse['Message'] = 'Successfully updated visitors';
                 return $response->withJson($apiResponse, $statusCode);
             }

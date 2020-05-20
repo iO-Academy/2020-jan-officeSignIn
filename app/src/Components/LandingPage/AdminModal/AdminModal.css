@@ -87,10 +87,11 @@
     align-items: center;
 }
 
-.keypadBtn:active::after,
-.closeModalBtn:active::after,
-.logInBtn:active::after {
+.keypadBtn:active,
+.closeModalBtn:active,
+.logInBtn:active {
     background-color: #FFFFFF;
+    transition: background-color 0s;
 }
 
 .keypadBtn:active {

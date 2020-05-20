@@ -152,7 +152,7 @@ class VisitorsTableSignedOut extends React.Component {
     }
 
     render() {
-        const signedOutTableClass = 'col-12 visitorsTable ' + this.state.signedOutTableVisible;
+        const signedOutTableClass = 'col-12 visitorsTable vSignedOutTable ' + this.state.signedOutTableVisible;
         const endMessageClass = 'endMessage ' + this.state.endMessageVisibility;
         return (
             <div className={signedOutTableClass}>
@@ -167,7 +167,7 @@ class VisitorsTableSignedOut extends React.Component {
                         </h5>
                     }
                 >
-                    <table className="table table-bordered table-hover">
+                    <table className="table visitorSignedOutTable table-hover">
                         <thead>
                         <tr className="d-flex">
                             <th key="Name" className="col-3">Name</th>

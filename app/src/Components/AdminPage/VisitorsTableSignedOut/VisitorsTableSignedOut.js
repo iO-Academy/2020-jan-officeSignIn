@@ -65,7 +65,7 @@ class VisitorsTableSignedOut extends React.Component {
         data = await data.json()
         await this.checkAuthorisation(data)
 
-        if (!data.Data.length > 0) {
+        if (!data.Data.length > 0 && this.state.visitorPackage < 1) {
             this.props.updateResponse('No visitors currently signed Out');
         }
         

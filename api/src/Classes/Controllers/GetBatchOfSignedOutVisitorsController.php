@@ -56,7 +56,6 @@ class GetBatchOfSignedOutVisitorsController extends ValidationEntity
             $apiResponse['Success'] = true;
             $apiResponse['Message'] = 'Successfully retrieved signed out visitors';
             $apiResponse['Data'] = $visitorData;
-            return $response->withJson($apiResponse, $statusCode);
         } else {
             $statusCode = 404;
             $apiResponse['Message'] = 'No data retrieved or no data in database';

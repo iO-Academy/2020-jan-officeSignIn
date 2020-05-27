@@ -77,6 +77,8 @@ class VisitorSignOutModal extends React.Component
         return result;
     };
 
+    doNothing = () => {}
+
     handleSignOut = async (e) => {
         let data = {
             "id": e.target.dataset.id
@@ -88,6 +90,16 @@ class VisitorSignOutModal extends React.Component
                 'PUT',
                 data
             );
+
+            this.setState({
+                onClick: this.doNothing
+            })
+
+            setTimeout(() => {
+                this.setState({
+                    onClick: this.handleSignOut
+                })
+            }, 2400)
 
             if (responseData.Success) {
                 setTimeout( () => {

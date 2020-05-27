@@ -45,14 +45,24 @@ class SignOutVisitorsController
         ];
         $statusCode = 500;
 
-        if (!(isset($option)) || $option !== 'all-previous') {
+        if (!(isset($option)) || $option !== 'all-previous' || $option !== 'all-current') {
             $statusCode = 400;
-            $apiResponse['Message'] = 'Key must be \'Option\', must be set and set to \'all-previous\'';
+            $apiResponse['Message'] = 'Key must be \'Option\', must either be set and set to \'all-previous\' or \'all-current\'';
             return $response->withJson($apiResponse, $statusCode);
         }
 
         if ($option === 'all-previous') {
             $updatedVisitors = $this->visitorModel->signOutAllVisitorsUpToToday($timeOfSignOut);
+            if ($updatedVisitors === true) {
+                $statusCode = 200;
+                $apiResponse['Success'] = true;
+                $apiResponse['Message'] = 'Successfully updated visitors';
+                return $response->withJson($apiResponse, $statusCode);
+            }
+        }
+
+        if ($option === 'all-current') {
+            $updatedVisitors = $this->visitorModel->signOutAllVisitors($timeOfSignOut);
             if ($updatedVisitors === true) {
                 $statusCode = 200;
                 $apiResponse['Success'] = true;

@@ -131,7 +131,7 @@ class AdminModal extends React.Component {
                                     <span>0</span>
                             </button>
                             <button className="logInBtn btnHoverEffectGreen" onClick={this.handleLogin}>
-                                    <span>Log In</span>
+                                    <span>Enter</span>
                             </button>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ import AdminBtn from "./AdminBtn/AdminBtn";
 import AdminModal from "./AdminModal/AdminModal";
 import VisitorSignOutModal from "./VisitorSignOutModal/VisitorSignOutModal";
 import BackgroundOverlay from "../BackgroundOverlay/BackgroundOverlay";
+import SignAllOutBtn from "./SignAllOutBtn/SignAllOutBtn";
 
 class LandingPage extends React.Component {
     state = {
@@ -61,6 +62,9 @@ class LandingPage extends React.Component {
                     updateModalVisible={this.updateModalVisible}
                     signOutModalVisible={this.state.signOutModalVisible}
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
+                />
+                <SignAllOutBtn
+                    adminBtnVisible={this.state.adminBtnVisible}
                 />
             </div>
         )

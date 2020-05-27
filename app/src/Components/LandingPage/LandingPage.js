@@ -65,6 +65,7 @@ class LandingPage extends React.Component {
                 />
                 <SignAllOutBtn
                     adminBtnVisible={this.state.adminBtnVisible}
+                    updateModalVisible={this.updateModalVisible}
                 />
             </div>
         )

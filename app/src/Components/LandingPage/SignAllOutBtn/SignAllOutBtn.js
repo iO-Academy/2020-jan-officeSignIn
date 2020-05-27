@@ -16,6 +16,13 @@ class SignAllOutBtn extends React.Component {
         }
     }
 
+    handleClick = () => {
+        this.props.updateModalVisible();
+
+        if (this.props.signOutModalVisible) {
+            this.props.updateSignOutModalVisible();
+        }
+    };
 
     render() {
         let signAllOutBtnVisibilityClass = 'signAllOutBtn btnHoverEffectOrange ' + this.state.signAllOutBtnVisibilityClass

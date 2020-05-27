@@ -183,12 +183,12 @@ class VisitorSignOutModal extends React.Component
                 <div className="col-12 visitorsTable">
                     <table className="table table-bordered table-hover">
                         <thead>
-                        <tr>
-                            {this.generateHeader()}
-                        </tr>
+                            <tr>
+                                {this.generateHeader()}
+                            </tr>
                         </thead>
                         <tbody>
-                        {this.generateRows()}
+                            {this.generateRows()}
                         </tbody>
                     </table>
                 </div>

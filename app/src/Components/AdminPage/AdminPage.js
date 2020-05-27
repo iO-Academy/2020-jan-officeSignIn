@@ -28,7 +28,7 @@ class AdminPage extends React.Component{
     render() {
         return (
             <div>
-                <h1 className={'adminPage'}>All visitors currently signed in today:</h1>
+                <h1 className={'adminPage'}>Admin Panel</h1>
                 <AdminContainer/>
             </div>
         );

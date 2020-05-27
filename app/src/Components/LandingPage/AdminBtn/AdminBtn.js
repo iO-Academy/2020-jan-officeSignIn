@@ -25,7 +25,7 @@ class AdminBtn extends React.Component {
     };
 
     render() {
-        let adminBtnVisibility = 'adminBtn ' + this.state.adminBtnClass
+        let adminBtnVisibility = 'adminBtn btnHoverEffectOrange ' + this.state.adminBtnClass
         return (
             <button className={adminBtnVisibility} onClick={this.handleClick}>Admin</button>
         )

@@ -87,14 +87,23 @@
     align-items: center;
 }
 
-.keypadBtn:active, .closeModalBtn:active {
-    background-color:#FFFFFF;
+.keypadBtn:active,
+.closeModalBtn:active,
+.logInBtn:active {
+    background-color: #FFFFFF;
+    transition: background-color 0s;
+}
+
+.keypadBtn:active {
     color: #288FB0;
 }
 
 .logInBtn:active {
-    background-color:#FFFFFF;
     color: #94BA66;
+}
+
+.closeModalBtn:active {
+    color: #F27424;
 }
 
 .responseMessage {

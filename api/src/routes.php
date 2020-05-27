@@ -37,9 +37,13 @@ return function (App $app) {
 
     //Api Routes
     $app->post('/api/visitorSignIn', 'AddVisitorController');
-    $app->get('/api/admin', 'GetAllSignedInVisitorsController')->add('Authenticate');
     $app->put('/api/visitorSignOut', 'SignOutVisitorController');
+    $app->put('/api/signOutVisitors','SignOutVisitorsController')->add('Authenticate');
+    $app->get('/api/admin', 'GetAllSignedInVisitorsController')->add('Authenticate');
+    $app->get('/api/signedOutVisitors', 'GetAllSignedOutVisitorsController')->add('Authenticate');
+    $app->get('/api/signedOutVisitorsByBatch', 'GetBatchOfSignedOutVisitorsController')->add('Authenticate');
 
+    //Route to acquire authenticated active token
     $app->post('/adminLogin', 'LoginController');
 
 

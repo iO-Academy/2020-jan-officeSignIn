@@ -1,5 +1,5 @@
 .adminContainer {
-    width: 700px;
+    width: 750px;
     text-align: center;
     min-height: 500px;
     background-color: #FFFFFF;
@@ -14,8 +14,15 @@
 }
 
 .adminContainerButtons {
+    width: 670px;
+    margin: 0 auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+
+}
+
+.dropdown-toggle::after {
+    margin-left: 0.555em;
 }
 
 @media only screen and (max-width: 800px) {

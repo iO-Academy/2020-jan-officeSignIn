@@ -89,15 +89,15 @@ To test, passcode is 8974.
 - Sends: 
     - `{ "Name": "string", "Company": "string" }`
     
-    - Returns:
-        - if successful 
-            - `status 200`
-            - `{ "Success": true, "Message": "Visitor successfully signed out", "Data": [] }`  
-        - if unsuccessful
-            - `status 422` 
-                - `{ "Success": false, "Message": "Multiple matches found", "Data": [all matches on same name and their time of sign out] }`
-            - `status 500` 
-                - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Visitor successfully signed out", "Data": [] }`  
+    - if unsuccessful
+        - `status 422` 
+            - `{ "Success": false, "Message": "Multiple matches found", "Data": [all matches on same name and their time of sign out] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
     
     OR
 
@@ -117,5 +117,76 @@ To test, passcode is 8974.
     - if unsuccessful
         - `status 400` 
             - `{ "Success": false, "Message": "Name or ID is required", "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+            
+
+### GET
+**/api/signedOutVisitors**
+
+You must be authenticated to retrieve data from this route.
+To test, passcode is 8974.
+
+- Gets all visitors currently signed out
+- Required
+    - None
+- Optional
+    - None
+    
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Successfully retrieved signed out visitors", "Data": [ { retrieved data } ] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "No data retrieved or no data in database", "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+            
+
+### GET
+**/api/signedOutVisitorsByBatch{count}{start}**
+
+You must be authenticated to retrieve data from this route.
+To test, passcode is 8974.
+
+- Gets a batch of visitors currently signed out. The batch returned depends on the amount you want returned, set by the count variable and the starting position within the db
+- Required query parameters 
+    - `count` - the amount of visitors you want returned
+    - `start` - the position within the db you want to start collecting the batch from
+- Optional
+    - None
+- Example request: `api/signedOutVisitorsByBatch?count=15&start=203`
+    
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Successfully retrieved signed out visitors", "Data": [ { retrieved data } ] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "No data retrieved or no data in database", "Data": [] }`
+        - `status 500` 
+            - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`
+            
+
+### PUT
+**/api/signOutVisitors**
+
+You must be authenticated to retrieve data from this route.
+To test, passcode is 8974.
+
+- Sets all visitors to signed out where signed in is true and date of visit is before current date
+- Logs time visitors signed out in the DB
+
+- Required and sends
+    - `{ "Option" : "all-previous" }` - Option with all-previous set
+
+- Returns:
+    - if successful 
+        - `status 200`
+        - `{ "Success": true, "Message": "Successfully updated visitors", "Data": [] }`  
+    - if unsuccessful
+        - `status 400` 
+            - `{ "Success": false, "Message": "Key must be 'Option', must be set and set to 'all-previous'", "Data": [] }`
         - `status 500` 
             - `{ "Success": false, "Message": "Unable to connect to server", "Data": [] }`

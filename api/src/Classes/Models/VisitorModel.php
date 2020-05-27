@@ -36,6 +36,46 @@ class VisitorModel
     }
 
     /**
+     * queries database to return all signed out visitors who signed out today
+     *
+     * @return array sorted by date then time of sign out
+     */
+    public function getAllSignedOutVisitors() : array
+    {
+        $query = $this->db->prepare(
+            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`
+            FROM `visitors`
+            WHERE `SignedIn` = 0
+            ORDER BY `DateOfVisit` DESC, `TimeOfSignOut` DESC;'
+        );
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
+     * Given a starting position / id returns an array of signed out visitors limited to the specified count
+     *
+     * @param $count
+     * @param $start
+     * @return array
+     */
+    public function getBatchOfSignedOutVisitors($count, $start)
+    {
+        $query = $this->db->prepare(
+            'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`
+            FROM `visitors`
+            WHERE `SignedIn` = 0
+            AND `id` < :id
+            ORDER BY `id` DESC
+            LIMIT :count;'
+        );
+        $query->bindParam(':id', $start, \PDO::PARAM_INT);
+        $query->bindParam(':count', $count, \PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
      *  Adds new visitor to the database and returns a bool based on success or failure
      *
      * @param $Name
@@ -68,6 +108,7 @@ class VisitorModel
             "SELECT `id`, `Name`, `TimeOfSignIn` 
             FROM `visitors`
             WHERE `Name` = :Name
+            AND `DateOfVisit` = CURDATE() 
             AND `SignedIn` = 1 "
         );
         $query->bindParam(':Name', $Name);
@@ -88,6 +129,7 @@ class VisitorModel
             "SELECT `id`, `Name`, `TimeOfSignIn` 
             FROM `visitors`
             WHERE `Name` = :Name 
+            AND `DateOfVisit` = CURDATE() 
             AND `Company` = :Company
             AND `SignedIn` = 1 "
         );
@@ -111,6 +153,24 @@ class VisitorModel
             WHERE `id` = :id;"
         );
         $query->bindParam(':id', $id);
+        $query->bindParam(':timeOfSignOut', $timeOfSignOut);
+        return $query->execute();
+    }
+
+    /**
+     * signs out all visitors who are currently signed in but DateOfVisit is not current days date
+     *
+     * @param $timeOfSignOut
+     * @return bool
+     */
+    public function signOutAllVisitorsUpToToday($timeOfSignOut) : bool
+    {
+        $query = $this->db->prepare(
+            'UPDATE `visitors` 
+            SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
+            WHERE `SignedIn` = 1
+            AND `DateOfVisit` < CURDATE();'
+        );
         $query->bindParam(':timeOfSignOut', $timeOfSignOut);
         return $query->execute();
     }

@@ -14,7 +14,8 @@ class VisitorSignOutModal extends React.Component
             response: '',
             success: false,
             successTick: false,
-            successTickVisible: 'hiddenOpacity'
+            successTickVisible: 'hiddenOpacity',
+            onClick: this.handleSignOut
         };
     }
 
@@ -58,7 +59,7 @@ class VisitorSignOutModal extends React.Component
                         <td key={timeOfSignIn}>{timeOfSignIn}</td>
                         <td className="text-danger tableSignOutBtn"
                             data-id={tableData[i].id}
-                            onClick={this.handleSignOut}>Sign Out
+                            onClick={this.state.onClick}>Sign Out
                         </td>
                     </tr>
                 )
@@ -76,6 +77,8 @@ class VisitorSignOutModal extends React.Component
         return result;
     };
 
+    doNothing = () => {}
+
     handleSignOut = async (e) => {
         let data = {
             "id": e.target.dataset.id
@@ -87,6 +90,16 @@ class VisitorSignOutModal extends React.Component
                 'PUT',
                 data
             );
+
+            this.setState({
+                onClick: this.doNothing
+            })
+
+            setTimeout(() => {
+                this.setState({
+                    onClick: this.handleSignOut
+                })
+            }, 2400)
 
             if (responseData.Success) {
                 setTimeout( () => {

@@ -1,0 +1,33 @@
+.visitorsTable {
+    padding: 10px 30px 30px 30px;
+    color: #222222;
+    margin: 0 auto;
+    font-size: 1rem;
+}
+
+.tableSignOutBtn {
+    cursor: pointer;
+}
+
+.endMessage {
+    font-weight: 300;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-top: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+}
+
+.visitorSignedOutTable {
+    border-left: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.vSignedOutTable .table thead th {
+    border-bottom: 1px solid #DDDDDD;
+}

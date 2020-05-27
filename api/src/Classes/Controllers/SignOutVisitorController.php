@@ -12,8 +12,9 @@ class SignOutVisitorController extends ValidationEntity
 {
     private $visitorModel;
 
-    /** Constructor assigns VisitorModel to this object
-     *  AddVisitorController constructor.
+    /**
+     *  Constructor assigns VisitorModel to this object
+     *  SignOutVisitorController constructor.
      *
      * @param VisitorModel $visitorModel
      */
@@ -23,8 +24,9 @@ class SignOutVisitorController extends ValidationEntity
     }
 
     /**
-     *On invoke check input for Name or ID value, if data there, call appropriate methods from VisitorModel
+     * On invoke check input for Name or ID value, if data there, call appropriate methods from VisitorModel
      * (signOutById or signOutByName) and respond as whether that was successful or not
+     *
      * @param Request $request
      * @param Response $response
      * @param array $args

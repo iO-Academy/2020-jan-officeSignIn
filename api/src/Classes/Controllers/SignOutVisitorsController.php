@@ -37,6 +37,7 @@ class SignOutVisitorsController
         $option = $requestData['Option'];
         $now = new DateTime('Europe/London');
         $timeOfSignOut = $now->format('H:i:s');
+        $optionStatus = false;
 
         $apiResponse = [
             'Success' => false,
@@ -45,9 +46,13 @@ class SignOutVisitorsController
         ];
         $statusCode = 500;
 
-        if (!(isset($option)) || $option !== 'all-previous' || $option !== 'all-current') {
+        if ($option === 'all-previous' || $option === 'all-current') {
+            $optionStatus = true;
+        }
+
+        if (!(isset($option)) || $optionStatus === false) {
             $statusCode = 400;
-            $apiResponse['Message'] = 'Key must be \'Option\', must either be set and set to \'all-previous\' or \'all-current\'';
+            $apiResponse['Message'] = 'Key must be \'Option\'. Value must be either \'all-previous\' or \'all-current\'';
             return $response->withJson($apiResponse, $statusCode);
         }
 

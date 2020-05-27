@@ -1,0 +1,13 @@
+.signAllOutBtn {
+    position: absolute;
+    bottom: 46px;
+    right: 200px;
+    background-color: #F27424;
+    color: #FFFFFF;
+    padding: 3px 25px;
+    font-weight: 700;
+    font-size: 25px;
+    border-radius: 5px;
+    border: 1px solid #295074;
+    cursor: pointer;
+}

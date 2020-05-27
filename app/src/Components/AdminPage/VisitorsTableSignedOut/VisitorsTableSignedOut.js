@@ -23,7 +23,8 @@ class VisitorsTableSignedOut extends React.Component {
 
     initialTableRenderData = async () => {
         const count = 15;
-        let firstBatch = await this.fetchVisitors(count, 999999);
+        let start = await this.highestSignedOutVisitorId() + 1
+        let firstBatch = await this.fetchVisitors(count, start);
         let orderedPackage = this.reorderVisitorPackage(firstBatch)
         await this.setState({
             visitorPackage: orderedPackage,
@@ -36,6 +37,27 @@ class VisitorsTableSignedOut extends React.Component {
                 hasMore: false
             })
         }
+    }
+
+    highestSignedOutVisitorId = async () => {
+        let data = await this.getAllSignedOutVisitors()
+        return parseInt(data[0].id)
+    }
+
+    getAllSignedOutVisitors = async () => {
+        const url = localStorage.getItem('apiUrl') + '/api/signedOutVisitors';
+        let data = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + this.state.bearerToken
+            }
+        })
+        data = await data.json()
+        await this.checkAuthorisation(data)
+
+        localStorage.removeItem('bearerToken')
+        return data.Data
     }
 
     componentDidUpdate(prevProps, prevState) {

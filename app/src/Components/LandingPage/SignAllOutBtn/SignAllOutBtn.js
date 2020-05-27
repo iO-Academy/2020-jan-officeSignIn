@@ -9,9 +9,9 @@ class SignAllOutBtn extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.adminBtnVisible !== this.props.adminBtnVisible) {
             if(this.props.adminBtnVisible) {
-                this.setState({adminBtnClass: 'visible'})
+                this.setState({signAllOutBtnVisibilityClass: 'visible'})
             } else {
-                this.setState({adminBtnClass: 'hidden'})
+                this.setState({signAllOutBtnVisibilityClass: 'hidden'})
             }
         }
     }

@@ -181,7 +181,7 @@ class VisitorModel
      * @param $timeOfSignOut
      * @return bool
      */
-    public function signOutAllVisitors($timeOfSignOut) : bool
+    public function signOutAllCurrentDayVisitors($timeOfSignOut) : bool
     {
         $query = $this->db->prepare(
             'UPDATE `visitors` 

@@ -14,7 +14,8 @@ class VisitorSignOutModal extends React.Component
             response: '',
             success: false,
             successTick: false,
-            successTickVisible: 'hiddenOpacity'
+            successTickVisible: 'hiddenOpacity',
+            onClick: this.handleSignOut
         };
     }
 
@@ -58,7 +59,7 @@ class VisitorSignOutModal extends React.Component
                         <td key={timeOfSignIn}>{timeOfSignIn}</td>
                         <td className="text-danger tableSignOutBtn"
                             data-id={tableData[i].id}
-                            onClick={this.handleSignOut}>Sign Out
+                            onClick={this.state.onClick}>Sign Out
                         </td>
                     </tr>
                 )

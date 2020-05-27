@@ -1,10 +1,10 @@
 .adminBtn {
     position: absolute;
-    bottom: 5%;
-    right: 5%;
+    bottom: 46px;
+    right: 50px;
     background-color: #F27424;
     color: #FFFFFF;
-    width: 150px;
+    padding: 3px 25px;
     font-weight: 700;
     font-size: 25px;
     border-radius: 5px;

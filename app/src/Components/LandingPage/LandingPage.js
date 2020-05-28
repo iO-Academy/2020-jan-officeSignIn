@@ -12,8 +12,13 @@ class LandingPage extends React.Component {
         modalVisible: false,
         adminBtnVisible: true,
         signOutModalVisible: false,
-        dataForSignOutModal: {}
+        dataForSignOutModal: {},
+        adminBtnActive: false
     };
+
+    toggleAdminBtnState = () => {
+        this.setState({adminBtnActive: !this.state.adminBtnActive})
+    }
 
     updateModalVisible = () => {
         if(!this.state.modalVisible) {
@@ -51,6 +56,8 @@ class LandingPage extends React.Component {
                 <AdminModal
                     modalVisible={this.state.modalVisible}
                     updateModalVisible={this.updateModalVisible}
+                    adminBtnActiveState={this.state.adminBtnActive}
+                    toggleAdminBtnState={this.toggleAdminBtnState}
                 />
                 <VisitorSignOutModal
                     signOutModalVisible={this.state.signOutModalVisible}
@@ -62,6 +69,8 @@ class LandingPage extends React.Component {
                     updateModalVisible={this.updateModalVisible}
                     signOutModalVisible={this.state.signOutModalVisible}
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
+                    adminBtnActiveState={this.state.adminBtnActive}
+                    toggleAdminBtnState={this.toggleAdminBtnState}
                 />
                 <SignAllOutBtn
                     adminBtnVisible={this.state.adminBtnVisible}

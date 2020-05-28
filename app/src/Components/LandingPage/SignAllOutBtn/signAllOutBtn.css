@@ -1,7 +1,7 @@
-.adminBtn {
+.signAllOutBtn {
     position: absolute;
     bottom: 46px;
-    right: 50px;
+    right: 200px;
     background-color: #F27424;
     color: #FFFFFF;
     padding: 2px 25px;

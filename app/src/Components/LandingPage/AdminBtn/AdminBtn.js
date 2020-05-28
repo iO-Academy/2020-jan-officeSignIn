@@ -14,7 +14,6 @@ class AdminBtn extends React.Component {
                 this.setState({adminBtnClass: 'hidden'})
             }
         }
-
     }
 
     handleClick = () => {

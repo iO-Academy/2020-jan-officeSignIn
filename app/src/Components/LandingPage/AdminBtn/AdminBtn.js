@@ -14,10 +14,15 @@ class AdminBtn extends React.Component {
                 this.setState({adminBtnClass: 'hidden'})
             }
         }
+
     }
 
     handleClick = () => {
         this.props.updateModalVisible();
+
+        if (!this.props.adminBtnActiveState) {
+            this.props.toggleAdminBtnState();
+        }
 
         if (this.props.signOutModalVisible) {
             this.props.updateSignOutModalVisible();

@@ -18,6 +18,11 @@ class SignAllOutBtn extends React.Component {
 
     handleClick = () => {
         this.props.updateModalVisible();
+        console.log(this.props.signAllOutBtnActiveState)
+
+        if (!this.props.signAllOutBtnActiveState) {
+            this.props.toggleSignAllOutBtnState();
+        }
 
         if (this.props.signOutModalVisible) {
             this.props.updateSignOutModalVisible();

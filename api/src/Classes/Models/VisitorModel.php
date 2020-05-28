@@ -46,7 +46,7 @@ class VisitorModel
             'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`
             FROM `visitors`
             WHERE `SignedIn` = 0
-            ORDER BY `DateOfVisit` DESC, `TimeOfSignOut` DESC;'
+            ORDER BY `id` DESC;'
         );
         $query->execute();
         return $query->fetchAll();

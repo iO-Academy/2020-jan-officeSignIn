@@ -159,8 +159,6 @@ class VisitorsTableSignedOut extends React.Component {
 
         let fetchedNextBatch = await this.fetchVisitors(count, start)
         this.updateVisitorPackage(fetchedNextBatch)
-        console.log(this.state.visitorPackage)
-        console.log(start)
     }
 
     updateVisitorPackage = (data) => {

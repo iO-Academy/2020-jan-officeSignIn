@@ -59,9 +59,15 @@ class AdminModal extends React.Component {
             if (this.props.adminBtnActiveState) {
                 window.location.replace(localStorage.getItem('appUrl') + 'AdminPage');
                 this.props.toggleAdminBtnState();
-            } else {
-                console.log('enter pressed but not action assigned')
+            } else if (this.props.signAllOutBtnActiveState) {
+                this.props.toggleSignAllOutBtnState();
+                let signAllOutResponse = await this.signAllOut();
+
+                if (signAllOutResponse.Success) {
+                    console.log('successfully signed folks out')
+                }
             }
+
         }
 
     };
@@ -77,6 +83,21 @@ class AdminModal extends React.Component {
         });
         return response.json();
     };
+
+    signAllOut = async () => {
+        const url = localStorage.getItem('apiUrl') + 'api/signOutVisitors';
+        const bodyData = JSON.stringify({ "Option" : "all-current" })
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: bodyData,
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + this.state.bearerToken
+            }
+        })
+
+        return await response.json();
+    }
 
     updateResponse = (newResponse) => {
         setTimeout(()=> {

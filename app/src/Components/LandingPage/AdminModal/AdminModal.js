@@ -77,7 +77,7 @@ class AdminModal extends React.Component {
                 this.props.toggleLandingPageSuccessTickState();
             }
         }
-        
+
     }
 
     postPasscodeToDb = async (url, requestMethod, dataToSend) => {

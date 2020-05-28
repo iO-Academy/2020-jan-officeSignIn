@@ -51,7 +51,7 @@ class AdminModal extends React.Component {
             dataToSend
         );
 
-        if(passcodeResponse.success === false) {
+        if (passcodeResponse.success === false) {
             this.updateResponse(passcodeResponse.message);
         } else if (passcodeResponse.success === true) {
             this.updateToken(passcodeResponse.token);
@@ -60,17 +60,25 @@ class AdminModal extends React.Component {
                 window.location.replace(localStorage.getItem('appUrl') + 'AdminPage');
                 this.props.toggleAdminBtnState();
             } else if (this.props.signAllOutBtnActiveState) {
-                this.props.toggleSignAllOutBtnState();
-                let signAllOutResponse = await this.signAllOut();
-
-                if (signAllOutResponse.Success) {
-                    console.log('successfully signed folks out')
-                }
+                this.handleSignAllOutBtnClick()
             }
 
         }
 
     };
+
+    handleSignAllOutBtnClick = async () => {
+        this.props.toggleSignAllOutBtnState();
+        let signAllOutResponse = await this.signAllOut();
+
+        if (signAllOutResponse.Success) {
+            this.props.updateModalVisible()
+            if (!this.props.signAllOutSuccessTickState) {
+                this.props.toggleLandingPageSuccessTickState();
+            }
+        }
+        
+    }
 
     postPasscodeToDb = async (url, requestMethod, dataToSend) => {
         let requestData = JSON.stringify(dataToSend);

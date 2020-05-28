@@ -26,7 +26,7 @@ class AdminModal extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.modalVisible !== this.props.modalVisible) {
-            if(this.props.modalVisible) {
+            if (this.props.modalVisible) {
                 this.setState({modalClass: 'visible'})
             } else {
                 this.setState({modalClass: 'hidden'})
@@ -35,17 +35,35 @@ class AdminModal extends React.Component {
     }
 
     captureInput = (e, keyPressed, passcodeUpdate) => {
-            let passcodeValue = {};
-                passcodeValue['passcode'] = passcodeUpdate + keyPressed;
+        let passcodeValue = {};
+            passcodeValue['passcode'] = passcodeUpdate + keyPressed;
         this.setState(passcodeValue)
     };
 
-    handleLogin = async (e)=>{
+    handleEnter = async () => {
         let dataToSend = {
             'Passcode': this.state.passcode
         };
         this.setState({passcode: ''});
-        await this.postPasscodeToDb(localStorage.getItem('apiUrl') + 'adminLogin', 'POST', dataToSend);
+        let passcodeResponse = await this.postPasscodeToDb(
+            localStorage.getItem('apiUrl') + 'adminLogin',
+            'POST',
+            dataToSend
+        );
+
+        if(passcodeResponse.success === false) {
+            this.updateResponse(passcodeResponse.message);
+        } else if (passcodeResponse.success === true) {
+            this.updateToken(passcodeResponse.token);
+
+            if (this.props.adminBtnActiveState) {
+                window.location.replace(localStorage.getItem('appUrl') + 'AdminPage');
+                this.props.toggleAdminBtnState();
+            } else {
+                console.log('enter pressed but not action assigned')
+            }
+        }
+
     };
 
     postPasscodeToDb = async (url, requestMethod, dataToSend) => {
@@ -57,13 +75,7 @@ class AdminModal extends React.Component {
                 "Content-Type" : "application/json"
             }
         });
-        let responseData = await response.json();
-        if(responseData.success === false) {
-            this.updateResponse(responseData.message);
-        } else if(responseData.success === true) {
-            this.updateToken(responseData.token);
-            window.location.replace(localStorage.getItem('appUrl') + 'AdminPage');
-        }
+        return response.json();
     };
 
     updateResponse = (newResponse) => {
@@ -130,7 +142,7 @@ class AdminModal extends React.Component {
                                     onClick={(e) => this.captureInput(e,'0', this.state.passcode)}>
                                     <span>0</span>
                             </button>
-                            <button className="logInBtn btnHoverEffectGreen" onClick={this.handleLogin}>
+                            <button className="logInBtn btnHoverEffectGreen" onClick={this.handleEnter}>
                                     <span>Enter</span>
                             </button>
                         </div>

@@ -69,7 +69,8 @@ class VisitorsTableSignedOut extends React.Component {
             }
         }
 
-        if (prevProps.visitorSignedOut !== this.props.visitorSignedOut) {
+        if (prevProps.visitorSignedOut !== this.props.visitorSignedOut ||
+        prevProps.updateSignedInTableState !== this.props.updateSignedInTableState) {
             this.initialTableRenderData()
         }
     }

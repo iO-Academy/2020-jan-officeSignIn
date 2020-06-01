@@ -6,6 +6,7 @@ import MessageBox from "../../LandingPage/MainContainer/MessageBox/MessageBox"
 import LogOutBtn from "../LogOutBtn/LogOutBtn";
 import TableSelector from "../TableSelector/TableSelector";
 import VisitorsTableSignedOut from "../VisitorsTableSignedOut/VisitorsTableSignedOut";
+import SignAllOutAdminPanelBtn from "../SignAllOutAdminPanelBtn/SignAllOutAdminPanelBtn";
 
 class AdminContainer extends React.Component {
     state = {
@@ -14,11 +15,16 @@ class AdminContainer extends React.Component {
         adminContainerVisible: 'hidden',
         signedInTableVisible: true,
         signedOutTableVisible: false,
-        visitorSignedOut: {}
+        visitorSignedOut: {},
+        updateSignedInTable: false
     };
 
     componentDidMount() {
         this.updateSignedOutDb()
+    }
+
+    toggleUpdateSignedInTable = () => {
+        this.setState({updateSignedInTable: !this.state.updateSignedInTable})
     }
 
     updateSignedOutDb = async () => {
@@ -77,6 +83,7 @@ class AdminContainer extends React.Component {
             <main>
                 <div className={adminContainerClass}>
                     <Logo/>
+                    <LogOutBtn/>
                     <div className="adminContainerButtons">
                         <TableSelector
                             signedInTableVisible={this.state.signedInTableVisible}
@@ -84,7 +91,10 @@ class AdminContainer extends React.Component {
                             viewSignedInVisitorTable={this.viewSignedInVisitorTable}
                             viewSignedOutVisitorTable={this.viewSignedOutVisitorTable}
                         />
-                        <LogOutBtn/>
+                        <SignAllOutAdminPanelBtn
+                            updateSignedInTableState={this.state.updateSignedInTable}
+                            toggleUpdateSignedInTable={this.toggleUpdateSignedInTable}
+                        />
                     </div>
                     <MessageBox
                         response={this.state.response}
@@ -95,11 +105,14 @@ class AdminContainer extends React.Component {
                         setAdminContainerVisible={this.setAdminContainerVisible}
                         signedInTableVisible={this.state.signedInTableVisible}
                         updateVisitorSignedOut={this.updateVisitorSignedOut}
+                        updateSignedInTableState={this.state.updateSignedInTable}
+                        toggleUpdateSignedInTable={this.toggleUpdateSignedInTable}
                     />
                     <VisitorsTableSignedOut
                         updateResponse={this.updateResponse}
                         signedOutTableVisible={this.state.signedOutTableVisible}
                         visitorSignedOut={this.state.visitorSignedOut}
+                        updateSignedInTableState={this.state.updateSignedInTable}
                     />
                 </div>
             </main>

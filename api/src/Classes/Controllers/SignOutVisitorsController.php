@@ -67,7 +67,7 @@ class SignOutVisitorsController
         }
 
         if ($option === 'all-current') {
-            $updatedVisitors = $this->visitorModel->signOutAllCurrentDayVisitors($timeOfSignOut);
+            $updatedVisitors = $this->visitorModel->signOutAllVisitors($timeOfSignOut);
             if ($updatedVisitors === true) {
                 $statusCode = 200;
                 $apiResponse['Success'] = true;

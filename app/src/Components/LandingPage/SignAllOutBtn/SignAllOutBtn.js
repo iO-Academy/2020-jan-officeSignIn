@@ -30,7 +30,8 @@ class SignAllOutBtn extends React.Component {
     };
 
     render() {
-        let signAllOutBtnVisibilityClass = 'signAllOutBtn btnHoverEffectOrange ' + this.state.signAllOutBtnVisibilityClass
+        let signAllOutBtnVisibilityClass = 'signAllOutBtn signAllOutBtnLandingPage btnHoverEffectOrange '
+            + this.state.signAllOutBtnVisibilityClass
         return (
             <button className={signAllOutBtnVisibilityClass} onClick={this.handleClick}>Sign All Out</button>
         )

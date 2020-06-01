@@ -176,18 +176,17 @@ class VisitorModel
     }
 
     /**
-     * signs out all visitors who are currently signed in today
+     * signs out all visitors who are currently signed in
      *
      * @param $timeOfSignOut
      * @return bool
      */
-    public function signOutAllCurrentDayVisitors($timeOfSignOut) : bool
+    public function signOutAllVisitors($timeOfSignOut) : bool
     {
         $query = $this->db->prepare(
             'UPDATE `visitors` 
             SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
-            WHERE `SignedIn` = 1
-            AND `DateOfVisit` = CURDATE();'
+            WHERE `SignedIn` = 1'
         );
         $query->bindParam(':timeOfSignOut', $timeOfSignOut);
         return $query->execute();

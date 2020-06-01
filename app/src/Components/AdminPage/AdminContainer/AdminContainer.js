@@ -86,7 +86,7 @@ class AdminContainer extends React.Component {
                             viewSignedInVisitorTable={this.viewSignedInVisitorTable}
                             viewSignedOutVisitorTable={this.viewSignedOutVisitorTable}
                         />
-                        {/*<SignAllOutAdminPanelBtn/>*/}
+                        <SignAllOutAdminPanelBtn/>
                     </div>
                     <MessageBox
                         response={this.state.response}

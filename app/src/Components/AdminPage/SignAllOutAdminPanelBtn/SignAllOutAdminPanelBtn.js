@@ -2,9 +2,37 @@ import React from "react";
 import '../../LandingPage/SignAllOutBtn/signAllOutBtn.css'
 
 class SignAllOutAdminPanelBtn extends React.Component {
-    handleClick = () => {
-        console.log('Sign all out button clicked!')
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            bearerToken: localStorage.getItem('bearerToken'),
+            apiUrl: localStorage.getItem('apiUrl')
+        }
+    }
+
+    handleClick = async () => {
+        let signAllOutResponse = await this.signAllOut();
+
+        if (signAllOutResponse.Success) {
+            console.log('success!')
+        }
     };
+
+    signAllOut = async () => {
+        const url = localStorage.getItem('apiUrl') + 'api/signOutVisitors';
+        const bodyData = JSON.stringify({ "Option" : "all-current" })
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: bodyData,
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + this.state.bearerToken
+            }
+        })
+
+        return await response.json();
+    }
 
     render() {
         return (

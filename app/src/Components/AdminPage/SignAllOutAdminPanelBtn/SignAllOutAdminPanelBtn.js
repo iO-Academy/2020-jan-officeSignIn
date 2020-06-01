@@ -15,7 +15,9 @@ class SignAllOutAdminPanelBtn extends React.Component {
         let signAllOutResponse = await this.signAllOut();
 
         if (signAllOutResponse.Success) {
-            console.log('success!')
+            if (!this.props.updateSignedInTableState) {
+                this.props.toggleUpdateSignedInTable();
+            }
         }
     };
 

@@ -26,7 +26,7 @@ class AdminModal extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.modalVisible !== this.props.modalVisible) {
-            if(this.props.modalVisible) {
+            if (this.props.modalVisible) {
                 this.setState({modalClass: 'visible'})
             } else {
                 this.setState({modalClass: 'hidden'})
@@ -35,18 +35,50 @@ class AdminModal extends React.Component {
     }
 
     captureInput = (e, keyPressed, passcodeUpdate) => {
-            let passcodeValue = {};
-                passcodeValue['passcode'] = passcodeUpdate + keyPressed;
+        let passcodeValue = {};
+            passcodeValue['passcode'] = passcodeUpdate + keyPressed;
         this.setState(passcodeValue)
     };
 
-    handleLogin = async (e)=>{
+    handleEnter = async () => {
         let dataToSend = {
             'Passcode': this.state.passcode
         };
         this.setState({passcode: ''});
-        await this.postPasscodeToDb(localStorage.getItem('apiUrl') + 'adminLogin', 'POST', dataToSend);
+        let passcodeResponse = await this.postPasscodeToDb(
+            localStorage.getItem('apiUrl') + 'adminLogin',
+            'POST',
+            dataToSend
+        );
+
+        if (passcodeResponse.success === false) {
+            this.updateResponse(passcodeResponse.message);
+        } else if (passcodeResponse.success === true) {
+            this.updateToken(passcodeResponse.token);
+
+            if (this.props.adminBtnActiveState) {
+                window.location.replace(localStorage.getItem('appUrl') + 'AdminPage');
+                this.props.toggleAdminBtnState();
+            } else if (this.props.signAllOutBtnActiveState) {
+                this.handleSignAllOutBtnClick()
+            }
+
+        }
+
     };
+
+    handleSignAllOutBtnClick = async () => {
+        this.props.toggleSignAllOutBtnState();
+        let signAllOutResponse = await this.signAllOut();
+
+        if (signAllOutResponse.Success) {
+            this.props.updateModalVisible()
+            if (!this.props.signAllOutSuccessTickState) {
+                this.props.toggleLandingPageSuccessTickState();
+            }
+        }
+
+    }
 
     postPasscodeToDb = async (url, requestMethod, dataToSend) => {
         let requestData = JSON.stringify(dataToSend);
@@ -57,14 +89,23 @@ class AdminModal extends React.Component {
                 "Content-Type" : "application/json"
             }
         });
-        let responseData = await response.json();
-        if(responseData.success === false) {
-            this.updateResponse(responseData.message);
-        } else if(responseData.success === true) {
-            this.updateToken(responseData.token);
-            window.location.replace(localStorage.getItem('appUrl') + 'AdminPage');
-        }
+        return response.json();
     };
+
+    signAllOut = async () => {
+        const url = localStorage.getItem('apiUrl') + 'api/signOutVisitors';
+        const bodyData = JSON.stringify({ "Option" : "all-current" })
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: bodyData,
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + this.state.bearerToken
+            }
+        })
+
+        return await response.json();
+    }
 
     updateResponse = (newResponse) => {
         setTimeout(()=> {
@@ -130,8 +171,8 @@ class AdminModal extends React.Component {
                                     onClick={(e) => this.captureInput(e,'0', this.state.passcode)}>
                                     <span>0</span>
                             </button>
-                            <button className="logInBtn btnHoverEffectGreen" onClick={this.handleLogin}>
-                                    <span>Log In</span>
+                            <button className="logInBtn btnHoverEffectGreen" onClick={this.handleEnter}>
+                                    <span>Enter</span>
                             </button>
                         </div>
                     </div>

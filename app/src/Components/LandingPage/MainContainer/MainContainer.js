@@ -31,12 +31,29 @@ class MainContainer extends React.Component {
         this.setState({successTickVisible: 'hiddenOpacity'})
     };
 
+    animateSuccessTick = () => {
+        setTimeout( () => {
+            setTimeout(() => {
+                this.toggleSuccessTick()
+            },400);
+            this.setSuccessTickHidden()
+        }, 2000);
+        this.toggleSuccessTick()
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevState.successTick !== this.state.successTick) {
             if (this.state.successTick) {
                 this.setState({successTickVisible: 'visible'})
             } else {
                 this.setState({successTickVisible: 'hiddenOpacity'})
+            }
+        }
+
+        if (prevProps.signAllOutSuccessTickState !== this.props.signAllOutSuccessTickState) {
+            if (this.props.signAllOutSuccessTickState) {
+                this.animateSuccessTick()
+                this.props.toggleLandingPageSuccessTickState();
             }
         }
     }
@@ -65,6 +82,7 @@ class MainContainer extends React.Component {
                         getSignOutData={this.props.getSignOutData}
                         toggleSuccessTick={this.toggleSuccessTick}
                         setSuccessTickHidden={this.setSuccessTickHidden}
+                        animateSuccessTick={this.animateSuccessTick}
                     />
                     <div className="responseMessageFailed">
                         <MessageBox response={this.state.response}/>

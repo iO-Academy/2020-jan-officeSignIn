@@ -82,13 +82,7 @@ class SigninForm extends React.Component {
         let responseData = await response.json();
 
         if (responseData.Success) {
-            setTimeout( () => {
-                setTimeout(() => {
-                    this.props.toggleSuccessTick()
-                },400);
-                this.props.setSuccessTickHidden()
-            }, 2000);
-            this.props.toggleSuccessTick()
+            this.props.animateSuccessTick()
         }
 
         if (responseData.Data !== undefined) {

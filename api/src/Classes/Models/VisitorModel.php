@@ -46,7 +46,7 @@ class VisitorModel
             'SELECT `id`, `Name`, `Company`, `DateOfVisit`, `TimeOfSignIn`, `TimeOfSignOut`
             FROM `visitors`
             WHERE `SignedIn` = 0
-            ORDER BY `DateOfVisit` DESC, `TimeOfSignOut` DESC;'
+            ORDER BY `id` DESC;'
         );
         $query->execute();
         return $query->fetchAll();
@@ -170,6 +170,23 @@ class VisitorModel
             SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
             WHERE `SignedIn` = 1
             AND `DateOfVisit` < CURDATE();'
+        );
+        $query->bindParam(':timeOfSignOut', $timeOfSignOut);
+        return $query->execute();
+    }
+
+    /**
+     * signs out all visitors who are currently signed in
+     *
+     * @param $timeOfSignOut
+     * @return bool
+     */
+    public function signOutAllVisitors($timeOfSignOut) : bool
+    {
+        $query = $this->db->prepare(
+            'UPDATE `visitors` 
+            SET `SignedIn` = 0, `TimeOfSignOut` = :timeOfSignOut
+            WHERE `SignedIn` = 1'
         );
         $query->bindParam(':timeOfSignOut', $timeOfSignOut);
         return $query->execute();

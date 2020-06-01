@@ -5,14 +5,30 @@ import AdminBtn from "./AdminBtn/AdminBtn";
 import AdminModal from "./AdminModal/AdminModal";
 import VisitorSignOutModal from "./VisitorSignOutModal/VisitorSignOutModal";
 import BackgroundOverlay from "../BackgroundOverlay/BackgroundOverlay";
+import SignAllOutBtn from "./SignAllOutBtn/SignAllOutBtn";
 
 class LandingPage extends React.Component {
     state = {
         modalVisible: false,
         adminBtnVisible: true,
         signOutModalVisible: false,
-        dataForSignOutModal: {}
+        dataForSignOutModal: {},
+        adminBtnActive: false,
+        signAllOutBtnActive: false,
+        successTickActive: false
     };
+
+    toggleAdminBtnState = () => {
+        this.setState({adminBtnActive: !this.state.adminBtnActive})
+    }
+
+    toggleSignAllOutBtnState = () => {
+        this.setState({signAllOutBtnActive: !this.state.signAllOutBtnActive})
+    }
+
+    toggleSuccessTickState = () => {
+        this.setState({successTickActive: !this.state.successTickActive})
+    }
 
     updateModalVisible = () => {
         if(!this.state.modalVisible) {
@@ -42,6 +58,8 @@ class LandingPage extends React.Component {
                 <MainContainer
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
                     getSignOutData={this.getSignOutData}
+                    signAllOutSuccessTickState={this.state.successTickActive}
+                    toggleLandingPageSuccessTickState={this.toggleSuccessTickState}
                 />
                 <BackgroundOverlay
                     modalVisible={this.state.modalVisible}
@@ -50,6 +68,12 @@ class LandingPage extends React.Component {
                 <AdminModal
                     modalVisible={this.state.modalVisible}
                     updateModalVisible={this.updateModalVisible}
+                    adminBtnActiveState={this.state.adminBtnActive}
+                    toggleAdminBtnState={this.toggleAdminBtnState}
+                    signAllOutBtnActiveState={this.state.signAllOutBtnActive}
+                    toggleSignAllOutBtnState={this.toggleSignAllOutBtnState}
+                    signAllOutSuccessTickState={this.state.successTickActive}
+                    toggleLandingPageSuccessTickState={this.toggleSuccessTickState}
                 />
                 <VisitorSignOutModal
                     signOutModalVisible={this.state.signOutModalVisible}
@@ -61,6 +85,14 @@ class LandingPage extends React.Component {
                     updateModalVisible={this.updateModalVisible}
                     signOutModalVisible={this.state.signOutModalVisible}
                     updateSignOutModalVisible={this.updateSignOutModalVisible}
+                    adminBtnActiveState={this.state.adminBtnActive}
+                    toggleAdminBtnState={this.toggleAdminBtnState}
+                />
+                <SignAllOutBtn
+                    adminBtnVisible={this.state.adminBtnVisible}
+                    updateModalVisible={this.updateModalVisible}
+                    signAllOutBtnActiveState={this.state.signAllOutBtnActive}
+                    toggleSignAllOutBtnState={this.toggleSignAllOutBtnState}
                 />
             </div>
         )

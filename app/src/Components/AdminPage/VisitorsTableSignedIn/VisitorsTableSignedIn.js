@@ -28,6 +28,13 @@ class VisitorsTableSignedIn extends React.Component {
                 this.setState({signedInTableVisible: 'd-none'})
             }
         }
+
+        if (prevProps.updateSignedInTableState !== this.props.updateSignedInTableState) {
+            if (this.props.updateSignedInTableState) {
+                this.fetchVisitors()
+                this.props.toggleUpdateSignedInTable()
+            }
+        }
     }
 
     fetchVisitors = () => {

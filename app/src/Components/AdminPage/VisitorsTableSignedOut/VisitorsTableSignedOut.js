@@ -69,7 +69,8 @@ class VisitorsTableSignedOut extends React.Component {
             }
         }
 
-        if (prevProps.visitorSignedOut !== this.props.visitorSignedOut) {
+        if (prevProps.visitorSignedOut !== this.props.visitorSignedOut ||
+        prevProps.updateSignedInTableState !== this.props.updateSignedInTableState) {
             this.initialTableRenderData()
         }
     }
@@ -159,8 +160,6 @@ class VisitorsTableSignedOut extends React.Component {
 
         let fetchedNextBatch = await this.fetchVisitors(count, start)
         this.updateVisitorPackage(fetchedNextBatch)
-        console.log(this.state.visitorPackage)
-        console.log(start)
     }
 
     updateVisitorPackage = (data) => {

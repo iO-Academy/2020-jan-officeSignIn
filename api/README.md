@@ -178,8 +178,9 @@ To test, passcode is 8974.
 - Sets all visitors to signed out where signed in is true and date of visit is before current date
 - Logs time visitors signed out in the DB
 
-- Required and sends
-    - `{ "Option" : "all-previous" }` - Option with all-previous set
+- Required and sends through body either of the following:
+    - `{ "Option" : "all-previous" }` - Option with all-previous set. Signs out all visitors who's signed in status is set to 1 and date of visit is before current date.
+    - `{ "Option" : "all-current" }` - Option with all-previous set. Signs out all visitors who's signed in status is set to 1 irrespective of date of visit.
 
 - Returns:
     - if successful 

@@ -6,6 +6,7 @@ import MessageBox from "../../LandingPage/MainContainer/MessageBox/MessageBox"
 import LogOutBtn from "../LogOutBtn/LogOutBtn";
 import TableSelector from "../TableSelector/TableSelector";
 import VisitorsTableSignedOut from "../VisitorsTableSignedOut/VisitorsTableSignedOut";
+import SignAllOutAdminPanelBtn from "../SignAllOutAdminPanelBtn/SignAllOutAdminPanelBtn";
 
 class AdminContainer extends React.Component {
     state = {
@@ -77,6 +78,7 @@ class AdminContainer extends React.Component {
             <main>
                 <div className={adminContainerClass}>
                     <Logo/>
+                    <LogOutBtn/>
                     <div className="adminContainerButtons">
                         <TableSelector
                             signedInTableVisible={this.state.signedInTableVisible}
@@ -84,7 +86,7 @@ class AdminContainer extends React.Component {
                             viewSignedInVisitorTable={this.viewSignedInVisitorTable}
                             viewSignedOutVisitorTable={this.viewSignedOutVisitorTable}
                         />
-                        <LogOutBtn/>
+                        {/*<SignAllOutAdminPanelBtn/>*/}
                     </div>
                     <MessageBox
                         response={this.state.response}

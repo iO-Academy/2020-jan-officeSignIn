@@ -30,7 +30,7 @@ class AdminContainer extends React.Component {
     updateSignedOutDb = async () => {
         const url = localStorage.getItem('apiUrl') + 'api/signOutVisitors';
         const option = JSON.stringify({ "Option" : "all-previous" })
-        const updatedVisitors = await fetch(url, {
+        await fetch(url, {
             method: "PUT",
             body: option,
             headers: {

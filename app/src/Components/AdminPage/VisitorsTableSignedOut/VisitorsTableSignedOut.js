@@ -147,6 +147,7 @@ class VisitorsTableSignedOut extends React.Component {
             if (new Date(visitor_1.DateOfVisit) < new Date(visitor_2.DateOfVisit)) return 1;
             if (visitor_1.TimeOfSignOut > visitor_2.TimeOfSignOut) return -1;
             if (visitor_1.TimeOfSignOut < visitor_2.TimeOfSignOut) return 1;
+            return 0;
         })
     }
 

@@ -55,7 +55,7 @@ class LoginController extends ValidationEntity
 
         if(password_verify($adminPasscode, $hashedPasscode[0]['passcode'])) {
             $key = $this->jwtKey;
-            $expiryTimestamp = time() + 60;
+            $expiryTimestamp = time() + 300;
             $payload = [
                 "exp" => $expiryTimestamp,
                 "iat" => time()
